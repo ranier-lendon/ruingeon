@@ -171,7 +171,7 @@ public partial class MapSystem : Node3D
     }
     
     // Returns a coordinate that is possible to add a room
-    private static int[] getRandomRoom()
+    private static int[] getRandomBaseRoom()
     {
         var possibleRooms = new List<int[]>();
 
