@@ -93,10 +93,10 @@ public partial class MapSystem : Node3D
 
     // Adds a room in the direction of the room you pass
     // Returns true if successfully added the room, vice versa
-    private static bool addRoom(int[] base, Direction dir, char room)
+    private static bool addRoom(int[] baseRoom, Direction dir, char room)
     {
-        int x = base[0];
-        int y = base[1];
+        int x = baseRoom[0];
+        int y = baseRoom[1];
 
         switch(dir)
         {
