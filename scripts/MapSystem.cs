@@ -91,6 +91,33 @@ public partial class MapSystem : Node3D
         }
     }
 
+    // Adds a room in the direction of the room you pass
+    // Returns true if successfully added the room, vice versa
+    private static bool addRoom(int[] base, Direction dir, char room)
+    {
+        int x = base[0];
+        int y = base[1];
+
+        switch(dir)
+        {
+            case Direction.up:
+                map[x, y-1] = room;
+                return true;
+            case Direction.down:
+                map[x, y+1] = room;
+                return true;
+            case Direction.left:
+                map[x-1, y] = room;
+                return true;
+            case Direction.right:
+                map[x+1, y] = room;
+                return true;
+            default:
+                GD.PushError($"Expected direction to be up, down, left, or right");
+                return false;
+        }
+    }
+
     // Accepts one coordinate in the map
     // Then returns a possible direction to add a room base on that coordinate
     private static Direction getRandomDirection(int x, int y)
