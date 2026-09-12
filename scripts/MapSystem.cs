@@ -60,17 +60,18 @@ public partial class MapSystem : Node3D
                 map[x,y] = 'n';
             }
         }
+
+        // Add starter rooms
+        int half = size/2;
+        map[half, half] = 's';
+        Direction randomDir = getRandomDirection(half, half);
+        addRoom(new int[]{half, half}, randomDir, 'x');
         
         GenerateMap();
     }
 
     public static char[,] GenerateMap()
     {
-        // Add Starter Room in the middle
-        map[size / 2, size / 2] = 's';
-
-
-        
         printMap();
 
         return map;
@@ -133,7 +134,7 @@ public partial class MapSystem : Node3D
             //return null;
         }
         // Checks if coordinate is valid to add a room
-        if (map[x, y] is ('n' or 'p' or 's' or 'b'))
+        if (map[x, y] is ('n' or 'p' or 'b'))
         {
             GD.PushError($"Passed Coordinate {x},{y} is invalid to add a room");
             // return null;
