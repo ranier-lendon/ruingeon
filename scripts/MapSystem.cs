@@ -79,7 +79,7 @@ public static class MapSystem
             return 0;
         }
         // Checks if coordinate is valid to add a room
-        if (map[x, y] is 'n' or 'p' or 's' or 'b')
+        if (map[x, y] is ('n' or 'p' or 's' or 'b'))
         {
             GD.PushError($"Passed Coordinate {x},{y} is invalid to add a room");
             return 0;
@@ -116,5 +116,39 @@ public static class MapSystem
         return randomDirection;
     }
     
+    // Returns a coordinate that is possible to add a room
+    private static int[] getRandomRoom()
+    {
+        var possibleRooms = new List<int[]>();
 
+        // Iterate every room then check if the room is possible to add a room
+        for (int x = 0; x < size-1; x++)
+        {
+            for (int y = 0; y < size-1; y++)
+            {
+                if (map[x, y] is ('n' or 'p' or 's' or 'b'))
+                {
+                    if (map[x+1, y] != 'n' || 
+                        map[x-1, y] != 'n' || 
+                        map[x, y+1] != 'n' || 
+                        map[x, y-1] != 'n')
+                    {
+                        continue;
+                    }
+                    possibleRooms.Add(new int[]{x, y});
+                }
+            }
+        }
+
+        // Checks if there is possible room to add a room
+        if (possibleRooms.Count == 0)
+        {
+            GD.PushError($"No possible room to add a room");
+            return 0;
+        }
+        // Chooses one random room from the possible rooms
+        int[] randomRoom = possibleRooms[GD.randi() % possibleRooms.Count];
+        
+        return randomRoom;
+    }
 }
