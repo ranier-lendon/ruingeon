@@ -42,26 +42,53 @@
 
 using Godot;
 using System;
+using System.Collections.Generic;
 using GameGlobals;
 
-public static class MapSystem
+public partial class MapSystem : Node3D
 {
     private static int size = 10;
     private static char[,] map = new char[size, size];
+
+    public override void _Ready()
+    {
+        // Put 'n' in every coordinate
+        for (int y = 0; y < size; y++)
+        {
+            for (int x = 0; x < size; x++)
+            {
+                map[x,y] = 'n';
+            }
+        }
+        
+        GenerateMap();
+    }
 
     public static char[,] GenerateMap()
     {
         // Add Starter Room in the middle
         map[size / 2, size / 2] = 's';
-        
 
+
+        
+        printMap();
 
         return map;
     }
 
-    private static void addRoom()
+    // Prints the 2d map
+    // Use it for debugging
+    private static void printMap()
     {
-        
+        for (int y = 0; y < size; y++)
+        {
+            string row = "";
+            for (int x = 0; x < size; x++)
+            {
+                row += map[x,y] + " ";
+            }
+            GD.Print(row);
+        }
     }
 
     // Accepts one coordinate in the map
@@ -76,13 +103,13 @@ public static class MapSystem
         if (x < 0 || x >= size-1 || y < 0 || y >= size-1)
         {
             GD.PushError($"Expected x and y value to be between 0-{size-1}");
-            return 0;
+            //return null;
         }
         // Checks if coordinate is valid to add a room
         if (map[x, y] is ('n' or 'p' or 's' or 'b'))
         {
             GD.PushError($"Passed Coordinate {x},{y} is invalid to add a room");
-            return 0;
+            // return null;
         }
 
         // Checks every direction if it's empty.
@@ -108,10 +135,10 @@ public static class MapSystem
         if (possibleDirections.Count == 0)
         {
             GD.PushError($"No possible direction to add a room at {x},{y}");
-            return 0;
+            // return null;
         }
         // Chooses one random direction from the possible directions
-        randomDirection = possibleDirections[GD.randi() % possibleDirections.Count];
+        randomDirection = possibleDirections[GD.RandRange(0, possibleDirections.Count) ];
         
         return randomDirection;
     }
@@ -144,10 +171,10 @@ public static class MapSystem
         if (possibleRooms.Count == 0)
         {
             GD.PushError($"No possible room to add a room");
-            return 0;
+            // return null;
         }
         // Chooses one random room from the possible rooms
-        int[] randomRoom = possibleRooms[GD.randi() % possibleRooms.Count];
+        int[] randomRoom = possibleRooms[GD.RandRange(0, possibleRooms.Count)];
         
         return randomRoom;
     }
