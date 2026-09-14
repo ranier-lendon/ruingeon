@@ -227,15 +227,6 @@ public partial class MapSystem : Node3D
     private static char getRandomNeighborRoom(char baseRoom, int floor)
     {
         /*
-            s = start
-            p = portal
-            - = empty
-            x = normal
-            h = heal
-            z = shop
-            e = elite
-            b = boss
-            t = treasure
             fight = x, e
             chill = h, z, t
             start = s
