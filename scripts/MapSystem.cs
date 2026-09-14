@@ -52,12 +52,12 @@ public partial class MapSystem : Node3D
 
     public override void _Ready()
     {
-        // Put 'n' in every coordinate
+        // Put '-' in every coordinate
         for (int y = 0; y < size; y++)
         {
             for (int x = 0; x < size; x++)
             {
-                map[x,y] = 'n';
+                map[x,y] = '-';
             }
         }
 
