@@ -72,6 +72,15 @@ public partial class MapSystem : Node3D
 
     public static char[,] GenerateMap()
     {
+        int roomCount = 12;
+
+        for (int i = 0; i < roomCount; i++)
+        {
+            int[] randomRoom = getRandomBaseRoom();
+            Direction randomDir = getRandomDirection(randomRoom[0], randomRoom[1]);
+            addRoom(randomRoom, randomDir, getRandomNeighborRoom(map[randomRoom[0], randomRoom[1]], 1));
+        }
+        
         printMap();
 
         return map;
