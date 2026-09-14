@@ -5,6 +5,7 @@ namespace GameGlobals
         up,
         down,
         left,
-        right
+        right,
+        none
     }
 }
