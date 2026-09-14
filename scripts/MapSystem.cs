@@ -2,7 +2,7 @@
     Character's Representation:
     s = start
     p = portal
-    n = empty
+    - = empty
     x = normal
     h = heal
     z = shop
@@ -18,16 +18,16 @@
     Example:
     
     Map 2d Array:
-    n n n n n n n n n n
-    n n n n n n n n n n
-    n n n n n n n n n n
-    n n n n n n n n n n
-    n n n n n n n n n n
-    n n n p x t n n n n
-    n n n n n x n n n n
-    n n n n s x x h n n
-    n n n n n n z n n n
-    n n n n n n n n n n
+    - - - - - - - - - -
+    - - - - - - - - - -
+    - - - - - - - - - -
+    - - - - - - - - - -
+    - - - - - - - - - -
+    - - - p x t - - - -
+    - - - - - x - - - -
+    - - - - s x x h - -
+    - - - - - - z - - -
+    - - - - - - - - - -
 
     Rules:
     - s (start), p (portal), z (shop), h (heal), b (boss), t (treasure) can be only spawn 1 time in the same floor.
@@ -65,7 +65,7 @@ public partial class MapSystem : Node3D
         int half = size/2;
         map[half, half] = 's';
         Direction randomDir = getRandomDirection(half, half);
-        addRoom(new int[]{half, half}, randomDir, 'x');
+        addRoom(new int[]{half, half}, randomDir, getRandomNeighborRoom('s', 1));
         
         GenerateMap();
     }
@@ -142,19 +142,19 @@ public partial class MapSystem : Node3D
 
         // Checks every direction if it's empty.
         // If empty then it is a possible place to add a room
-        if (map[x+1, y] == 'n')
+        if (map[x+1, y] == '-')
         {
             possibleDirections.Add(Direction.right);
         }
-        if (map[x-1, y] == 'n')
+        if (map[x-1, y] == '-')
         {
             possibleDirections.Add(Direction.left);
         }
-        if (map[x, y+1] == 'n')
+        if (map[x, y+1] == '-')
         {
             possibleDirections.Add(Direction.down);
         }
-        if (map[x, y-1] == 'n')
+        if (map[x, y-1] == '-')
         {
             possibleDirections.Add(Direction.up);
         }
@@ -181,12 +181,12 @@ public partial class MapSystem : Node3D
         {
             for (int y = 0; y < size-1; y++)
             {
-                if (map[x, y] is ('n' or 'p' or 's' or 'b'))
+                if (map[x, y] is ('-' or 'p' or 's' or 'b'))
                 {
-                    if (map[x+1, y] != 'n' || 
-                        map[x-1, y] != 'n' || 
-                        map[x, y+1] != 'n' || 
-                        map[x, y-1] != 'n')
+                    if (map[x+1, y] != '-' || 
+                        map[x-1, y] != '-' || 
+                        map[x, y+1] != '-' || 
+                        map[x, y-1] != '-')
                     {
                         continue;
                     }
@@ -204,6 +204,49 @@ public partial class MapSystem : Node3D
         // Chooses one random room from the possible rooms
         int[] randomRoom = possibleRooms[GD.RandRange(0, possibleRooms.Count)];
         
+        return randomRoom;
+    }
+
+    // Returns a room that is possible to be a neighbor room
+    private static char getRandomNeighborRoom(char baseRoom, int floor)
+    {
+        /*
+            s = start
+            p = portal
+            - = empty
+            x = normal
+            h = heal
+            z = shop
+            e = elite
+            b = boss
+            t = treasure
+            fight = x, e
+            chill = h, z, t
+            start = s
+            end = p, b
+        */
+        var neighborDict = new Dictionary<string, char[]>()
+        {
+            {"fight", new char[]{'x', 'h', 'z', 't', 'e', 'b', 'p'}},
+            {"chill", new char[]{'x', 'e', 'b'}}
+        };
+        char randomRoom = ' ';
+
+        if (baseRoom is 'x' or 'e')
+        {
+            var possibleRooms = neighborDict["fight"];
+            randomRoom = possibleRooms[GD.RandRange(0, possibleRooms.Length)];
+        }
+        else if (baseRoom is 'h' or 'z' or 't')
+        {
+            var possibleRooms = neighborDict["chill"];
+            randomRoom = possibleRooms[GD.RandRange(0, possibleRooms.Length)];
+        }
+        else if (baseRoom is 's')
+        {
+            randomRoom = 'x';
+        }
+
         return randomRoom;
     }
 }
