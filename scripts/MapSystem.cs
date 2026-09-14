@@ -49,6 +49,7 @@ public partial class MapSystem : Node3D
 {
     private static int size = 10;
     private static char[,] map = new char[size, size];
+    private static List<int[]> baseRooms = new List<int[]>();
 
     public override void _Ready()
     {
@@ -67,12 +68,12 @@ public partial class MapSystem : Node3D
         Direction randomDir = getRandomDirection(half, half);
         addRoom(new int[]{half, half}, randomDir, getRandomNeighborRoom('s', 1));
         
-        GenerateMap();
+        GenerateMap(1);
     }
 
-    public static char[,] GenerateMap()
+    public static char[,] GenerateMap(int floor)
     {
-        int roomCount = 12;
+        int roomCount = 6;
 
         for (int i = 0; i < roomCount; i++)
         {
@@ -81,15 +82,16 @@ public partial class MapSystem : Node3D
             addRoom(randomRoom, randomDir, getRandomNeighborRoom(map[randomRoom[0], randomRoom[1]], 1));
         }
         
-        printMap();
+        printMap(floor);
 
         return map;
     }
 
     // Prints the 2d map
     // Use it for debugging
-    private static void printMap()
+    private static void printMap(int floor)
     {
+        GD.Print($"Floor {floor}");
         for (int y = 0; y < size; y++)
         {
             string row = "";
@@ -111,21 +113,30 @@ public partial class MapSystem : Node3D
         switch(dir)
         {
             case Direction.up:
-                map[x, y-1] = room;
-                return true;
+                y -= 1;
+                break;
             case Direction.down:
-                map[x, y+1] = room;
-                return true;
+                y += 1;
+                break;
             case Direction.left:
-                map[x-1, y] = room;
-                return true;
+                x -= 1;
+                break;
             case Direction.right:
-                map[x+1, y] = room;
-                return true;
+                x += 1;
+                break;
             default:
                 GD.PushError($"Expected direction to be up, down, left, or right");
                 return false;
         }
+
+        map[x, y] = room;
+
+        if (room is 'x' or 'e' or 'h' or 'z' or 't')
+        {
+            baseRooms.Add(new int[]{x, y});
+        }
+
+        return true;
     }
 
     // Accepts one coordinate in the map
@@ -143,7 +154,7 @@ public partial class MapSystem : Node3D
             //return null;
         }
         // Checks if coordinate is valid to add a room
-        if (map[x, y] is ('n' or 'p' or 'b'))
+        if (map[x, y] is ('-' or 'p' or 'b'))
         {
             GD.PushError($"Passed Coordinate {x},{y} is invalid to add a room");
             // return null;
@@ -172,10 +183,10 @@ public partial class MapSystem : Node3D
         if (possibleDirections.Count == 0)
         {
             GD.PushError($"No possible direction to add a room at {x},{y}");
-            // return null;
+            return Direction.none;
         }
         // Chooses one random direction from the possible directions
-        randomDirection = possibleDirections[GD.RandRange(0, possibleDirections.Count) ];
+        randomDirection = possibleDirections[GD.RandRange(0, possibleDirections.Count-1) ];
         
         return randomDirection;
     }
@@ -183,35 +194,31 @@ public partial class MapSystem : Node3D
     // Returns a coordinate that is possible to add a room
     private static int[] getRandomBaseRoom()
     {
-        var possibleRooms = new List<int[]>();
-
-        // Iterate every room then check if the room is possible to add a room
-        for (int x = 0; x < size-1; x++)
+        int[] randomRoom = new int[2];
+        
+        while (true)
         {
-            for (int y = 0; y < size-1; y++)
+            if (baseRooms.Count > 0)
             {
-                if (map[x, y] is ('-' or 'p' or 's' or 'b'))
-                {
-                    if (map[x+1, y] != '-' || 
-                        map[x-1, y] != '-' || 
-                        map[x, y+1] != '-' || 
-                        map[x, y-1] != '-')
-                    {
-                        continue;
-                    }
-                    possibleRooms.Add(new int[]{x, y});
-                }
+                randomRoom = baseRooms[GD.RandRange(0, baseRooms.Count-1)];
+            }
+            else
+            {
+                randomRoom = new int[]{size/2, size/2};
+            }
+
+            // Checks if randomRoom has a possible direction to add a room
+            if (getRandomDirection(randomRoom[0], randomRoom[1]) != Direction.none)
+            {
+                break;
+            }
+            else 
+            {
+                // Remove the room from baseRooms
+                baseRooms.Remove(randomRoom);
             }
         }
-
-        // Checks if there is possible room to add a room
-        if (possibleRooms.Count == 0)
-        {
-            GD.PushError($"No possible room to add a room");
-            // return null;
-        }
-        // Chooses one random room from the possible rooms
-        int[] randomRoom = possibleRooms[GD.RandRange(0, possibleRooms.Count)];
+        
         
         return randomRoom;
     }
@@ -244,12 +251,12 @@ public partial class MapSystem : Node3D
         if (baseRoom is 'x' or 'e')
         {
             var possibleRooms = neighborDict["fight"];
-            randomRoom = possibleRooms[GD.RandRange(0, possibleRooms.Length)];
+            randomRoom = possibleRooms[GD.RandRange(0, possibleRooms.Length-1)];
         }
         else if (baseRoom is 'h' or 'z' or 't')
         {
             var possibleRooms = neighborDict["chill"];
-            randomRoom = possibleRooms[GD.RandRange(0, possibleRooms.Length)];
+            randomRoom = possibleRooms[GD.RandRange(0, possibleRooms.Length-1)];
         }
         else if (baseRoom is 's')
         {
