@@ -47,7 +47,7 @@ using GameGlobals;
 
 public partial class MapSystem : Node3D
 {
-    private static int size = 10;
+    private static int size = 9;
     private static char[,] map = new char[size, size];
     private static List<int[]> baseRooms = new List<int[]>();
 
