@@ -48,6 +48,7 @@ using GameGlobals;
 public partial class MapSystem : Node3D
 {
     private static int size = 9;
+    private static int roomCount = 7;
     private static char[,] map = new char[size, size];
     private static List<int[]> baseRooms = new List<int[]>();
 
@@ -73,8 +74,6 @@ public partial class MapSystem : Node3D
 
     public static char[,] GenerateMap(int floor)
     {
-        int roomCount = 6;
-
         for (int i = 0; i < roomCount; i++)
         {
             int[] randomRoom = getRandomBaseRoom();
