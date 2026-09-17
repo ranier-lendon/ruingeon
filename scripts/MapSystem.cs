@@ -66,7 +66,7 @@ public partial class MapSystem : Node3D
         int half = size/2;
         map[half, half] = 's';
         Direction randomDir = getRandomDirection(half, half);
-        addRoom(new int[]{half, half}, randomDir, getRandomNeighborRoom('s', 1));
+        addRoom(new int[]{half, half}, randomDir, getRandomNeighborRoom('s'));
         
         GenerateMap(1);
     }
@@ -79,7 +79,24 @@ public partial class MapSystem : Node3D
         {
             int[] randomRoom = getRandomBaseRoom();
             Direction randomDir = getRandomDirection(randomRoom[0], randomRoom[1]);
-            addRoom(randomRoom, randomDir, getRandomNeighborRoom(map[randomRoom[0], randomRoom[1]], 1));
+            char neighbor = getRandomNeighborRoom(map[randomRoom[0], randomRoom[1]]);
+            
+
+            if (i == roomCount-1)
+            {
+                addRoom(randomRoom, randomDir, 'p');
+
+                if (floor == 4)
+                {
+                    randomRoom = getRandomBaseRoom();
+                    randomDir = getRandomDirection(randomRoom[0], randomRoom[1]);
+                    addRoom(randomRoom, randomDir, 'b');
+                }
+                
+                break;
+            }
+
+            addRoom(randomRoom, randomDir, neighbor);
         }
         
         printMap(floor);
@@ -161,16 +178,16 @@ public partial class MapSystem : Node3D
         
         // Check if passed coordinate is valid
         // Checks if coordinate is inside the map
-        if (x < 0 || x >= size-1 || y < 0 || y >= size-1)
+        if (x < 0 || x > size-1 || y < 0 || y > size-1)
         {
             GD.PushError($"Expected x and y value to be between 0-{size-1}. Got {x},{y} instead");
-            //return null;
+            return Direction.none;
         }
         // Checks if coordinate is valid to add a room
         if (map[x, y] is ('*' or 'p' or 'b'))
         {
             GD.PushError($"Passed Coordinate {x},{y} is invalid to add a room");
-            // return null;
+            return Direction.none;
         }
 
         // Checks every direction if it's empty.
@@ -237,7 +254,7 @@ public partial class MapSystem : Node3D
     }
 
     // Returns a room that is possible to be a neighbor room
-    private static char getRandomNeighborRoom(char baseRoom, int floor)
+    private static char getRandomNeighborRoom(char baseRoom)
     {
         /*
             fight = x, e
@@ -247,8 +264,8 @@ public partial class MapSystem : Node3D
         */
         var neighborDict = new Dictionary<string, char[]>()
         {
-            {"fight", new char[]{'x', 'h', 'z', 't', 'e', 'b', 'p'}},
-            {"chill", new char[]{'x', 'e', 'b'}}
+            {"fight", new char[]{'x', 'h', 'z', 't', 'e'}},
+            {"chill", new char[]{'x', 'e'}}
         };
         char randomRoom = ' ';
 
