@@ -2,7 +2,7 @@
     Character's Representation:
     s = start
     p = portal
-    - = empty
+    * = empty
     x = normal
     h = heal
     z = shop
@@ -18,16 +18,16 @@
     Example:
     
     Map 2d Array:
-    - - - - - - - - - -
-    - - - - - - - - - -
-    - - - - - - - - - -
-    - - - - - - - - - -
-    - - - - - - - - - -
-    - - - p x t - - - -
-    - - - - - x - - - -
-    - - - - s x x h - -
-    - - - - - - z - - -
-    - - - - - - - - - -
+    * * * * * * * * * *
+    * * * * * * * * * *
+    * * * * * * * * * *
+    * * * * * * * * * *
+    * * * * * * * * * *
+    * * * p x t * * * *
+    * * * * x * * * * *
+    * * * * s x x h * *
+    * * * * * * z * * *
+    * * * * * * * * * *
 
     Rules:
     - s (start), p (portal), z (shop), h (heal), b (boss), t (treasure) can be only spawn 1 time in the same floor.
@@ -53,12 +53,12 @@ public partial class MapSystem : Node3D
 
     public override void _Ready()
     {
-        // Put '-' in every coordinate
+        // Put '*' in every coordinate
         for (int y = 0; y < size; y++)
         {
             for (int x = 0; x < size; x++)
             {
-                map[x,y] = '-';
+                map[x,y] = '*';
             }
         }
 
@@ -103,32 +103,45 @@ public partial class MapSystem : Node3D
         }
     }
 
-    // Adds a room in the direction of the room you pass
+    // Adds a room and bridge in the direction of the room you pass
     // Returns true if successfully added the room, vice versa
     private static bool addRoom(int[] baseRoom, Direction dir, char room)
     {
         int x = baseRoom[0];
         int y = baseRoom[1];
 
+        char bridge = '|';
+        int bx = x;
+        int by = y;
+
         switch(dir)
         {
             case Direction.up:
-                y -= 1;
+                bridge = '|';
+                by -= 1;
+                y -= 2;
                 break;
             case Direction.down:
-                y += 1;
+                bridge = '|';
+                by += 1;
+                y += 2;
                 break;
             case Direction.left:
-                x -= 1;
+                bridge = '-';
+                bx -= 1;
+                x -= 2;
                 break;
             case Direction.right:
-                x += 1;
+                bridge = '-';
+                bx += 1;
+                x += 2;
                 break;
             default:
                 GD.PushError($"Expected direction to be up, down, left, or right");
                 return false;
         }
 
+        map[bx, by] = bridge;
         map[x, y] = room;
 
         if (room is 'x' or 'e' or 'h' or 'z' or 't')
@@ -150,11 +163,11 @@ public partial class MapSystem : Node3D
         // Checks if coordinate is inside the map
         if (x < 0 || x >= size-1 || y < 0 || y >= size-1)
         {
-            GD.PushError($"Expected x and y value to be between 0-{size-1}");
+            GD.PushError($"Expected x and y value to be between 0-{size-1}. Got {x},{y} instead");
             //return null;
         }
         // Checks if coordinate is valid to add a room
-        if (map[x, y] is ('-' or 'p' or 'b'))
+        if (map[x, y] is ('*' or 'p' or 'b'))
         {
             GD.PushError($"Passed Coordinate {x},{y} is invalid to add a room");
             // return null;
@@ -162,19 +175,19 @@ public partial class MapSystem : Node3D
 
         // Checks every direction if it's empty.
         // If empty then it is a possible place to add a room
-        if (map[x+1, y] == '-')
+        if (map[x+1, y] == '*')
         {
             possibleDirections.Add(Direction.right);
         }
-        if (map[x-1, y] == '-')
+        if (map[x-1, y] == '*')
         {
             possibleDirections.Add(Direction.left);
         }
-        if (map[x, y+1] == '-')
+        if (map[x, y+1] == '*')
         {
             possibleDirections.Add(Direction.down);
         }
-        if (map[x, y-1] == '-')
+        if (map[x, y-1] == '*')
         {
             possibleDirections.Add(Direction.up);
         }
