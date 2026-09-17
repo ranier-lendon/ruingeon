@@ -185,9 +185,9 @@ public partial class MapSystem : Node3D
         
         // Check if passed coordinate is valid
         // Checks if coordinate is inside the map
-        if (x < 0 || x > size-1 || y < 0 || y > size-1)
+        if (x < 2 || x > size-3 || y < 2 || y > size-3)
         {
-            GD.PushError($"getRandomDirection: Expected x and y value to be between 0-{size-1}. Got {x},{y} instead");
+            GD.PushError($"getRandomDirection: Expected x and y value to be between 2-{size-3}. Got {x},{y} instead");
             return Direction.none;
         }
         // Checks if coordinate is valid to add a room
