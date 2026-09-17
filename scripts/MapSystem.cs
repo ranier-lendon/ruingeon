@@ -131,6 +131,13 @@ public partial class MapSystem : Node3D
         int bx = x;
         int by = y;
 
+        // Checks if there is room for the bridge and the room
+        if (x <= 1 || x >= size-2 || y <= 1 || y >= size-2)
+        {
+            GD.PushError($"addRoom: base room at {x},{y} is too close to the edge");
+            return false;
+        }
+
         switch(dir)
         {
             case Direction.up:
@@ -180,13 +187,13 @@ public partial class MapSystem : Node3D
         // Checks if coordinate is inside the map
         if (x < 0 || x > size-1 || y < 0 || y > size-1)
         {
-            GD.PushError($"Expected x and y value to be between 0-{size-1}. Got {x},{y} instead");
+            GD.PushError($"getRandomDirection: Expected x and y value to be between 0-{size-1}. Got {x},{y} instead");
             return Direction.none;
         }
         // Checks if coordinate is valid to add a room
         if (map[x, y] is ('*' or 'p' or 'b'))
         {
-            GD.PushError($"Passed Coordinate {x},{y} is invalid to add a room");
+            GD.PushError($"getRandomDirection: Passed Coordinate {x},{y} is invalid to add a room");
             return Direction.none;
         }
 
@@ -212,7 +219,7 @@ public partial class MapSystem : Node3D
         // Checks if there is possible direction to add a room
         if (possibleDirections.Count == 0)
         {
-            GD.PushError($"No possible direction to add a room at {x},{y}");
+            GD.PushError($"getRandomDirection: No possible direction to add a room at {x},{y}");
             return Direction.none;
         }
         // Chooses one random direction from the possible directions
