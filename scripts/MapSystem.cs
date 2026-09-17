@@ -199,19 +199,19 @@ public partial class MapSystem : Node3D
 
         // Checks every direction if it's empty.
         // If empty then it is a possible place to add a room
-        if (map[x+1, y] == '*')
+        if (map[x+2, y] == '*')
         {
             possibleDirections.Add(Direction.right);
         }
-        if (map[x-1, y] == '*')
+        if (map[x-2, y] == '*')
         {
             possibleDirections.Add(Direction.left);
         }
-        if (map[x, y+1] == '*')
+        if (map[x, y+2] == '*')
         {
             possibleDirections.Add(Direction.down);
         }
-        if (map[x, y-1] == '*')
+        if (map[x, y-2] == '*')
         {
             possibleDirections.Add(Direction.up);
         }
