@@ -265,12 +265,14 @@ public partial class MapSystem : Node3D
         /*
             fight = x, e
             chill = h, z, t
-            start = s
-            end = p, b
         */
+
+
         char randomRoom = ' ';
         bool canBeChill = baseRoom is 'x' or 'e';
 
+        // 80% chance to choose fight room
+        // 20% chance for chill room
         if (canBeChill)
         {
             float rng = (float)GD.RandRange(0.0f, 1.0f);
@@ -291,6 +293,8 @@ public partial class MapSystem : Node3D
         return randomRoom;
     }
 
+    // 70% chance to pull normal room ('x')
+    // 30% for elite room ('e')
     private static char pickRandomFight()
     {
         float number = (float)GD.RandRange(0.0f, 1.0f);
@@ -305,6 +309,7 @@ public partial class MapSystem : Node3D
         return room;
     }
 
+    // 33.33% chance for each room to choose
     private static char pickRandomChill()
     {
         float number = (float)GD.RandRange(0.0f, 1.0f);
