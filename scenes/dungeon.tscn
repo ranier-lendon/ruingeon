@@ -1,10 +1,10 @@
 [gd_scene format=3 uid="uid://blq0sxgkmlosh"]
 
-[ext_resource type="Script" uid="uid://bfdujyoumifk4" path="res://scripts/MapSystem.cs" id="1_ubp1v"]
-[ext_resource type="PackedScene" uid="uid://bloampnv8lwce" path="res://scenes/dungeon rooms/bridge.tscn" id="2_c4wp1"]
+[ext_resource type="Script" uid="uid://dhpqdw216o2fo" path="res://scripts/MapBuilder.cs" id="1_c4wp1"]
+[ext_resource type="PackedScene" uid="uid://bloampnv8lwce" path="res://scenes/dungeonRooms/bridge.tscn" id="2_c4wp1"]
 
-[node name="MapSystem" type="Node3D" unique_id=469557585]
-script = ExtResource("1_ubp1v")
+[node name="MapBuilder" type="Node3D" unique_id=469557585]
+script = ExtResource("1_c4wp1")
 
 [node name="StarterRoom" type="CSGCombiner3D" parent="." unique_id=1113392394]
 use_collision = true
@@ -45,5 +45,5 @@ size = Vector3(5, 2.5, 2.5)
 [node name="Camera3D" type="Camera3D" parent="." unique_id=348754679]
 transform = Transform3D(-0.71933824, 0.59229475, -0.3629593, 0, 0.5224992, 0.85263973, 0.69466, 0.6133364, -0.37585366, -10.781953, 20.11271, -11.185109)
 
-[node name="CSGCombiner3D" parent="." unique_id=955709685 instance=ExtResource("2_c4wp1")]
+[node name="Bridge" parent="." unique_id=955709685 instance=ExtResource("2_c4wp1")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20, 0, 0)

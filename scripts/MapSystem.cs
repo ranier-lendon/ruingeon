@@ -2,7 +2,7 @@
     Character's Representation:
     s = start
     p = portal
-    * = empty
+      = empty
     x = normal
     h = heal
     z = shop
@@ -45,21 +45,21 @@ using System;
 using System.Collections.Generic;
 using GameGlobals;
 
-public partial class MapSystem : Node3D
+public static class MapSystem
 {
     private static int size = 9;
     private static int roomCount = 7;
     private static char[,] map = new char[size, size];
     private static List<int[]> baseRooms = new List<int[]>();
 
-    public override void _Ready()
+    public static void Initialize()
     {
-        // Put '*' in every coordinate
+        // Put ' ' in every coordinate
         for (int y = 0; y < size; y++)
         {
             for (int x = 0; x < size; x++)
             {
-                map[x,y] = '*';
+                map[x,y] = ' ';
             }
         }
 
@@ -68,12 +68,12 @@ public partial class MapSystem : Node3D
         map[half, half] = 's';
         Direction randomDir = getRandomDirection(half, half);
         addRoom(new int[]{half, half}, randomDir, getRandomNeighborRoom('s'));
-        
-        GenerateMap(1);
     }
 
     public static char[,] GenerateMap(int floor)
     {
+        Initialize();
+
         for (int i = 0; i < roomCount; i++)
         {
             int[] randomRoom = getRandomBaseRoom();
@@ -198,19 +198,19 @@ public partial class MapSystem : Node3D
 
         // Checks every direction if it's empty.
         // If empty then it is a possible place to add a room
-        if (map[x+2, y] == '*')
+        if (map[x+2, y] == ' ')
         {
             possibleDirections.Add(Direction.right);
         }
-        if (map[x-2, y] == '*')
+        if (map[x-2, y] == ' ')
         {
             possibleDirections.Add(Direction.left);
         }
-        if (map[x, y+2] == '*')
+        if (map[x, y+2] == ' ')
         {
             possibleDirections.Add(Direction.down);
         }
-        if (map[x, y-2] == '*')
+        if (map[x, y-2] == ' ')
         {
             possibleDirections.Add(Direction.up);
         }
