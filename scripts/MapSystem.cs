@@ -268,28 +268,60 @@ public partial class MapSystem : Node3D
             start = s
             end = p, b
         */
-        var neighborDict = new Dictionary<string, char[]>()
-        {
-            {"fight", new char[]{'x', 'h', 'z', 't', 'e'}},
-            {"chill", new char[]{'x', 'e'}}
-        };
         char randomRoom = ' ';
+        bool canBeChill = baseRoom is 'x' or 'e';
 
-        if (baseRoom is 'x' or 'e')
+        if (canBeChill)
         {
-            var possibleRooms = neighborDict["fight"];
-            randomRoom = possibleRooms[GD.RandRange(0, possibleRooms.Length-1)];
+            float rng = (float)GD.RandRange(0.0f, 1.0f);
+            if (rng < 0.8f)
+            {
+                randomRoom = pickRandomFight();
+            }
+            else 
+            {
+                randomRoom = pickRandomChill();
+            }
         }
-        else if (baseRoom is 'h' or 'z' or 't')
+        else
         {
-            var possibleRooms = neighborDict["chill"];
-            randomRoom = possibleRooms[GD.RandRange(0, possibleRooms.Length-1)];
-        }
-        else if (baseRoom is 's')
-        {
-            randomRoom = 'x';
+            randomRoom = pickRandomFight();
         }
 
         return randomRoom;
+    }
+
+    private static char pickRandomFight()
+    {
+        float number = (float)GD.RandRange(0.0f, 1.0f);
+        char room = ' ';
+        if (number < 0.7f)
+        {
+            room = 'x';
+        }
+        else{
+            room = 'e';
+        }
+        return room;
+    }
+
+    private static char pickRandomChill()
+    {
+        float number = (float)GD.RandRange(0.0f, 1.0f);
+        char room = ' ';
+        if (number < 0.3333f)
+        {
+            room = 'z';
+        }
+        else if (number < 0.6667f)
+        {
+            room = 'h';
+        }
+        else
+        {
+            room = 't';
+        }
+
+        return room;
     }
 }
