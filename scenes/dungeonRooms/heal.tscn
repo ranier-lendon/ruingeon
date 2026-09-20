@@ -1,0 +1,44 @@
+[gd_scene format=3 uid="uid://idkede1mcx4u"]
+
+[node name="Elite" type="CSGCombiner3D" unique_id=118526844]
+use_collision = true
+
+[node name="Floor" type="CSGBox3D" parent="." unique_id=280052024]
+size = Vector3(20, 1, 20)
+
+[node name="Label3D" type="Label3D" parent="Floor" unique_id=859526377]
+transform = Transform3D(-4.371139e-08, 1, 4.371139e-08, 0, -4.371139e-08, 1, 1, 4.371139e-08, 1.9106855e-15, 0, 1, 0)
+modulate = Color(1, 0, 0, 1)
+text = "Heal"
+font_size = 512
+outline_size = 5
+
+[node name="Walls" type="CSGCombiner3D" parent="." unique_id=1247818087]
+
+[node name="Wall" type="CSGBox3D" parent="Walls" unique_id=48573246]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 3, 9.5)
+size = Vector3(19, 5, 1)
+
+[node name="Wall2" type="CSGBox3D" parent="Walls" unique_id=1404458363]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 3, -9.5)
+size = Vector3(19, 5, 1)
+
+[node name="Wall3" type="CSGBox3D" parent="Walls" unique_id=331252765]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -9.5, 3, 0)
+size = Vector3(20, 5, 1)
+
+[node name="Wall4" type="CSGBox3D" parent="Walls" unique_id=516546187]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 9.5, 3, 0)
+size = Vector3(18, 5, 1)
+
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="Walls/Wall4" unique_id=953067826]
+transform = Transform3D(1.522, 1.4293622e-08, 1.9106853e-15, 0, -1.4293624e-08, 1, 6.652873e-08, -0.327, -4.371139e-08, 0, 0.0055060387, 0)
+operation = 2
+radius = 1.636
+height = 5.0
+sides = 12
+
+[node name="CSGBox3D" type="CSGBox3D" parent="Walls/Wall4" unique_id=899316305]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.25, 0)
+operation = 2
+size = Vector3(5, 2.5, 2.5)
