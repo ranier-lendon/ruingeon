@@ -1,12 +1,21 @@
 /*
-    Builds the map
+    Plan:
+    - Iterate through the 2d map from MapSystem
+    - If room is not ' ' (empty), then spawn a room
+    - '|' and '-' are bridge.
+    - if got '-' rotate the bridge 90deg
+    - Actual world position formula: (RoomSize * (x-mapSize/2), 0, RoomSize * (y-mapSize/2))
+    - Each room is 20x1x20
+    - Each room has walls
+    - Walls have 3 variations (Wall, OpenDoorWall, CloseDoorWall)
+
 */
 
 using Godot;
 
 public partial class MapBuilder : Node3D
 {
-    private static int size = 9;
+    private static int mapSize = 9;
     private static char[,] map;
 
     // Scenes
