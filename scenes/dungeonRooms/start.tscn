@@ -1,5 +1,7 @@
 [gd_scene format=3 uid="uid://bg4v4vvsl24tf"]
 
+[ext_resource type="PackedScene" uid="uid://k073yrpgt2u3" path="res://scenes/player.tscn" id="1_jg2tp"]
+
 [node name="Start" type="CSGCombiner3D" unique_id=259429710]
 use_collision = true
 
@@ -42,3 +44,6 @@ size = Vector3(20, 5, 1)
 [node name="West" type="CSGBox3D" parent="Walls" unique_id=677423156]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 9.5, 3, 0)
 size = Vector3(18, 5, 1)
+
+[node name="Player" parent="." unique_id=1932986954 instance=ExtResource("1_jg2tp")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 0)
