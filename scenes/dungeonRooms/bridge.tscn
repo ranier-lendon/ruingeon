@@ -1,0 +1,14 @@
+[gd_scene format=3 uid="uid://bloampnv8lwce"]
+
+[node name="Bridge" type="CSGCombiner3D" unique_id=955709685]
+
+[node name="Floor" type="CSGBox3D" parent="." unique_id=687043977]
+size = Vector3(20, 1, 5)
+
+[node name="Wall" type="CSGBox3D" parent="." unique_id=1717177904]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, 3)
+size = Vector3(20, 6, 1)
+
+[node name="Wall2" type="CSGBox3D" parent="." unique_id=869311599]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, -3)
+size = Vector3(20, 6, 1)

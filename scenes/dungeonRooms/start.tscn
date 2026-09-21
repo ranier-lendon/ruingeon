@@ -1,0 +1,44 @@
+[gd_scene format=3 uid="uid://bg4v4vvsl24tf"]
+
+[node name="Start" type="CSGCombiner3D" unique_id=259429710]
+use_collision = true
+
+[node name="Floor" type="CSGBox3D" parent="." unique_id=480714104]
+size = Vector3(20, 1, 20)
+
+[node name="Label3D" type="Label3D" parent="Floor" unique_id=1783541295]
+transform = Transform3D(-1, 8.742278e-08, 3.821371e-15, 0, -4.371139e-08, 1, 8.742278e-08, 1, 4.371139e-08, 0, 1, 0)
+modulate = Color(1, 0, 0, 1)
+text = "Start"
+font_size = 512
+outline_size = 5
+
+[node name="Walls" type="CSGCombiner3D" parent="." unique_id=1015020131]
+
+[node name="North" type="CSGBox3D" parent="Walls" unique_id=821730434]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 3, 9.5)
+size = Vector3(19, 5, 1)
+
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="Walls/North" unique_id=1553512649]
+transform = Transform3D(1.522, 0, 0, 0, -1.4293624e-08, 1, 0, -0.327, -4.371139e-08, 0, 0.0055060387, 0)
+operation = 2
+radius = 1.636
+height = 5.0
+sides = 12
+
+[node name="CSGBox3D" type="CSGBox3D" parent="Walls/North" unique_id=1363994111]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.25, 0)
+operation = 2
+size = Vector3(5, 2.5, 2.5)
+
+[node name="South" type="CSGBox3D" parent="Walls" unique_id=2091498143]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 3, -9.5)
+size = Vector3(19, 5, 1)
+
+[node name="East" type="CSGBox3D" parent="Walls" unique_id=90791810]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -9.5, 3, 0)
+size = Vector3(20, 5, 1)
+
+[node name="West" type="CSGBox3D" parent="Walls" unique_id=677423156]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 9.5, 3, 0)
+size = Vector3(18, 5, 1)
