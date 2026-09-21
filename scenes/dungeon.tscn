@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://dhpqdw216o2fo" path="res://scripts/MapBuilder.cs" id="1_c4wp1"]
 [ext_resource type="PackedScene" uid="uid://bloampnv8lwce" path="res://scenes/dungeonRooms/bridge.tscn" id="2_c4wp1"]
+[ext_resource type="PackedScene" uid="uid://dqtdwfst24l0b" path="res://scenes/dungeonRooms/normal.tscn" id="3_fpimf"]
 
 [node name="MapBuilder" type="Node3D" unique_id=469557585]
 script = ExtResource("1_c4wp1")
@@ -13,7 +14,7 @@ use_collision = true
 size = Vector3(20, 1, 20)
 
 [node name="Label3D" type="Label3D" parent="Starter/Floor" unique_id=1316441594]
-transform = Transform3D(-4.371139e-08, 1, 4.371139e-08, 0, -4.371139e-08, 1, 1, 4.371139e-08, 1.9106855e-15, 0, 1, 0)
+transform = Transform3D(-1, 8.742278e-08, 3.821371e-15, 0, -4.371139e-08, 1, 8.742278e-08, 1, 4.371139e-08, 0, 1, 0)
 modulate = Color(1, 0, 0, 1)
 text = "Starter"
 font_size = 512
@@ -21,36 +22,39 @@ outline_size = 5
 
 [node name="Walls" type="CSGCombiner3D" parent="Starter" unique_id=423149599]
 
-[node name="Wall" type="CSGBox3D" parent="Starter/Walls" unique_id=1746404208]
+[node name="North" type="CSGBox3D" parent="Starter/Walls" unique_id=1746404208]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 3, 9.5)
 size = Vector3(19, 5, 1)
 
-[node name="Wall2" type="CSGBox3D" parent="Starter/Walls" unique_id=1770509433]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 3, -9.5)
-size = Vector3(19, 5, 1)
-
-[node name="Wall3" type="CSGBox3D" parent="Starter/Walls" unique_id=396395193]
-transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -9.5, 3, 0)
-size = Vector3(20, 5, 1)
-
-[node name="Wall4" type="CSGBox3D" parent="Starter/Walls" unique_id=1572389149]
-transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 9.5, 3, 0)
-size = Vector3(18, 5, 1)
-
-[node name="CSGCylinder3D" type="CSGCylinder3D" parent="Starter/Walls/Wall4" unique_id=1102993242]
-transform = Transform3D(1.522, 1.4293622e-08, 1.9106853e-15, 0, -1.4293624e-08, 1, 6.652873e-08, -0.327, -4.371139e-08, 0, 0.0055060387, 0)
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="Starter/Walls/North" unique_id=1962235201]
+transform = Transform3D(1.522, 0, 0, 0, -1.4293624e-08, 1, 0, -0.327, -4.371139e-08, 0, 0.0055060387, 0)
 operation = 2
 radius = 1.636
 height = 5.0
 sides = 12
 
-[node name="CSGBox3D" type="CSGBox3D" parent="Starter/Walls/Wall4" unique_id=1165785822]
+[node name="CSGBox3D" type="CSGBox3D" parent="Starter/Walls/North" unique_id=161029998]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.25, 0)
 operation = 2
 size = Vector3(5, 2.5, 2.5)
+
+[node name="South" type="CSGBox3D" parent="Starter/Walls" unique_id=1770509433]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 3, -9.5)
+size = Vector3(19, 5, 1)
+
+[node name="East" type="CSGBox3D" parent="Starter/Walls" unique_id=396395193]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -9.5, 3, 0)
+size = Vector3(20, 5, 1)
+
+[node name="West" type="CSGBox3D" parent="Starter/Walls" unique_id=1572389149]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 9.5, 3, 0)
+size = Vector3(18, 5, 1)
 
 [node name="Camera3D" type="Camera3D" parent="." unique_id=348754679]
 transform = Transform3D(-0.71933824, 0.59229475, -0.3629593, 0, 0.5224992, 0.85263973, 0.69466, 0.6133364, -0.37585366, -10.781953, 20.11271, -11.185109)
 
 [node name="Bridge" parent="." unique_id=955709685 instance=ExtResource("2_c4wp1")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20, 0, 0)
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 0, 20)
+
+[node name="Normal" parent="." unique_id=118526844 instance=ExtResource("3_fpimf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 40)
