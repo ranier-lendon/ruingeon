@@ -6,6 +6,42 @@ public partial class PlayerControl : CharacterBody3D
     public const float Speed = 10.0f;
     public const float JumpVelocity = 4.5f;
 
+    private Node3D _visuals;
+    private Camera3D _camera;
+
+    public override void _Ready()
+    {
+        _visuals = GetNode<Node3D>("Visuals");
+        _camera = GetViewport().GetCamera3D();
+    }
+
+    public override void _Process(double delta)
+    {
+        // Project mouse position into world space via a horizontal plane at player's Y
+        Vector2 mousePos = GetViewport().GetMousePosition();
+        Vector3 rayOrigin = _camera.ProjectRayOrigin(mousePos);
+        Vector3 rayDir = _camera.ProjectRayNormal(mousePos);
+
+        // Intersect ray with the horizontal plane at the player's Y position
+        float planeY = GlobalPosition.Y;
+        if (!Mathf.IsZeroApprox(rayDir.Y))
+        {
+            float t = (planeY - rayOrigin.Y) / rayDir.Y;
+            if (t > 0f)
+            {
+                Vector3 worldMousePos = rayOrigin + rayDir * t;
+
+                // Only rotate if the target is not the same as our position
+                Vector3 lookTarget = new Vector3(worldMousePos.X, GlobalPosition.Y, worldMousePos.Z);
+                if (lookTarget.DistanceTo(GlobalPosition) > 0.01f)
+                {
+                    _visuals.LookAt(lookTarget, Vector3.Up);
+                    _visuals.RotateY(Mathf.Pi);
+                }
+            }
+        }
+    }
+
     public override void _PhysicsProcess(double delta)
     {
         Vector3 velocity = Velocity;
