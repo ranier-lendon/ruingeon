@@ -11,6 +11,7 @@ public partial class PlayerControl : CharacterBody3D
     // --- Dash settings (tweak these in the Inspector) ---
     [Export] public float DashDistance = 8.0f;  // World units travelled per dash
     [Export] public float DashDuration = 0.15f; // Seconds the dash lasts
+    [Export] public float DashCooldown = 1.0f;  // Seconds before you can dash again
 
     private Node3D _visuals;
     private Camera3D _camera;
@@ -19,6 +20,7 @@ public partial class PlayerControl : CharacterBody3D
     // Dash state
     private bool _isDashing = false;
     private float _dashTimer = 0f;
+    private float _dashCooldownTimer = 0f;
     private Vector3 _dashDirection = Vector3.Zero;
 
     public override void _Ready()
@@ -46,16 +48,17 @@ public partial class PlayerControl : CharacterBody3D
         }
 
         // Start dash on "dash" action (mapped to Shift)
-        if (@event.IsActionPressed("dash") && !_isDashing)
+        if (@event.IsActionPressed("dash") && !_isDashing && _dashCooldownTimer <= 0f)
         {
             // Use the direction the Visuals node is facing (toward the mouse)
-            // Visuals' -Z is its forward after the RotateY(Pi) flip applied in _Process
+            // Visuals' +Z points toward mouse due to the RotateY(Pi) flip in _Process
             _dashDirection = _visuals.GlobalTransform.Basis.Z;
             _dashDirection.Y = 0f;
             _dashDirection = _dashDirection.Normalized();
 
             _isDashing = true;
             _dashTimer = DashDuration;
+            _dashCooldownTimer = DashCooldown;
         }
     }
 
@@ -87,6 +90,10 @@ public partial class PlayerControl : CharacterBody3D
     {
         float fDelta = (float)delta;
         Vector3 velocity = Velocity;
+
+        // Tick down cooldown regardless of dashing
+        if (_dashCooldownTimer > 0f)
+            _dashCooldownTimer -= fDelta;
 
         if (_isDashing)
         {
