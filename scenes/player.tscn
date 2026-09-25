@@ -24,7 +24,7 @@ script = ExtResource("1_3vyb7")
 shape = SubResource("CapsuleShape3D_gtnjw")
 
 [node name="Camera3D" type="Camera3D" parent="." unique_id=414665665]
-transform = Transform3D(-0.74895895, -0.52214926, 0.4079468, 0, 0.6156606, 0.78801143, -0.6626164, 0.5901882, -0.4611045, 4.3650208, 10.878642, -5.283078)
+transform = Transform3D(-0.9995336, -0.024468336, 0.018271336, 0, 0.5983238, 0.8012544, -0.030537538, 0.8008807, -0.59804475, -0.2217358, 10.369852, -6.006441)
 
 [node name="Visuals" type="Node3D" parent="." unique_id=778444902]
 
