@@ -24,12 +24,10 @@ public partial class PlayerControl : CharacterBody3D
         if (@event.IsActionPressed("rotateCam"))
         {
             _isRotating = true;
-            Input.MouseMode = Input.MouseModeEnum.Captured;
         }
         else if (@event.IsActionReleased("rotateCam"))
         {
             _isRotating = false;
-            Input.MouseMode = Input.MouseModeEnum.Visible;
         }
 
         // Rotate player Y while right-click dragging
@@ -41,10 +39,6 @@ public partial class PlayerControl : CharacterBody3D
 
     public override void _Process(double delta)
     {
-        // Skip mouse-look while rotating (mouse is captured)
-        if (_isRotating)
-            return;
-
         Vector2 mousePos = GetViewport().GetMousePosition();
         Vector3 rayOrigin = _camera.ProjectRayOrigin(mousePos);
         Vector3 rayDir = _camera.ProjectRayNormal(mousePos);
