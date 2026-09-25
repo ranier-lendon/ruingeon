@@ -1,0 +1,38 @@
+[gd_scene format=3 uid="uid://k073yrpgt2u3"]
+
+[ext_resource type="Script" uid="uid://dculnhly52bgb" path="res://scripts/PlayerControl.cs" id="1_3vyb7"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_gtnjw"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_qyjd6"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rcfou"]
+albedo_color = Color(0, 0, 1, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_qyjd6"]
+top_radius = 0.3
+bottom_radius = 0.3
+height = 0.2685547
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gtnjw"]
+albedo_color = Color(1, 0, 0, 1)
+
+[node name="Player" type="CharacterBody3D" unique_id=1932986954]
+script = ExtResource("1_3vyb7")
+
+[node name="Collision" type="CollisionShape3D" parent="." unique_id=1755242798]
+shape = SubResource("CapsuleShape3D_gtnjw")
+
+[node name="Camera3D" type="Camera3D" parent="." unique_id=414665665]
+transform = Transform3D(-0.9995336, -0.024468336, 0.018271336, 0, 0.5983238, 0.8012544, -0.030537538, 0.8008807, -0.59804475, -0.2217358, 10.369852, -6.006441)
+
+[node name="Visuals" type="Node3D" parent="." unique_id=778444902]
+
+[node name="Body" type="MeshInstance3D" parent="Visuals" unique_id=1114429139]
+mesh = SubResource("CapsuleMesh_qyjd6")
+surface_material_override/0 = SubResource("StandardMaterial3D_rcfou")
+
+[node name="Eye" type="MeshInstance3D" parent="Visuals" unique_id=1694376276]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.341981, 0.36311644)
+mesh = SubResource("CylinderMesh_qyjd6")
+surface_material_override/0 = SubResource("StandardMaterial3D_gtnjw")

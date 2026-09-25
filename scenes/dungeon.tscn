@@ -5,5 +5,6 @@
 [node name="MapBuilder" type="Node3D" unique_id=469557585]
 script = ExtResource("1_c4wp1")
 
-[node name="Camera3D" type="Camera3D" parent="." unique_id=1370311070]
-transform = Transform3D(-0.9999143, 0.013092529, -1.0425247e-05, 0, 0.0007962743, 0.9999997, 0.013092533, 0.999914, -0.000796206, -0.00063023454, 129.83307, -0.048135847)
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=2000313435]
+transform = Transform3D(0.9997713, 0, -0.021385793, 0.010197443, 0.8789941, 0.47672355, 0.018797986, -0.4768326, 0.87879306, 0, 76.47587, 0)
+light_energy = 1.5
