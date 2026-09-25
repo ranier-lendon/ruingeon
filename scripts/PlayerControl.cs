@@ -8,9 +8,18 @@ public partial class PlayerControl : CharacterBody3D
 
     [Export] public float RotateSensitivity = 0.005f;
 
+    // --- Dash settings (tweak these in the Inspector) ---
+    [Export] public float DashDistance = 8.0f;  // World units travelled per dash
+    [Export] public float DashDuration = 0.15f; // Seconds the dash lasts
+
     private Node3D _visuals;
     private Camera3D _camera;
     private bool _isRotating = false;
+
+    // Dash state
+    private bool _isDashing = false;
+    private float _dashTimer = 0f;
+    private Vector3 _dashDirection = Vector3.Zero;
 
     public override void _Ready()
     {
@@ -34,6 +43,19 @@ public partial class PlayerControl : CharacterBody3D
         if (_isRotating && @event is InputEventMouseMotion motion)
         {
             RotateY(-motion.Relative.X * RotateSensitivity);
+        }
+
+        // Start dash on "dash" action (mapped to Shift)
+        if (@event.IsActionPressed("dash") && !_isDashing)
+        {
+            // Use the direction the Visuals node is facing (toward the mouse)
+            // Visuals' -Z is its forward after the RotateY(Pi) flip applied in _Process
+            _dashDirection = _visuals.GlobalTransform.Basis.Z;
+            _dashDirection.Y = 0f;
+            _dashDirection = _dashDirection.Normalized();
+
+            _isDashing = true;
+            _dashTimer = DashDuration;
         }
     }
 
@@ -63,21 +85,37 @@ public partial class PlayerControl : CharacterBody3D
 
     public override void _PhysicsProcess(double delta)
     {
+        float fDelta = (float)delta;
         Vector3 velocity = Velocity;
 
-        Vector2 inputDir = Input.GetVector("rightward", "leftward", "backward", "forward");
-
-        Vector3 direction = (Transform.Basis * new Vector3(inputDir.X, 0, inputDir.Y)).Normalized();
-
-        if (direction != Vector3.Zero)
+        if (_isDashing)
         {
-            velocity.X = direction.X * Speed;
-            velocity.Z = direction.Z * Speed;
+            _dashTimer -= fDelta;
+            float dashSpeed = DashDistance / DashDuration;
+            velocity.X = _dashDirection.X * dashSpeed;
+            velocity.Z = _dashDirection.Z * dashSpeed;
+
+            if (_dashTimer <= 0f)
+            {
+                _isDashing = false;
+                _dashTimer = 0f;
+            }
         }
         else
         {
-            velocity.X = Mathf.MoveToward(Velocity.X, 0, Speed);
-            velocity.Z = Mathf.MoveToward(Velocity.Z, 0, Speed);
+            Vector2 inputDir = Input.GetVector("rightward", "leftward", "backward", "forward");
+            Vector3 direction = (Transform.Basis * new Vector3(inputDir.X, 0, inputDir.Y)).Normalized();
+
+            if (direction != Vector3.Zero)
+            {
+                velocity.X = direction.X * Speed;
+                velocity.Z = direction.Z * Speed;
+            }
+            else
+            {
+                velocity.X = Mathf.MoveToward(Velocity.X, 0, Speed);
+                velocity.Z = Mathf.MoveToward(Velocity.Z, 0, Speed);
+            }
         }
 
         Velocity = velocity;
