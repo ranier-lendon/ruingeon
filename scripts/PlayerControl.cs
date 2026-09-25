@@ -6,8 +6,11 @@ public partial class PlayerControl : CharacterBody3D
     public const float Speed = 10.0f;
     public const float JumpVelocity = 4.5f;
 
+    [Export] public float RotateSensitivity = 0.005f;
+
     private Node3D _visuals;
     private Camera3D _camera;
+    private bool _isRotating = false;
 
     public override void _Ready()
     {
@@ -15,14 +18,37 @@ public partial class PlayerControl : CharacterBody3D
         _camera = GetViewport().GetCamera3D();
     }
 
+    public override void _Input(InputEvent @event)
+    {
+        // Track rotateCam press/release
+        if (@event.IsActionPressed("rotateCam"))
+        {
+            _isRotating = true;
+            Input.MouseMode = Input.MouseModeEnum.Captured;
+        }
+        else if (@event.IsActionReleased("rotateCam"))
+        {
+            _isRotating = false;
+            Input.MouseMode = Input.MouseModeEnum.Visible;
+        }
+
+        // Rotate player Y while right-click dragging
+        if (_isRotating && @event is InputEventMouseMotion motion)
+        {
+            RotateY(-motion.Relative.X * RotateSensitivity);
+        }
+    }
+
     public override void _Process(double delta)
     {
-        // Project mouse position into world space via a horizontal plane at player's Y
+        // Skip mouse-look while rotating (mouse is captured)
+        if (_isRotating)
+            return;
+
         Vector2 mousePos = GetViewport().GetMousePosition();
         Vector3 rayOrigin = _camera.ProjectRayOrigin(mousePos);
         Vector3 rayDir = _camera.ProjectRayNormal(mousePos);
 
-        // Intersect ray with the horizontal plane at the player's Y position
         float planeY = GlobalPosition.Y;
         if (!Mathf.IsZeroApprox(rayDir.Y))
         {
@@ -31,7 +57,6 @@ public partial class PlayerControl : CharacterBody3D
             {
                 Vector3 worldMousePos = rayOrigin + rayDir * t;
 
-                // Only rotate if the target is not the same as our position
                 Vector3 lookTarget = new Vector3(worldMousePos.X, GlobalPosition.Y, worldMousePos.Z);
                 if (lookTarget.DistanceTo(GlobalPosition) > 0.01f)
                 {
@@ -47,7 +72,7 @@ public partial class PlayerControl : CharacterBody3D
         Vector3 velocity = Velocity;
 
         Vector2 inputDir = Input.GetVector("rightward", "leftward", "backward", "forward");
-        
+
         Vector3 direction = (Transform.Basis * new Vector3(inputDir.X, 0, inputDir.Y)).Normalized();
 
         if (direction != Vector3.Zero)
