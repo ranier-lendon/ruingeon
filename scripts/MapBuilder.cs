@@ -12,6 +12,9 @@
 */
 
 using Godot;
+using System;
+using System.Collections.Generic;
+using GameGlobals;
 
 public partial class MapBuilder : Node3D
 {
@@ -28,116 +31,179 @@ public partial class MapBuilder : Node3D
     PackedScene shop = GD.Load<PackedScene>("res://scenes/dungeonRooms/shop.tscn");
     PackedScene start = GD.Load<PackedScene>("res://scenes/dungeonRooms/start.tscn");
     PackedScene treasure = GD.Load<PackedScene>("res://scenes/dungeonRooms/treasure.tscn");
+    PackedScene wall = GD.Load<PackedScene>("res://scenes/dungeonRooms/wall.tscn");
+    PackedScene wallDoor = GD.Load<PackedScene>("res://scenes/dungeonRooms/wall_door.tscn");
     
     public override void _Ready()
     {
         map = MapSystem.GenerateMap(1);
-        BuildMap();
-    }
 
-    public void BuildMap()
-    {
         for (int y=0; y<mapSize; y++)
         {
             for (int x=0; x<mapSize; x++)
             {
                 char room = map[x,y];
+
                 if (room == ' ')
                 {
                     continue;
                 }
-                Vector3 position = new Vector3(x * 20 - (mapSize/2) * 20, 0, y * 20 - (mapSize/2) * 20);
-                switch(room)
-                {
-                    case 's':
-                        AddRoom(start, position);
-                        break;
-                    case 'x':
-                        AddRoom(normal, position);
-                        break;
-                    case 'p':
-                        AddRoom(portal, position);
-                        break;
-                    case 'z':
-                        AddRoom(shop, position);
-                        break;
-                    case 'h':
-                        AddRoom(heal, position);
-                        break;
-                    case 'b':
-                        AddRoom(boss, position);
-                        break;
-                    case 't':
-                        AddRoom(treasure, position);
-                        break;
-                    case 'e':
-                        AddRoom(elite, position);
-                        break;
-                    case '-':
-                        AddRoom(bridge, position);
-                        break;
-                    case '|':
-                        AddRoom(bridge, position, Mathf.Pi / 2);
-                        break;
-                }
 
-                /* 
-
-                 - Make a function that checks the direction of the bridge and add a wall_door to
-                that direction.
-
-                const north = Pos = (0, 3, 9.5), Rot = (0, 0, 0)
-                const south = Pos = (0, 3, -9.5), Rot = (0, 180, 0)
-                const east = Pos = (9.5, 3, 0), Rot = (0, 90, 0)
-                const west = Pos = (-9.5, 3, 0), Rot = (0, -90, 0)
-                */
-                
-                // Checks if room is not a bridge
-                if (room != '-' && room != '|')
-                {
-                    Direction bridgeDir = GetBridgeRotation(x, y);
-
-                    
-                }
+                BuildMap(x, y, room);
             }
         }
     }
 
-    private void AddRoom(PackedScene room, Vector3 position, float rotationY = 0f)
+    public void BuildMap(int x, int y, char room)
+    {
+        Vector3 position = new Vector3(x * 20 - (mapSize/2) * 20, 0, y * 20 - (mapSize/2) * 20);
+        switch(room)
+        {
+            case 's':
+                AddInstance(start, position);
+                break;
+            case 'x':
+                AddInstance(normal, position);
+                break;
+            case 'p':
+                AddInstance(portal, position);
+                break;
+            case 'z':
+                AddInstance(shop, position);
+                break;
+            case 'h':
+                AddInstance(heal, position);
+                break;
+            case 'b':
+                AddInstance(boss, position);
+                break;
+            case 't':
+                AddInstance(treasure, position);
+                break;
+            case 'e':
+                AddInstance(elite, position);
+                break;
+            case '-':
+                AddInstance(bridge, position);
+                break;
+            case '|':
+                AddInstance(bridge, position, 90f);
+                break;
+        }
+
+        if (room != '|' && room != '-')
+        {
+            AddWall(x, y, position);
+        }
+    }
+
+    private void AddWall(int x, int y, Vector3 basePosition)
+    {
+        /* 
+        - Make a function that checks the direction of the bridge and add a wall_door to
+        that direction.
+
+        const north = Pos = (0, 3, 9.5), Rot = (0, 0, 0)
+        const south = Pos = (0, 3, -9.5), Rot = (0, 0, 0)
+        const east = Pos = (9.5, 3, 0), Rot = (0, 90, 0)
+        const west = Pos = (-9.5, 3, 0), Rot = (0, 90, 0)
+        */
+
+        var transformData = new Dictionary<Direction, Vector3[]>
+        {
+            { Direction.up, new Vector3[]{new Vector3(0, 3, 9.5f), new Vector3(0, 0, 0)} },
+            { Direction.down, new Vector3[]{new Vector3(0, 3, -9.5f), new Vector3(0, 0, 0)} },
+            { Direction.left, new Vector3[]{new Vector3(9.5f, 3, 0), new Vector3(0, 90, 0)} },
+            { Direction.right, new Vector3[]{new Vector3(-9.5f, 3, 0), new Vector3(0, 90, 0)} }
+        };
+        Direction[] bridgeDirections = GetAllBridgeRotation(x, y);
+        
+        if (Array.Exists(bridgeDirections, d => d == Direction.up))
+        {
+            Vector3 pos = basePosition + transformData[Direction.up][0];
+            float rot = transformData[Direction.up][1].Y;
+            AddInstance(wallDoor, pos, rot);
+        }
+        else
+        {
+            Vector3 pos = basePosition + transformData[Direction.up][0];
+            float rot = transformData[Direction.up][1].Y;
+            AddInstance(wall, pos, rot);
+        }
+
+        if (Array.Exists(bridgeDirections, d => d == Direction.down))
+        {
+            Vector3 pos = basePosition + transformData[Direction.down][0];
+            float rot = transformData[Direction.down][1].Y;
+            AddInstance(wallDoor, pos, rot);
+        }
+        else
+        {
+            Vector3 pos = basePosition + transformData[Direction.down][0];
+            float rot = transformData[Direction.down][1].Y;
+            AddInstance(wall, pos, rot);
+        }
+
+        if (Array.Exists(bridgeDirections, d => d == Direction.left))
+        {
+            Vector3 pos = basePosition + transformData[Direction.left][0];
+            float rot = transformData[Direction.left][1].Y;
+            AddInstance(wallDoor, pos, rot);
+        }
+        else
+        {
+            Vector3 pos = basePosition + transformData[Direction.left][0];
+            float rot = transformData[Direction.left][1].Y;
+            AddInstance(wall, pos, rot);
+        }
+
+        if (Array.Exists(bridgeDirections, d => d == Direction.right))
+        {
+            Vector3 pos = basePosition + transformData[Direction.right][0];
+            float rot = transformData[Direction.right][1].Y;
+            AddInstance(wallDoor, pos, rot);
+        }
+        else
+        {
+            Vector3 pos = basePosition + transformData[Direction.right][0];
+            float rot = transformData[Direction.right][1].Y;
+            AddInstance(wall, pos, rot);
+        }
+    }
+
+    private void AddInstance(PackedScene room, Vector3 position, float rotationY = 0f)
     {
         Node3D roomInstance = (Node3D)room.Instantiate();
         roomInstance.Position = position;
-        roomInstance.RotationDegrees = new Vector3(0, Mathf.RadToDeg(rotationY), 0);
+        roomInstance.RotationDegrees = new Vector3(0, rotationY, 0);
         AddChild(roomInstance);
     }
 
-    private Direction GetBridgeRotation(int x, int y)
+
+    private Direction[] GetAllBridgeRotation(int x, int y)
     {
-        int finalX = Math.Clamp(x, 0, mapSize-1);
-        int finalY = Math.Clamp(y, 0, mapSize-1);
+        List<Direction> dir = new List<Direction>();
 
-        Direction dir = Direction.none;
-
-        if (map[x, y-1] is '|' or '-')
+        if (y > 0 && map[x, y-1] is '|' or '-')
         {
-            dir = Direction.up;
+            dir.Add(Direction.down);
         }
 
-        if (map[x, y+1] is '|' or '-')
+        if (y < mapSize-1 && map[x, y+1] is '|' or '-')
         {
-            dir = Direction.down;
+            dir.Add(Direction.up);
         }
 
-        if (map[x-1, y] is '|' or '-')
+        if (x > 0 && map[x-1, y] is '|' or '-')
         {
-            dir = Direction.left;
+            dir.Add(Direction.right);
         }
 
-        if (map[x+1, y] is '|' or '-')
+        if (x < mapSize-1 && map[x+1, y] is '|' or '-')
         {
-            dir = Direction.right;
+            dir.Add(Direction.left);
         }
 
-        return dir;
+        return dir.ToArray();
     }
 }
