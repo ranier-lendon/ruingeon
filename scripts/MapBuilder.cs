@@ -80,6 +80,25 @@ public partial class MapBuilder : Node3D
                         AddRoom(bridge, position, Mathf.Pi / 2);
                         break;
                 }
+
+                /* 
+
+                 - Make a function that checks the direction of the bridge and add a wall_door to
+                that direction.
+
+                const north = Pos = (0, 3, 9.5), Rot = (0, 0, 0)
+                const south = Pos = (0, 3, -9.5), Rot = (0, 180, 0)
+                const east = Pos = (9.5, 3, 0), Rot = (0, 90, 0)
+                const west = Pos = (-9.5, 3, 0), Rot = (0, -90, 0)
+                */
+                
+                // Checks if room is not a bridge
+                if (room != '-' && room != '|')
+                {
+                    Direction bridgeDir = GetBridgeRotation(x, y);
+
+                    
+                }
             }
         }
     }
@@ -90,5 +109,35 @@ public partial class MapBuilder : Node3D
         roomInstance.Position = position;
         roomInstance.RotationDegrees = new Vector3(0, Mathf.RadToDeg(rotationY), 0);
         AddChild(roomInstance);
+    }
+
+    private Direction GetBridgeRotation(int x, int y)
+    {
+        int finalX = Math.Clamp(x, 0, mapSize-1);
+        int finalY = Math.Clamp(y, 0, mapSize-1);
+
+        Direction dir = Direction.none;
+
+        if (map[x, y-1] is '|' or '-')
+        {
+            dir = Direction.up;
+        }
+
+        if (map[x, y+1] is '|' or '-')
+        {
+            dir = Direction.down;
+        }
+
+        if (map[x-1, y] is '|' or '-')
+        {
+            dir = Direction.left;
+        }
+
+        if (map[x+1, y] is '|' or '-')
+        {
+            dir = Direction.right;
+        }
+
+        return dir;
     }
 }
