@@ -1,0 +1,32 @@
+[gd_scene format=3 uid="uid://664pw2uwsg0a"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_gtnjw"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_md0e3"]
+albedo_color = Color(1, 0, 0, 1)
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_qyjd6"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4ra3w"]
+albedo_color = Color(0, 0, 0, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_qyjd6"]
+top_radius = 0.3
+bottom_radius = 0.3
+height = 0.2685547
+
+[node name="Enemy" type="CharacterBody3D" unique_id=1932986954]
+
+[node name="Collision" type="CollisionShape3D" parent="." unique_id=1755242798]
+shape = SubResource("CapsuleShape3D_gtnjw")
+
+[node name="Visuals" type="Node3D" parent="." unique_id=778444902]
+
+[node name="Body" type="MeshInstance3D" parent="Visuals" unique_id=1114429139]
+material_override = SubResource("StandardMaterial3D_md0e3")
+mesh = SubResource("CapsuleMesh_qyjd6")
+
+[node name="Eye" type="MeshInstance3D" parent="Visuals" unique_id=1694376276]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.341981, 0.36311644)
+material_override = SubResource("StandardMaterial3D_4ra3w")
+mesh = SubResource("CylinderMesh_qyjd6")
