@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://bipsd66r77jej"]
 
 [node name="WallDoor" type="CSGCombiner3D" unique_id=1895828023]
+use_collision = true
 
 [node name="WallDoor" type="CSGBox3D" parent="." unique_id=717194184]
 size = Vector3(20, 5, 1)

@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://x5k5n1ip4gb4"]
 
 [node name="Wall" type="CSGCombiner3D" unique_id=299186583]
+use_collision = true
 
 [node name="South" type="CSGBox3D" parent="." unique_id=329143339]
 size = Vector3(20, 5, 1)

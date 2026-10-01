@@ -1,10 +1,13 @@
 using Godot;
 using System;
 
-public partial class PlayerControl : CharacterBody3D
+public partial class PlayerControl : CharacterBody3D, IGravity
 {
     public const float Speed = 10.0f;
     public const float JumpVelocity = 4.5f;
+
+    // IGravity implementation
+    [Export] public float GravityScale { get; set; } = 1.0f;
 
     [Export] public float RotateSensitivity = 0.005f;
 
@@ -89,6 +92,10 @@ public partial class PlayerControl : CharacterBody3D
     public override void _PhysicsProcess(double delta)
     {
         float fDelta = (float)delta;
+
+        // Apply gravity via shared helper
+        GravityComponent.ApplyGravity(this, delta);
+
         Vector3 velocity = Velocity;
 
         // Tick down cooldown regardless of dashing
