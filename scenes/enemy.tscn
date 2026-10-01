@@ -1,5 +1,7 @@
 [gd_scene format=3 uid="uid://664pw2uwsg0a"]
 
+[ext_resource type="Script" uid="uid://devl2n3qoycua" path="res://scripts/Enemy.cs" id="1_7p1mj"]
+
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_gtnjw"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_md0e3"]
@@ -16,6 +18,7 @@ bottom_radius = 0.3
 height = 0.2685547
 
 [node name="Enemy" type="CharacterBody3D" unique_id=1932986954]
+script = ExtResource("1_7p1mj")
 
 [node name="Collision" type="CollisionShape3D" parent="." unique_id=1755242798]
 shape = SubResource("CapsuleShape3D_gtnjw")
@@ -30,3 +33,7 @@ mesh = SubResource("CapsuleMesh_qyjd6")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.341981, 0.36311644)
 material_override = SubResource("StandardMaterial3D_4ra3w")
 mesh = SubResource("CylinderMesh_qyjd6")
+
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="." unique_id=2134567890]
+path_desired_distance = 1.2
+target_desired_distance = 1.2
