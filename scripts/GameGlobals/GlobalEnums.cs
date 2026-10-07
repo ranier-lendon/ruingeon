@@ -8,4 +8,10 @@ namespace GameGlobals
         right,
         none
     }
+
+    public enum DoorState
+    {
+        Open,
+        Close
+    }
 }
