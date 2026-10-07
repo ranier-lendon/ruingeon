@@ -17,8 +17,9 @@ text = "Normal"
 font_size = 512
 outline_size = 5
 
-[node name="RoomTrigger" type="Area3D" parent="." unique_id=74448864]
+[node name="RoomTrigger" type="Area3D" parent="." unique_id=74448864 node_paths=PackedStringArray("Door")]
 script = ExtResource("1_0juhp")
+Door = NodePath("../Door")
 
 [node name="Detector" type="CollisionShape3D" parent="RoomTrigger" unique_id=1704796819]
 transform = Transform3D(17.9, 0, 0, 0, 17.9, 0, 0, 0, 17.9, 0, 9.6, 0)
