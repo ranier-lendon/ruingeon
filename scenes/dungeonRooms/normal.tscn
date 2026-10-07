@@ -23,3 +23,23 @@ script = ExtResource("1_0juhp")
 [node name="Detector" type="CollisionShape3D" parent="RoomTrigger" unique_id=1704796819]
 transform = Transform3D(17.9, 0, 0, 0, 17.9, 0, 0, 0, 17.9, 0, 9.6, 0)
 shape = SubResource("BoxShape3D_qyjd6")
+
+[node name="Door" type="CSGCombiner3D" parent="." unique_id=1484066288]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 0.2, 0, 5, 0)
+use_collision = true
+
+[node name="CSGBox3D" type="CSGBox3D" parent="Door" unique_id=1250120093]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.25, 47.5)
+size = Vector3(5, 0.5, 1)
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="Door" unique_id=1268852846]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.25, -47.500008)
+size = Vector3(5, 0.5, 1)
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="Door" unique_id=2025358483]
+transform = Transform3D(-4.371139e-08, 0, 0.19999999, 0, 1, 0, -5.0000005, 0, -4.371139e-08, 9.5, -0.25, -4.7683716e-06)
+size = Vector3(5, 0.5, 1)
+
+[node name="CSGBox3D4" type="CSGBox3D" parent="Door" unique_id=999920169]
+transform = Transform3D(-4.371139e-08, 0, 0.19999999, 0, 1, 0, -5.0000005, 0, -4.371139e-08, -9.5, -0.25, -4.7683716e-06)
+size = Vector3(5, 0.5, 1)
