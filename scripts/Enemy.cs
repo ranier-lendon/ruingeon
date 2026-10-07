@@ -3,6 +3,8 @@ using Godot;
 // Enemy AI — chases the player directly. Requires player node in group "player".
 public partial class Enemy : CharacterBody3D, IGravity
 {
+    [Signal] public delegate void DiedEventHandler();
+
     [Export] public float MoveSpeed = 4.0f;
     [Export] public float StopDistance = 1.2f;
     [Export] public float DetectionRange = 20.0f;
@@ -16,6 +18,7 @@ public partial class Enemy : CharacterBody3D, IGravity
     {
         _visuals = GetNode<Node3D>("Visuals");
         _player  = FindPlayer();
+        TreeExiting += () => EmitSignal(SignalName.Died);
     }
 
     public override void _PhysicsProcess(double delta)
