@@ -8,4 +8,17 @@ namespace GameGlobals
         right,
         none
     }
+
+    public enum DoorState
+    {
+        Open,
+        Close
+    }
+
+    public enum WaveType
+    {
+        Normal,
+        Elite,
+        Boss
+    }
 }

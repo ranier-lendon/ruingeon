@@ -1,5 +1,10 @@
 [gd_scene format=3 uid="uid://dqtdwfst24l0b"]
 
+[ext_resource type="Script" uid="uid://cprtu0sfquao7" path="res://scripts/RoomTrigger.cs" id="1_0juhp"]
+[ext_resource type="Script" uid="uid://qf6ql6u1so6u" path="res://scripts/SpawnManager.cs" id="2_dfava"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_qyjd6"]
+
 [node name="Normal" type="CSGCombiner3D" unique_id=118526844]
 use_collision = true
 
@@ -12,3 +17,50 @@ modulate = Color(1, 0, 0, 1)
 text = "Normal"
 font_size = 512
 outline_size = 5
+
+[node name="RoomTrigger" type="Area3D" parent="." unique_id=74448864 node_paths=PackedStringArray("Door", "SpawnManager")]
+script = ExtResource("1_0juhp")
+Door = NodePath("../Door")
+MaxWave = 2
+SpawnManager = NodePath("../SpawnManager")
+MobsPerWave = 2
+
+[node name="Detector" type="CollisionShape3D" parent="RoomTrigger" unique_id=1704796819]
+transform = Transform3D(17.9, 0, 0, 0, 17.9, 0, 0, 0, 17.9, 0, 9.6, 0)
+shape = SubResource("BoxShape3D_qyjd6")
+
+[node name="Door" type="CSGCombiner3D" parent="." unique_id=1484066288]
+transform = Transform3D(1, 0, 0, 0, 1.8315516, 0, 0, 0, 0.2, 0, 5, 0)
+use_collision = true
+
+[node name="CSGBox3D" type="CSGBox3D" parent="Door" unique_id=1250120093]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.25, 47.5)
+size = Vector3(5, 0.5, 1)
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="Door" unique_id=1268852846]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.25, -47.500008)
+size = Vector3(5, 0.5, 1)
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="Door" unique_id=2025358483]
+transform = Transform3D(-4.371139e-08, 0, 0.19999999, 0, 1, 0, -5.0000005, 0, -4.371139e-08, 9.5, -0.25, -4.7683716e-06)
+size = Vector3(5, 0.5, 1)
+
+[node name="CSGBox3D4" type="CSGBox3D" parent="Door" unique_id=999920169]
+transform = Transform3D(-4.371139e-08, 0, 0.19999999, 0, 1, 0, -5.0000005, 0, -4.371139e-08, -9.5, -0.25, -4.7683716e-06)
+size = Vector3(5, 0.5, 1)
+
+[node name="SpawnManager" type="Node3D" parent="." unique_id=545584394]
+script = ExtResource("2_dfava")
+CurrentDungeon = "Dungeon1"
+
+[node name="Spawn1" type="Marker3D" parent="SpawnManager" unique_id=504177503]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.5, 0.6, 0)
+
+[node name="Spawn2" type="Marker3D" parent="SpawnManager" unique_id=451298824]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.5, 0.6, 0)
+
+[node name="Spawn3" type="Marker3D" parent="SpawnManager" unique_id=598557169]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6, -4.5)
+
+[node name="Spawn4" type="Marker3D" parent="SpawnManager" unique_id=1485255007]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6, 4.5)

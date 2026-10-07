@@ -17,7 +17,7 @@ top_radius = 0.3
 bottom_radius = 0.3
 height = 0.2685547
 
-[node name="Enemy" type="CharacterBody3D" unique_id=1932986954]
+[node name="Enemy" type="CharacterBody3D" unique_id=1932986954 groups=["enemy"]]
 script = ExtResource("1_7p1mj")
 
 [node name="Collision" type="CollisionShape3D" parent="." unique_id=1755242798]
