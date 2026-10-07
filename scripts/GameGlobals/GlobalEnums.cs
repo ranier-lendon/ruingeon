@@ -14,4 +14,11 @@ namespace GameGlobals
         Open,
         Close
     }
+
+    public enum WaveType
+    {
+        Normal,
+        Elite,
+        Boss
+    }
 }
