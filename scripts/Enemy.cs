@@ -56,8 +56,8 @@ public partial class Enemy : CharacterBody3D, IGravity
         toPlayer   = toPlayer.Normalized();
 
         Vector3 velocity = Velocity;
-        velocity.X = toPlayer.X * MoveSpeed;
-        velocity.Z = toPlayer.Z * MoveSpeed;
+        velocity.X = Mathf.MoveToward(velocity.X, toPlayer.X * MoveSpeed, MoveSpeed * 10f * delta);
+        velocity.Z = Mathf.MoveToward(velocity.Z, toPlayer.Z * MoveSpeed, MoveSpeed * 10f * delta);
         Velocity   = velocity;
 
         FacePlayer();
