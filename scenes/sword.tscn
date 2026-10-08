@@ -1,0 +1,21 @@
+[gd_scene format=3 uid="uid://tdeujvq1sy4u"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qyjd6"]
+albedo_color = Color(0, 1, 0, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_rcfou"]
+size = Vector3(1, 0.19921875, 0.65979004)
+
+[node name="Sword" type="CSGCombiner3D" unique_id=1304829794]
+
+[node name="CSGBox3D" type="CSGBox3D" parent="." unique_id=1467029793]
+transform = Transform3D(1, 0, 0, 0, -0.50000006, -0.8660254, 0, 0.8660254, -0.50000006, -0.558, 0.25, 0.258)
+material_override = SubResource("StandardMaterial3D_qyjd6")
+size = Vector3(0.1, 0.1, 1)
+
+[node name="HurtBox" type="Area3D" parent="." unique_id=976911102]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.25, 0.5906722)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="HurtBox" unique_id=527435942]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.28269458)
+shape = SubResource("BoxShape3D_rcfou")
