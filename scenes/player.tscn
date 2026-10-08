@@ -38,6 +38,9 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.341981, 0.36311644)
 mesh = SubResource("CylinderMesh_qyjd6")
 surface_material_override/0 = SubResource("StandardMaterial3D_gtnjw")
 
-[node name="Sword" parent="." unique_id=1304829794 instance=ExtResource("2_g2els")]
+[node name="Weapon" type="Node3D" parent="Visuals" unique_id=1241290733]
+editor_description = "Holds the active weapon of the player. Can only have ONE active weapon"
 
-[editable path="Sword"]
+[node name="Sword" parent="Visuals/Weapon" unique_id=1304829794 instance=ExtResource("2_g2els")]
+
+[editable path="Visuals/Weapon/Sword"]

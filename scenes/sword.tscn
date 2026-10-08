@@ -7,7 +7,6 @@ albedo_color = Color(0, 1, 0, 1)
 size = Vector3(1, 0.19921875, 0.65979004)
 
 [node name="Sword" type="CSGCombiner3D" unique_id=1304829794]
-use_collision = true
 
 [node name="CSGBox3D" type="CSGBox3D" parent="." unique_id=1467029793]
 transform = Transform3D(1, 0, 0, 0, -0.50000006, -0.8660254, 0, 0.8660254, -0.50000006, -0.558, 0.25, 0.258)

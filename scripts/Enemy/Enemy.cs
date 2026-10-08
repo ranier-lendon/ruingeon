@@ -11,10 +11,10 @@ public partial class Enemy : CharacterBody3D, IGravity, IDamageable, IAttacker
 
     [Export] public float GravityScale { get; set; } = 1.0f;
 
-    public float Health { get; } = 100f;
-    public float Damage = 10f;
-    public float AttackRange = 1.2f;
-    public float AttackCooldown = 1f;
+    public float Health { get; private set; } = 100f;
+    public float Damage { get; } = 10f;
+    public float AttackRange { get; } = 1.2f;
+    public float AttackCooldown { get; } = 1f;
 
     private Node3D _visuals;
     private CharacterBody3D _player;
@@ -41,6 +41,7 @@ public partial class Enemy : CharacterBody3D, IGravity, IDamageable, IAttacker
     public void TakeDamage(float amount)
     {
         Health -= amount;
+        GD.Print($"Enemy health: {Health}");
         if (Health <= 0)
             Die();
     }
