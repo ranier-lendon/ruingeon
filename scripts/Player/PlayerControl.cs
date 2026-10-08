@@ -1,13 +1,15 @@
 using Godot;
 using System;
 
-public partial class PlayerControl : CharacterBody3D, IGravity
+public partial class PlayerControl : CharacterBody3D, IGravity, IDamageable
 {
     public const float Speed = 10.0f;
     public const float JumpVelocity = 4.5f;
 
     // IGravity implementation
     [Export] public float GravityScale { get; set; } = 1.0f;
+
+    public float Health { get; } = 100f;
 
     [Export] public float RotateSensitivity = 0.005f;
 
@@ -134,5 +136,18 @@ public partial class PlayerControl : CharacterBody3D, IGravity
 
         Velocity = velocity;
         MoveAndSlide();
+    }
+
+    public void TakeDamage(float amount)
+    {
+        Health -= amount;
+        if (Health <= 0)
+            Die();
+    }
+
+    public void Die()
+    {
+        EmitSignal(SignalName.Died);
+        QueueFree();
     }
 }
