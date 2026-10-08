@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://k073yrpgt2u3"]
 
 [ext_resource type="Script" uid="uid://coedodtj68lfd" path="res://scripts/Player/PlayerControl.cs" id="1_3vyb7"]
+[ext_resource type="PackedScene" uid="uid://tdeujvq1sy4u" path="res://scenes/sword.tscn" id="2_g2els"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_gtnjw"]
 
@@ -36,3 +37,7 @@ surface_material_override/0 = SubResource("StandardMaterial3D_rcfou")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.341981, 0.36311644)
 mesh = SubResource("CylinderMesh_qyjd6")
 surface_material_override/0 = SubResource("StandardMaterial3D_gtnjw")
+
+[node name="Sword" parent="." unique_id=1304829794 instance=ExtResource("2_g2els")]
+
+[editable path="Sword"]
