@@ -53,13 +53,24 @@ public partial class SpawnManager : Node3D
             return spawned;
         }
 
+        // Shuffle spawn points so enemies don't stack on the same position
+        var shuffledPoints = new List<Marker3D>(_spawnPoints);
+        Shuffle(shuffledPoints);
+        int spawnIndex = 0;
+
         for (int i = 0; i < mobCount; i++)
         {
-            int randomSpawnIndex = GD.RandRange(0, _spawnPoints.Count - 1);
-            int randomMobIndex   = GD.RandRange(0, _mobList.Count - 1);
+            // If we've used all spawn points, re-shuffle and cycle again
+            if (spawnIndex >= shuffledPoints.Count)
+            {
+                Shuffle(shuffledPoints);
+                spawnIndex = 0;
+            }
 
-            Marker3D spawnPoint  = _spawnPoints[randomSpawnIndex];
+            int randomMobIndex  = GD.RandRange(0, _mobList.Count - 1);
+            Marker3D spawnPoint = shuffledPoints[spawnIndex];
             PackedScene mobScene = _mobList[randomMobIndex];
+            spawnIndex++;
 
             Enemy mob = mobScene.Instantiate<Enemy>();
             GetParent().AddChild(mob);
@@ -68,5 +79,15 @@ public partial class SpawnManager : Node3D
         }
 
         return spawned;
+    }
+
+    // Fisher-Yates Shuffle
+    private static void Shuffle<T>(List<T> list)
+    {
+        for (int i = list.Count - 1; i > 0; i--)
+        {
+            int j = GD.RandRange(0, i);
+            (list[i], list[j]) = (list[j], list[i]);
+        }
     }
 }

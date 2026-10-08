@@ -7,7 +7,7 @@ public partial class RoomTrigger : Area3D
     [Export] public Node3D Door;
     [Export] public int MaxWave;
     [Export] public SpawnManager SpawnManager;
-    [Export] public int MobsPerWave = 3;
+    [Export] public int MobsPerWave;
 
     private int _wave = 1;
     private int _aliveEnemies = 0;

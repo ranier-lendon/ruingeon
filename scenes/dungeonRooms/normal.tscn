@@ -23,6 +23,7 @@ script = ExtResource("1_dfava")
 Door = NodePath("../Door")
 MaxWave = 2
 SpawnManager = NodePath("../SpawnManager")
+MobsPerWave = 1
 
 [node name="Detector" type="CollisionShape3D" parent="RoomTrigger" unique_id=1704796819]
 transform = Transform3D(17.9, 0, 0, 0, 17.9, 0, 0, 0, 17.9, 0, 9.6, 0)
