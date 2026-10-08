@@ -1,7 +1,7 @@
 using Godot;
 using System;
 
-public partial class PlayerControl : CharacterBody3D, IGravity, IDamageable
+public partial class PlayerControl : CharacterBody3D, IGravity, IDamageable, IAttacker
 {
     public const float Speed = 10.0f;
     public const float JumpVelocity = 4.5f;
@@ -10,6 +10,9 @@ public partial class PlayerControl : CharacterBody3D, IGravity, IDamageable
     [Export] public float GravityScale { get; set; } = 1.0f;
 
     public float Health { get; } = 100f;
+    public float Damage { get; } = 10f;
+    public float AttackRange { get; } = 1.2f;
+    public float AttackCooldown { get; } = 1f;
 
     [Export] public float RotateSensitivity = 0.005f;
 
@@ -149,5 +152,10 @@ public partial class PlayerControl : CharacterBody3D, IGravity, IDamageable
     {
         EmitSignal(SignalName.Died);
         QueueFree();
+    }
+
+    public void Attack()
+    {
+        
     }
 }
