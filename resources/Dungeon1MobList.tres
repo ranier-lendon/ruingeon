@@ -1,10 +1,10 @@
 [gd_resource type="Resource" script_class="DungeonSpawnData" format=3 uid="uid://dnpqv5e42d2k3"]
 
 [ext_resource type="PackedScene" uid="uid://664pw2uwsg0a" path="res://scenes/enemy.tscn" id="1_j68vx"]
-[ext_resource type="Script" uid="uid://bo50rnnpgrds0" path="res://scripts/DungeonSpawnData.cs" id="1_kdiun"]
+[ext_resource type="Script" uid="uid://cn32q6bnnylqo" path="res://scripts/Dungeon/DungeonSpawnData.cs" id="2_j68vx"]
 
 [resource]
-script = ExtResource("1_kdiun")
+script = ExtResource("2_j68vx")
 Normal = Array[PackedScene]([ExtResource("1_j68vx")])
 Elite = Array[PackedScene]([ExtResource("1_j68vx")])
 Boss = Array[PackedScene]([ExtResource("1_j68vx")])

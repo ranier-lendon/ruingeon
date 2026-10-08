@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://dqtdwfst24l0b"]
 
-[ext_resource type="Script" uid="uid://cprtu0sfquao7" path="res://scripts/RoomTrigger.cs" id="1_0juhp"]
-[ext_resource type="Script" uid="uid://qf6ql6u1so6u" path="res://scripts/SpawnManager.cs" id="2_dfava"]
+[ext_resource type="Script" uid="uid://c3hb10ucijp8j" path="res://scripts/Dungeon/RoomTrigger.cs" id="1_dfava"]
+[ext_resource type="Script" uid="uid://blfkedyl0c8ek" path="res://scripts/Dungeon/SpawnManager.cs" id="2_6rmhc"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_qyjd6"]
 
@@ -19,11 +19,10 @@ font_size = 512
 outline_size = 5
 
 [node name="RoomTrigger" type="Area3D" parent="." unique_id=74448864 node_paths=PackedStringArray("Door", "SpawnManager")]
-script = ExtResource("1_0juhp")
+script = ExtResource("1_dfava")
 Door = NodePath("../Door")
 MaxWave = 2
 SpawnManager = NodePath("../SpawnManager")
-MobsPerWave = 2
 
 [node name="Detector" type="CollisionShape3D" parent="RoomTrigger" unique_id=1704796819]
 transform = Transform3D(17.9, 0, 0, 0, 17.9, 0, 0, 0, 17.9, 0, 9.6, 0)
@@ -50,7 +49,7 @@ transform = Transform3D(-4.371139e-08, 0, 0.19999999, 0, 1, 0, -5.0000005, 0, -4
 size = Vector3(5, 0.5, 1)
 
 [node name="SpawnManager" type="Node3D" parent="." unique_id=545584394]
-script = ExtResource("2_dfava")
+script = ExtResource("2_6rmhc")
 CurrentDungeon = "Dungeon1"
 
 [node name="Spawn1" type="Marker3D" parent="SpawnManager" unique_id=504177503]
