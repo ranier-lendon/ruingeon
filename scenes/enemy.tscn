@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://664pw2uwsg0a"]
 
 [ext_resource type="Script" uid="uid://c0etbdtmbm3ty" path="res://scripts/Enemy/Enemy.cs" id="1_7p1mj"]
-[ext_resource type="PackedScene" uid="uid://tdeujvq1sy4u" path="res://scenes/sword.tscn" id="2_md0e3"]
+[ext_resource type="PackedScene" uid="uid://tdeujvq1sy4u" path="res://scenes/melee.tscn" id="2_md0e3"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_gtnjw"]
 

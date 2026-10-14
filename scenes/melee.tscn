@@ -1,12 +1,15 @@
 [gd_scene format=3 uid="uid://tdeujvq1sy4u"]
 
+[ext_resource type="Script" uid="uid://dtucqip00ojgh" path="res://scripts/Combat/Weapons/Melee.cs" id="1_v46oj"]
+
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qyjd6"]
 albedo_color = Color(0, 1, 0, 1)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_rcfou"]
 size = Vector3(1, 0.19921875, 0.65979004)
 
-[node name="Sword" type="CSGCombiner3D" unique_id=1304829794]
+[node name="Melee" type="CSGCombiner3D" unique_id=1304829794]
+script = ExtResource("1_v46oj")
 
 [node name="CSGBox3D" type="CSGBox3D" parent="." unique_id=1467029793]
 transform = Transform3D(1, 0, 0, 0, -0.50000006, -0.8660254, 0, 0.8660254, -0.50000006, -0.558, 0.25, 0.258)
