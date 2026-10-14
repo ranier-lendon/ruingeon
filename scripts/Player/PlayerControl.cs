@@ -2,31 +2,31 @@ using Godot;
 using System;
 using System.Collections.Generic;
 
-public partial class PlayerControl : CharacterBody3D, IGravity, IDamageable, IAttacker
+public partial class PlayerControl : CharacterBody3D, IGravity, IDamageable, IStats
 {
     [Signal] public delegate void DiedEventHandler();
-
-    public const float Speed = 10.0f;
-    public const float JumpVelocity = 4.5f;
+    [Signal] public delegate void PlayerAttackEventHandler();
 
     // IGravity implementation
     [Export] public float GravityScale { get; set; } = 1.0f;
 
-    public float Health { get; private set; } = 100f;
-    public float Damage { get; } = 10f;
-    public float AttackRange { get; } = 1.2f;
-    public float AttackCooldown { get; } = 1f;
-
-    private Node3D _weapon;
-    private Area3D _hurtBox;
-    private List<IDamageable> _enemiesWithinRange = new();
+    // Stats
+    [Export] public float Health { get; private set; } = 100f;
+    [Export] public float MaxHealth { get; private set; } = 100f;
+    [Export] public float Damage { get; private set; } = 10f;
+    [Export] public float CritChance { get; private set; } = 1f;
+    [Export] public float CritDamage { get; private set; } = 2f;
+    [Export] public float ArmorPenetration { get; private set; } = 0f;
+    [Export] public float AttackSpeed { get; private set; } = 1f;
+    [Export] public float Armor { get; private set; } = 0f;
+    [Export] public float MoveSpeed { get; private set; } = 10f;
+    [Export] public float Luck { get; private set; } = 0f;
 
     [Export] public float RotateSensitivity = 0.005f;
 
-    // --- Dash settings (tweak these in the Inspector) ---
-    [Export] public float DashDistance = 8.0f;  // World units travelled per dash
-    [Export] public float DashDuration = 0.15f; // Seconds the dash lasts
-    [Export] public float DashCooldown = 1.0f;  // Seconds before you can dash again
+    [Export] public float DashDistance = 8.0f;
+    [Export] public float DashDuration = 0.15f;
+    [Export] public float DashCooldown = 1.0f;
 
     private Node3D _visuals;
     private Camera3D _camera;
@@ -42,11 +42,6 @@ public partial class PlayerControl : CharacterBody3D, IGravity, IDamageable, IAt
     {
         _visuals = GetNode<Node3D>("Visuals");
         _camera = GetViewport().GetCamera3D();
-        _weapon = _visuals.GetNode<Node3D>("Weapon").GetChild(0) as Node3D;
-        _hurtBox = _weapon.GetNode<Area3D>("HurtBox");
-
-        _hurtBox.BodyEntered += OnHurtBoxBodyEntered;
-        _hurtBox.BodyExited  += OnHurtBoxBodyExited;
     }
 
     public override void _Input(InputEvent @event)
@@ -86,7 +81,7 @@ public partial class PlayerControl : CharacterBody3D, IGravity, IDamageable, IAt
     {
         if (@event.IsActionPressed("attack"))
         {
-            Attack();
+            EmitSignal(SignalName.PlayerAttack);
         }
     }
 
@@ -147,13 +142,13 @@ public partial class PlayerControl : CharacterBody3D, IGravity, IDamageable, IAt
 
             if (direction != Vector3.Zero)
             {
-                velocity.X = direction.X * Speed;
-                velocity.Z = direction.Z * Speed;
+                velocity.X = direction.X * MoveSpeed;
+                velocity.Z = direction.Z * MoveSpeed;
             }
             else
             {
-                velocity.X = Mathf.MoveToward(Velocity.X, 0, Speed);
-                velocity.Z = Mathf.MoveToward(Velocity.Z, 0, Speed);
+                velocity.X = Mathf.MoveToward(Velocity.X, 0, MoveSpeed);
+                velocity.Z = Mathf.MoveToward(Velocity.Z, 0, MoveSpeed);
             }
         }
 
@@ -172,37 +167,5 @@ public partial class PlayerControl : CharacterBody3D, IGravity, IDamageable, IAt
     {
         EmitSignal(SignalName.Died);
         QueueFree();
-    }
-
-    public void Attack()
-    {
-        if (_weapon.Name == "Sword")
-        {
-            float originalRotationY = 0f;
-            Tween tween = CreateTween();
-            tween.TweenProperty(_weapon, "rotation:y", originalRotationY + (Mathf.Pi / 2), 0.1f);
-            tween.TweenProperty(_weapon, "rotation:y", originalRotationY, 0.1f);
-
-            foreach (var enemy in _enemiesWithinRange)
-            {
-                enemy.TakeDamage(Damage);
-            }
-        }   
-    }
-
-    private void OnHurtBoxBodyEntered(Node3D body)
-    {
-        if (body is IDamageable damageable && !_enemiesWithinRange.Contains(damageable))
-        {
-            _enemiesWithinRange.Add(damageable);
-        }
-    }
-
-    private void OnHurtBoxBodyExited(Node3D body)
-    {
-        if (body is IDamageable damageable && _enemiesWithinRange.Contains(damageable))
-        {
-            _enemiesWithinRange.Remove(damageable);
-        }
     }
 }
