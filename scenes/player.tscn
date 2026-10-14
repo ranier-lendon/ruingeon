@@ -1,7 +1,8 @@
 [gd_scene format=3 uid="uid://k073yrpgt2u3"]
 
 [ext_resource type="Script" uid="uid://coedodtj68lfd" path="res://scripts/Player/PlayerControl.cs" id="1_3vyb7"]
-[ext_resource type="PackedScene" uid="uid://tdeujvq1sy4u" path="res://scenes/sword.tscn" id="2_g2els"]
+[ext_resource type="PackedScene" uid="uid://tdeujvq1sy4u" path="res://scenes/melee.tscn" id="2_g2els"]
+[ext_resource type="PackedScene" uid="uid://cpdt5khn1lo21" path="res://scenes/Projectile.tscn" id="3_qhqgy"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_gtnjw"]
 
@@ -41,6 +42,11 @@ surface_material_override/0 = SubResource("StandardMaterial3D_gtnjw")
 [node name="Weapon" type="Node3D" parent="Visuals" unique_id=1241290733]
 editor_description = "Holds the active weapon of the player. Can only have ONE active weapon"
 
-[node name="Sword" parent="Visuals/Weapon" unique_id=1304829794 instance=ExtResource("2_g2els")]
+[node name="Melee" parent="Visuals/Weapon" unique_id=1304829794 instance=ExtResource("2_g2els")]
+transform = Transform3D(0.877983, 0, -0.47869185, 0, 1, 0, 0.47869185, 0, 0.877983, 0, 0, 0)
+Id = "Rusty Sword"
 
-[editable path="Visuals/Weapon/Sword"]
+[node name="Arrow" parent="." unique_id=465553830 instance=ExtResource("3_qhqgy")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 0, 1)
+
+[editable path="Visuals/Weapon/Melee"]
