@@ -1,6 +1,7 @@
 using Godot;
 using System;
 using System.Collections.Generic;
+using WeaponData;
 
 public partial class PlayerControl : CharacterBody3D, IGravity, IDamageable, IStats
 {
@@ -38,10 +39,19 @@ public partial class PlayerControl : CharacterBody3D, IGravity, IDamageable, ISt
     private float _dashCooldownTimer = 0f;
     private Vector3 _dashDirection = Vector3.Zero;
 
+    private Weapon _weapon;
+
     public override void _Ready()
     {
         _visuals = GetNode<Node3D>("Visuals");
         _camera = GetViewport().GetCamera3D();
+        _weapon = GetNode<Weapon>("Visuals/Weapon/Melee");
+
+        Damage = WeaponDatabase.WeaponList[_weapon.Id].Damage;
+        CritChance = WeaponDatabase.WeaponList[_weapon.Id].CritChance;
+        CritDamage = WeaponDatabase.WeaponList[_weapon.Id].CritDamage;
+        ArmorPenetration = WeaponDatabase.WeaponList[_weapon.Id].ArmorPenetration;
+        AttackSpeed = WeaponDatabase.WeaponList[_weapon.Id].AttackSpeed;
     }
 
     public override void _Input(InputEvent @event)
