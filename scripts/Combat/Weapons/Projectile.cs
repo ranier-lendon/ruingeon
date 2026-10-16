@@ -24,7 +24,6 @@ public partial class Projectile : Area3D
         float critChance, 
         float critDamage, 
         float armorPenetration,
-        float speed, 
         float maxDistance
     )
     {
@@ -34,7 +33,6 @@ public partial class Projectile : Area3D
         _critChance = critChance;
         _critDamage = critDamage;
         _armorPenetration = armorPenetration;
-        _speed = speed;
         _maxDistance = maxDistance;
         _distanceTraveled = 0f;
 
