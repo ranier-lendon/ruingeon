@@ -1,7 +1,7 @@
 using Godot;
 
 // Enemy AI — chases the player directly. Requires player node in group "player".
-public partial class Enemy : CharacterBody3D, IGravity
+public partial class Enemy : CharacterBody3D, IGravity, IDamageable, IAttacker
 {
     [Signal] public delegate void DiedEventHandler();
 
@@ -11,6 +11,11 @@ public partial class Enemy : CharacterBody3D, IGravity
 
     [Export] public float GravityScale { get; set; } = 1.0f;
 
+    public float Health { get; private set; } = 100f;
+    public float Damage { get; } = 10f;
+    public float AttackRange { get; } = 1.2f;
+    public float AttackCooldown { get; } = 1f;
+
     private Node3D _visuals;
     private CharacterBody3D _player;
 
@@ -18,7 +23,6 @@ public partial class Enemy : CharacterBody3D, IGravity
     {
         _visuals = GetNode<Node3D>("Visuals");
         _player  = FindPlayer();
-        TreeExiting += () => EmitSignal(SignalName.Died);
     }
 
     public override void _PhysicsProcess(double delta)
@@ -32,6 +36,25 @@ public partial class Enemy : CharacterBody3D, IGravity
             ChasePlayer((float)delta);
 
         MoveAndSlide();
+    }
+
+    public void TakeDamage(float amount)
+    {
+        Health -= amount;
+        GD.Print($"Enemy health: {Health}");
+        if (Health <= 0)
+            Die();
+    }
+
+    public void Die()
+    {
+        EmitSignal(SignalName.Died);
+        QueueFree();
+    }
+
+    public void Attack()
+    {
+        
     }
 
     private void ChasePlayer(float delta)

@@ -1,13 +1,25 @@
 using Godot;
 using System;
+using System.Collections.Generic;
 
-public partial class PlayerControl : CharacterBody3D, IGravity
+public partial class PlayerControl : CharacterBody3D, IGravity, IDamageable, IAttacker
 {
+    [Signal] public delegate void DiedEventHandler();
+
     public const float Speed = 10.0f;
     public const float JumpVelocity = 4.5f;
 
     // IGravity implementation
     [Export] public float GravityScale { get; set; } = 1.0f;
+
+    public float Health { get; private set; } = 100f;
+    public float Damage { get; } = 10f;
+    public float AttackRange { get; } = 1.2f;
+    public float AttackCooldown { get; } = 1f;
+
+    private Node3D _weapon;
+    private Area3D _hurtBox;
+    private List<IDamageable> _enemiesWithinRange = new();
 
     [Export] public float RotateSensitivity = 0.005f;
 
@@ -30,6 +42,11 @@ public partial class PlayerControl : CharacterBody3D, IGravity
     {
         _visuals = GetNode<Node3D>("Visuals");
         _camera = GetViewport().GetCamera3D();
+        _weapon = _visuals.GetNode<Node3D>("Weapon").GetChild(0) as Node3D;
+        _hurtBox = _weapon.GetNode<Area3D>("HurtBox");
+
+        _hurtBox.BodyEntered += OnHurtBoxBodyEntered;
+        _hurtBox.BodyExited  += OnHurtBoxBodyExited;
     }
 
     public override void _Input(InputEvent @event)
@@ -62,6 +79,14 @@ public partial class PlayerControl : CharacterBody3D, IGravity
             _isDashing = true;
             _dashTimer = DashDuration;
             _dashCooldownTimer = DashCooldown;
+        }
+    }
+
+    public override void _UnhandledInput(InputEvent @event)
+    {
+        if (@event.IsActionPressed("attack"))
+        {
+            Attack();
         }
     }
 
@@ -134,5 +159,50 @@ public partial class PlayerControl : CharacterBody3D, IGravity
 
         Velocity = velocity;
         MoveAndSlide();
+    }
+
+    public void TakeDamage(float amount)
+    {
+        Health -= amount;
+        if (Health <= 0)
+            Die();
+    }
+
+    public void Die()
+    {
+        EmitSignal(SignalName.Died);
+        QueueFree();
+    }
+
+    public void Attack()
+    {
+        if (_weapon.Name == "Sword")
+        {
+            float originalRotationY = 0f;
+            Tween tween = CreateTween();
+            tween.TweenProperty(_weapon, "rotation:y", originalRotationY + (Mathf.Pi / 2), 0.1f);
+            tween.TweenProperty(_weapon, "rotation:y", originalRotationY, 0.1f);
+
+            foreach (var enemy in _enemiesWithinRange)
+            {
+                enemy.TakeDamage(Damage);
+            }
+        }   
+    }
+
+    private void OnHurtBoxBodyEntered(Node3D body)
+    {
+        if (body is IDamageable damageable && !_enemiesWithinRange.Contains(damageable))
+        {
+            _enemiesWithinRange.Add(damageable);
+        }
+    }
+
+    private void OnHurtBoxBodyExited(Node3D body)
+    {
+        if (body is IDamageable damageable && _enemiesWithinRange.Contains(damageable))
+        {
+            _enemiesWithinRange.Remove(damageable);
+        }
     }
 }

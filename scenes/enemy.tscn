@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://664pw2uwsg0a"]
 
 [ext_resource type="Script" uid="uid://c0etbdtmbm3ty" path="res://scripts/Enemy/Enemy.cs" id="1_7p1mj"]
+[ext_resource type="PackedScene" uid="uid://tdeujvq1sy4u" path="res://scenes/sword.tscn" id="2_md0e3"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_gtnjw"]
 
@@ -34,6 +35,12 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.341981, 0.36311644)
 material_override = SubResource("StandardMaterial3D_4ra3w")
 mesh = SubResource("CylinderMesh_qyjd6")
 
+[node name="Weapon" type="Node3D" parent="Visuals" unique_id=20925283]
+
+[node name="Sword" parent="Visuals/Weapon" unique_id=1304829794 instance=ExtResource("2_md0e3")]
+
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="." unique_id=2134567890]
 path_desired_distance = 1.2
 target_desired_distance = 1.2
+
+[editable path="Visuals/Weapon/Sword"]
