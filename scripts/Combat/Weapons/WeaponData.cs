@@ -24,6 +24,7 @@ namespace WeaponData
 
     public class RangeInfo : WeaponInfo
     {
+        public float MaxDamage { get; set; }
         public float MaxChargeTime { get; set; }
         public float MaxProjectileDistance { get; set; }
         public float MinSpread { get; set; }
@@ -54,6 +55,7 @@ namespace WeaponData
                 {
                     Name = "Rusty Bow",
                     Damage = 1.0f,
+                    MaxDamage = 10.0f,
                     AttackSpeed = 0.5f,
                     CritChance = 0.1f,
                     CritDamage = 2.0f,
