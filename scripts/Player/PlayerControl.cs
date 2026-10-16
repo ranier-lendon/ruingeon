@@ -32,6 +32,7 @@ public partial class PlayerControl : CharacterBody3D, IGravity, IDamageable, ISt
     [Export] public float DashCooldown = 1.0f;
 
     private Node3D _visuals;
+    public Vector3 FacingDirection => _visuals != null ? _visuals.GlobalTransform.Basis.Z : GlobalTransform.Basis.Z;
     private Camera3D _camera;
     private bool _isRotating = false;
 

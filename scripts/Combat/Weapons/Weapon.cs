@@ -80,18 +80,20 @@ public abstract partial class Weapon : Node
         Projectile arrow = ProjectileManager.Instance.GetProjectile();
 
         float chargePercent = Mathf.Clamp(chargeTimer / ((RangeInfo)Info).MaxChargeTime, 0f, 1f);
-        float MaxDistance = Mathf.Lerp(1f, ((RangeInfo)Info).MaxProjectileDistance, chargePercent);
+
+        float damage = Mathf.Lerp(Info.Damage, ((RangeInfo)Info).MaxDamage, chargePercent);
+        float maxDistance = Mathf.Lerp(3f, ((RangeInfo)Info).MaxProjectileDistance, chargePercent);
         float spread = Mathf.Lerp(((RangeInfo)Info).MaxSpread, ((RangeInfo)Info).MinSpread, chargePercent);
         float spreadOffset = Mathf.DegToRad((float)GD.RandRange(-spread, spread));
-        Vector3 direction = Player.Rotation + new Vector3(0f, 0f, spreadOffset);
+        Vector3 direction = Player.FacingDirection.Rotated(Vector3.Up, spreadOffset);
 
         arrow.Setup(
             Player.GlobalPosition + new Vector3(0f, 2f, 0f), 
             direction,  
-            Player.Damage, 
+            damage,
             Player.CritChance, 
             Player.CritDamage, 
             Player.ArmorPenetration,
-            MaxDistance);
+            maxDistance);
     }
 }
