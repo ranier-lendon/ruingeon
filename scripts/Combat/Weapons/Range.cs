@@ -14,8 +14,8 @@ public partial class Range : Weapon
         Init(WeaponType.Range);
     }
 
-    protected override void OnPlayerAttack()
+    protected override void OnPlayerAttack(float chargeTimer)
     {
-        AttackRange();
+        AttackRange(chargeTimer);
     }
 }

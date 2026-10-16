@@ -2,11 +2,13 @@ using Godot;
 using System;
 using System.Collections.Generic;
 using WeaponData;
+using GameGlobals;
 
 public partial class PlayerControl : CharacterBody3D, IGravity, IDamageable, IStats
 {
     [Signal] public delegate void DiedEventHandler();
     [Signal] public delegate void PlayerAttackEventHandler();
+    [Signal] public delegate void PlayerRangeAttackEventHandler(float chargeTimer);
 
     // IGravity implementation
     [Export] public float GravityScale { get; set; } = 1.0f;
@@ -39,13 +41,15 @@ public partial class PlayerControl : CharacterBody3D, IGravity, IDamageable, ISt
     private float _dashCooldownTimer = 0f;
     private Vector3 _dashDirection = Vector3.Zero;
 
+    private bool _isHeld = false;
+    private float _chargeTimer = 0f;
     private Weapon _weapon;
 
     public override void _Ready()
     {
         _visuals = GetNode<Node3D>("Visuals");
         _camera = GetViewport().GetCamera3D();
-        _weapon = GetNode<Weapon>("Visuals/Weapon/Melee");
+        _weapon = GetNode<Node3D>("Visuals/Weapon").GetChild(0) as Weapon;
 
         Damage = WeaponDatabase.WeaponList[_weapon.Id].Damage;
         CritChance = WeaponDatabase.WeaponList[_weapon.Id].CritChance;
@@ -89,9 +93,34 @@ public partial class PlayerControl : CharacterBody3D, IGravity, IDamageable, ISt
 
     public override void _UnhandledInput(InputEvent @event)
     {
-        if (@event.IsActionPressed("attack"))
+        if (@event.IsAction("attack"))
         {
-            EmitSignal(SignalName.PlayerAttack);
+            if (_weapon == null) return;
+            var weaponType = WeaponDatabase.WeaponList[_weapon.Id].Type;
+            
+            switch (weaponType)
+            {
+                case WeaponType.Melee:
+                    if (@event.IsActionPressed("attack"))
+                        EmitSignal(SignalName.PlayerAttack);
+                    break;
+                case WeaponType.Range:
+                    if (@event.IsActionPressed("attack"))
+                    {
+                        _isHeld = true;
+                    }
+                    else if (@event.IsActionReleased("attack"))
+                    {
+                        GD.Print(_chargeTimer);
+                        EmitSignal(SignalName.PlayerRangeAttack, _chargeTimer);
+                        _isHeld = false;
+                        _chargeTimer = 0f;
+                    }
+                    break;
+                default:
+                    GD.PushError("Invalid weapon type");
+                    break;
+            }
         }
     }
 
@@ -116,6 +145,12 @@ public partial class PlayerControl : CharacterBody3D, IGravity, IDamageable, ISt
                     _visuals.RotateY(Mathf.Pi);
                 }
             }
+        }
+
+        // Charge Timer for Range Weapon
+        if (_isHeld)
+        {
+            _chargeTimer += (float)delta;
         }
     }
 
