@@ -22,10 +22,10 @@ namespace WeaponData
                 "Rusty Sword", new WeaponInfo
                 {
                     Name = "Rusty Sword",
-                    Damage = 1.0f,
-                    AttackSpeed = 1.0f,
-                    CritChance = 0.1f,
-                    CritDamage = 2.0f,
+                    Damage = 20.0f,
+                    AttackSpeed = 1f,
+                    CritChance = 0f,
+                    CritDamage = 1f,
                     ArmorPenetration = 0.0f,
                     Type = WeaponType.Melee
                 }
