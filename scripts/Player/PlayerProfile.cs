@@ -1,16 +1,17 @@
 using Godot;
 using System;
 using System.Collections.Generic;
+using System.Text.Json;
 
 public class PlayerProfile : ISaveable
 {
     public string ID => "player_profile";
     
-    public string Name { get; private set; }
-    public int Level { get; private set; }
-    public int Experience { get; private set; }
-    public int BasicCoin { get; private set; }
-    public int PremiumCoin { get; private set; }
+    public string Name { get; set; }
+    public int Level { get; set; }
+    public int Experience { get; set; }
+    public int BasicCoin { get; set; }
+    public int PremiumCoin { get; set; }
 
     public PlayerProfile(
         string name,
@@ -40,11 +41,12 @@ public class PlayerProfile : ISaveable
 
     public void RestoreState(object state)
     {
-        var data = (Dictionary<string, object>)state;
-        Name = (string)data["name"];
-        Level = (int)data["level"];
-        Experience = (int)data["experience"];
-        BasicCoin = (int)data["basic_coin"];
-        PremiumCoin = (int)data["premium_coin"];
+        var element = (JsonElement)state;
+        var data = JsonSerializer.Deserialize<Dictionary<string, JsonElement>>(element.GetRawText());
+        Name = data["name"].GetString();
+        Level = data["level"].GetInt32();
+        Experience = data["experience"].GetInt32();
+        BasicCoin = data["basic_coin"].GetInt32();
+        PremiumCoin = data["premium_coin"].GetInt32();
     }
 }

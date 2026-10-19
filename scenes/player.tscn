@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://k073yrpgt2u3"]
 
-[ext_resource type="Script" uid="uid://coedodtj68lfd" path="res://scripts/Player/PlayerControl.cs" id="1_3vyb7"]
-[ext_resource type="PackedScene" uid="uid://bcgl2kw348el4" path="res://scenes/range.tscn" id="2_g2els"]
+[ext_resource type="Script" uid="uid://baf0hfnxmb7ph" path="res://scripts/Player/Player.cs" id="1_g2els"]
+[ext_resource type="PackedScene" uid="uid://buhsvabsur13b" path="res://scenes/range.tscn" id="2_g2els"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_gtnjw"]
 
@@ -19,7 +19,7 @@ height = 0.2685547
 albedo_color = Color(1, 0, 0, 1)
 
 [node name="Player" type="CharacterBody3D" unique_id=1932986954 groups=["player"]]
-script = ExtResource("1_3vyb7")
+script = ExtResource("1_g2els")
 
 [node name="Collision" type="CollisionShape3D" parent="." unique_id=1755242798]
 shape = SubResource("CapsuleShape3D_gtnjw")
