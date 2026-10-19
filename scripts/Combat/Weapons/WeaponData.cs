@@ -56,12 +56,12 @@ namespace WeaponData
                     Name = "Rusty Bow",
                     Damage = 1.0f,
                     MaxDamage = 10.0f,
-                    AttackSpeed = 0.5f,
+                    AttackSpeed = 100f,
                     CritChance = 0.1f,
                     CritDamage = 2.0f,
                     ArmorPenetration = 0.0f,
                     MaxChargeTime = 1.0f,
-                    MaxProjectileDistance = 20.0f,
+                    MaxProjectileDistance = 120.0f,
                     MinSpread = 1.0f,
                     MaxSpread = 15.0f
                 }

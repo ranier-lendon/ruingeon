@@ -56,14 +56,16 @@ public partial class Projectile : Area3D
 
     private void OnBodyEntered(Node3D body)
     {
-        if (body is IDamageable damageable)
+        if (body is IDamageable damageable && body is not PlayerControl)
         {
             float finalDamage = DamageCalculator.CalculateDamage(
                 _damage, _armorPenetration, _critChance, _critDamage, damageable);
             damageable.TakeDamage(finalDamage);
         }
-
-        ReturnToPool();
+        if (body is not CollisionObject3D)
+        {
+            ReturnToPool();
+        }
     }
 
     private void ReturnToPool()
