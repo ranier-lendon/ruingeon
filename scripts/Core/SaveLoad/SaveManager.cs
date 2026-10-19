@@ -2,19 +2,18 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text.Json;
 
-public class SaveManager
+public static class SaveManager
 {
-    private readonly string _savePath = "save.json";
-    private List<ISaveable> _saveables = new();
+    private const string _savePath = "save.json";
+    private static List<ISaveable> _saveables = new();
 
-
-    public void Register(ISaveable saveable)
+    public static void Register(ISaveable saveable)
     {
         _saveables.Add(saveable);
     }
 
 
-    public void Save()
+    public static void Save()
     {
         Dictionary<string, object> data = new();
 
@@ -31,7 +30,7 @@ public class SaveManager
         File.WriteAllText(_savePath, json);
     }
 
-    public void Load()
+    public static void Load()
     {
         if (!File.Exists(_savePath)) return;
 
