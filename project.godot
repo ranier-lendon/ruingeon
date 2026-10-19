@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Ruingeon 2"
-run/main_scene="uid://blq0sxgkmlosh"
+run/main_scene="uid://dae3sw27epyuw"
 config/features=PackedStringArray("4.7", "C#", "Forward Plus")
 config/icon="res://icon.svg"
 
@@ -22,7 +22,7 @@ ProjectileManager="*uid://bwd3m1rhyk1rh"
 
 [display]
 
-window/size/mode=2
+window/size/mode=3
 window/stretch/mode="canvas_items"
 window/stretch/aspect="expand"
 
