@@ -30,21 +30,21 @@ public class PlayerProfile : ISaveable
     {
         return new Dictionary<string, object>
         {
-            {"Name", Name},
-            {"Level", Level},
-            {"Experience", Experience},
-            {"BasicCoin", BasicCoin},
-            {"PremiumCoin", PremiumCoin}
+            {"name", Name},
+            {"level", Level},
+            {"experience", Experience},
+            {"basic_coin", BasicCoin},
+            {"premium_coin", PremiumCoin}
         };
     }
 
     public void RestoreState(object state)
     {
         var data = (Dictionary<string, object>)state;
-        Name = (string)data["Name"];
-        Level = (int)data["Level"];
-        Experience = (int)data["Experience"];
-        BasicCoin = (int)data["BasicCoin"];
-        PremiumCoin = (int)data["PremiumCoin"];
+        Name = (string)data["name"];
+        Level = (int)data["level"];
+        Experience = (int)data["experience"];
+        BasicCoin = (int)data["basic_coin"];
+        PremiumCoin = (int)data["premium_coin"];
     }
 }
