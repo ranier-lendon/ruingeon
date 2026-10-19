@@ -3,11 +3,11 @@ using System;
 
 public class PlayerProfile
 {
-    private string _name;
-    private int _level;
-    private int _experience;
-    private int _basicCoin;
-    private int _premiumCoin;
+    public string Name { get; private set; }
+    public int Level { get; private set; }
+    public int Experience { get; private set; }
+    public int BasicCoin { get; private set; }
+    public int PremiumCoin { get; private set; }
 
     public PlayerProfile(
         string name,
@@ -16,10 +16,10 @@ public class PlayerProfile
         int basicCoin,
         int premiumCoin)
     {
-        _name = name;
-        _level = level;
-        _experience = experience;
-        _basicCoin = basicCoin;
-        _premiumCoin = premiumCoin;
+        Name = name;
+        Level = level;
+        Experience = experience;
+        BasicCoin = basicCoin;
+        PremiumCoin = premiumCoin;
     }
 }
