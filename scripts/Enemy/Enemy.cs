@@ -1,7 +1,7 @@
 using Godot;
 
 // Enemy AI — chases the player directly. Requires player node in group "player".
-public partial class Enemy : CharacterBody3D, IGravity, IDamageable, IAttacker
+public partial class Enemy : CharacterBody3D, IGravity, IDamageable
 {
     [Signal] public delegate void DiedEventHandler();
 

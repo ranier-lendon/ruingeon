@@ -1,0 +1,22 @@
+[gd_scene format=3 uid="uid://otjtkn52ru6i"]
+
+[ext_resource type="Script" uid="uid://boq0ou6t0hg8f" path="res://scripts/Combat/Weapons/Projectile.cs" id="1_c8fcr"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_qyjd6"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mueel"]
+albedo_color = Color(1, 0, 0, 1)
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_gtnjw"]
+
+[node name="Projectile" type="Area3D" unique_id=465553830]
+transform = Transform3D(-6.664227e-08, 0, -1, 0, 1.4290557, 0, 1.5245974, 0, -4.371139e-08, 0, 0, 0)
+script = ExtResource("1_c8fcr")
+
+[node name="Mesh" type="MeshInstance3D" parent="." unique_id=1383954536]
+transform = Transform3D(-1.9186045e-08, 0, 0.049999993, 0, 0.025695242, 0, -0.43892553, 0, -2.1855695e-09, 0, 0, 0)
+mesh = SubResource("CapsuleMesh_qyjd6")
+surface_material_override/0 = SubResource("StandardMaterial3D_mueel")
+
+[node name="Collision" type="CollisionShape3D" parent="." unique_id=375688602]
+shape = SubResource("CapsuleShape3D_gtnjw")

@@ -21,4 +21,11 @@ namespace GameGlobals
         Elite,
         Boss
     }
+
+    public enum WeaponType
+    {
+        Melee,
+        Range,
+        None
+    }
 }

@@ -1,0 +1,22 @@
+[gd_scene format=3 uid="uid://buhsvabsur13b"]
+
+[ext_resource type="Script" uid="uid://ban4yhb4odet4" path="res://scripts/Combat/Weapons/Range.cs" id="1_mueel"]
+
+[node name="Range" type="CSGCombiner3D" unique_id=1304829794]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -0.63576436, 0, 0)
+script = ExtResource("1_mueel")
+
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="." unique_id=2039838196]
+transform = Transform3D(0.6505009, 0, 0, 0, 0.32620668, 0, 0, 0, 0.20800608, 0, 0, 0)
+sides = 10
+
+[node name="CSGBox3D" type="CSGBox3D" parent="." unique_id=104152813]
+transform = Transform3D(0.6505009, 0, 0, 0, 0.76184356, 0, 0, 0, 0.20800608, -0.20026407, 0, 0)
+operation = 2
+size = Vector3(0.60791016, 1, 1)
+
+[node name="CSGCylinder3D2" type="CSGCylinder3D" parent="." unique_id=1380905075]
+transform = Transform3D(0.51681715, 0, 0, 0, 0.25906703, 0, 0, 0, 0.56004286, 0.13424867, -2.9802322e-08, -0.0032086894)
+operation = 2
+radius = 0.21679688
+sides = 10
