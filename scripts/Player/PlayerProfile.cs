@@ -1,8 +1,10 @@
 using Godot;
 using System;
 
-public class PlayerProfile
+public class PlayerProfile : ISaveable
 {
+    public string ID => "player_profile";
+    
     public string Name { get; private set; }
     public int Level { get; private set; }
     public int Experience { get; private set; }
@@ -21,5 +23,27 @@ public class PlayerProfile
         Experience = experience;
         BasicCoin = basicCoin;
         PremiumCoin = premiumCoin;
+    }
+
+    public object CaptureState()
+    {
+        return new Dictionary<string, object>
+        {
+            {"Name", Name},
+            {"Level", Level},
+            {"Experience", Experience},
+            {"BasicCoin", BasicCoin},
+            {"PremiumCoin", PremiumCoin}
+        };
+    }
+
+    public void RestoreState(object state)
+    {
+        var data = (Dictionary<string, object>)state;
+        Name = (string)data["Name"];
+        Level = (int)data["Level"];
+        Experience = (int)data["Experience"];
+        BasicCoin = (int)data["BasicCoin"];
+        PremiumCoin = (int)data["PremiumCoin"];
     }
 }
