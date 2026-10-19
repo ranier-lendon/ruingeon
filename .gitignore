@@ -3,4 +3,4 @@
 /android/
 *.sln
 save.json
-*.jpeg
+assets/
