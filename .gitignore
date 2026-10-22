@@ -4,3 +4,5 @@
 *.sln
 save.json
 assets/
+assets.tscn
+*.meshlib
