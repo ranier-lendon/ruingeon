@@ -2794,6 +2794,7 @@ transform = Transform3D(0, 0, 1.25, 0, 1, 0, -1, 0, 0, 16.1, 6.5, -4.1)
 transform = Transform3D(0, 0, 1.25, 0, 1, 0, -1, 0, 0, 7.1, 6.5, -4.1)
 
 [node name="Building_Market_South" type="Node3D" parent="Environment/Buildings" unique_id=1711607722]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -51, 0, 0)
 
 [node name="W10_Front_F0_06" parent="Environment/Buildings/Building_Market_South" unique_id=245071355 instance=ExtResource("ext_Wall_Plaster_Straight_Base_101")]
 transform = Transform3D(0, 0, 1, 0, 1, 0, -1, 0, 0, 5.1, 0.5, 7.4)
