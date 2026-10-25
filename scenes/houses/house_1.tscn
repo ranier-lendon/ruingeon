@@ -31,7 +31,6 @@ emission_energy_multiplier = 16.0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=268116760]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.4849625, 5.9658203, -0.29821777)
-visible = false
 shape = SubResource("BoxShape3D_qyjd6")
 
 [node name="Wall" type="Node3D" parent="." unique_id=1997881420]

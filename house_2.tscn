@@ -13,7 +13,7 @@
 [ext_resource type="PackedScene" uid="uid://563vr1r28ijq" path="res://assets/Models/Environment/Medieval Village MegaKit[Standard]/glTF/Roof_Front_Brick8.gltf" id="11_7pm1c"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_qyjd6"]
-size = Vector3(15.002563, 12.075256, 4)
+size = Vector3(15.002563, 12.075256, 9.849548)
 
 [sub_resource type="BoxMesh" id="BoxMesh_7pm1c"]
 size = Vector3(12.721167, 6.537819, 1)
@@ -26,7 +26,7 @@ emission_energy_multiplier = 16.0
 [node name="House2" type="StaticBody3D" unique_id=93071622]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=2133294772]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.11114502, 6.4371033, 1.5)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.11114502, 6.4371033, -0.60946655)
 shape = SubResource("BoxShape3D_qyjd6")
 
 [node name="W10_Back_F0_06" parent="." unique_id=1134193878 instance=ExtResource("2_7pm1c")]
