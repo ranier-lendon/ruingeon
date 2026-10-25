@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://dx52im6pmxdq7" path="res://scripts/Portal.cs" id="1_5gu6x"]
 [ext_resource type="PackedScene" uid="uid://k073yrpgt2u3" path="res://scenes/player.tscn" id="1_o1atq"]
+[ext_resource type="AudioStream" uid="uid://dd158p4iyrm70" path="res://assets/Sounds/Lobby.mp3" id="3_q60fs"]
 [ext_resource type="PackedScene" uid="uid://654b00nml1q0" path="res://scenes/houses/house_1.tscn" id="69_5jb2g"]
 [ext_resource type="PackedScene" uid="uid://yu36446qbxpx" path="res://house_2.tscn" id="69_s0n6j"]
 [ext_resource type="PackedScene" uid="uid://c1yqqmpxmjve2" path="res://assets/Models/Environment/Fantasy Props MegaKit[Standard]/Exports/glTF/Anvil_Log.gltf" id="ext_Anvil_Log_144"]
@@ -102,6 +103,13 @@ light_color = Color(1, 0.96, 0.88, 1)
 light_energy = 1.15
 shadow_enabled = true
 shadow_blur = 1.5
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=1384940003]
+stream = ExtResource("3_q60fs")
+volume_db = -10.0
+autoplay = true
+playback_type = 1
+parameters/looping = true
 
 [node name="CSGCombiner3D" type="CSGCombiner3D" parent="." unique_id=1216453811]
 use_collision = true

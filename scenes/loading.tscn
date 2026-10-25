@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://bwpblf18uxb" path="res://assets/Loading progress.png" id="3_yt702"]
 [ext_resource type="FontFile" uid="uid://c3khjsw2edlef" path="res://assets/Cormorant_Garamond/static/CormorantGaramond-Bold.ttf" id="4_2ytni"]
 [ext_resource type="Texture2D" uid="uid://brn6jxea5640p" path="res://assets/kenney_particle-pack/PNG (Transparent)/circle_05.png" id="6_2ytni"]
+[ext_resource type="AudioStream" uid="uid://cpvj3veyfc68u" path="res://assets/Sounds/GameStart.mp3" id="7_nxo4k"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_qyjd6"]
 font = ExtResource("4_2ytni")
@@ -84,3 +85,9 @@ scale_amount_curve = SubResource("Curve_scale")
 color = Color(0.9, 0.85, 0.7, 0.45)
 hue_variation_min = -0.05
 hue_variation_max = 0.05
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=899629926]
+stream = ExtResource("7_nxo4k")
+volume_db = -10.0
+autoplay = true
+parameters/looping = true
