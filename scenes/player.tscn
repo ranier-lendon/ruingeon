@@ -1,27 +1,17 @@
 [gd_scene format=3 uid="uid://k073yrpgt2u3"]
 
-[ext_resource type="Script" uid="uid://baf0hfnxmb7ph" path="res://scripts/Player/Player.cs" id="1_g2els"]
+[ext_resource type="Script" uid="uid://coedodtj68lfd" path="res://scripts/Player/PlayerControl.cs" id="1_g2els"]
 [ext_resource type="PackedScene" uid="uid://buhsvabsur13b" path="res://scenes/range.tscn" id="2_g2els"]
+[ext_resource type="PackedScene" uid="uid://nbx1m6xue7x5" path="res://assets/Models/Player_NPC/Universal Base Characters[Standard]/Universal Base Characters[Standard]/Base Characters/Godot - UE/Superhero_Male_FullBody.gltf" id="3_qhqgy"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_gtnjw"]
-
-[sub_resource type="CapsuleMesh" id="CapsuleMesh_qyjd6"]
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rcfou"]
-albedo_color = Color(0, 0, 1, 1)
-
-[sub_resource type="CylinderMesh" id="CylinderMesh_qyjd6"]
-top_radius = 0.3
-bottom_radius = 0.3
-height = 0.2685547
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gtnjw"]
-albedo_color = Color(1, 0, 0, 1)
 
 [node name="Player" type="CharacterBody3D" unique_id=1932986954 groups=["player"]]
 script = ExtResource("1_g2els")
 
 [node name="Collision" type="CollisionShape3D" parent="." unique_id=1755242798]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9300091, 0)
+visible = false
 shape = SubResource("CapsuleShape3D_gtnjw")
 
 [node name="Camera3D" type="Camera3D" parent="." unique_id=414665665]
@@ -29,17 +19,11 @@ transform = Transform3D(-0.9995336, -0.024468336, 0.018271336, 0, 0.5983238, 0.8
 
 [node name="Visuals" type="Node3D" parent="." unique_id=778444902]
 
-[node name="Body" type="MeshInstance3D" parent="Visuals" unique_id=1114429139]
-mesh = SubResource("CapsuleMesh_qyjd6")
-surface_material_override/0 = SubResource("StandardMaterial3D_rcfou")
-
-[node name="Eye" type="MeshInstance3D" parent="Visuals" unique_id=1694376276]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.341981, 0.36311644)
-mesh = SubResource("CylinderMesh_qyjd6")
-surface_material_override/0 = SubResource("StandardMaterial3D_gtnjw")
+[node name="Superhero_Male_FullBody" parent="Visuals" unique_id=2077677086 instance=ExtResource("3_qhqgy")]
 
 [node name="Weapon" type="Node3D" parent="Visuals" unique_id=1241290733]
 editor_description = "Holds the active weapon of the player. Can only have ONE active weapon"
 
 [node name="Range" parent="Visuals/Weapon" unique_id=1304829794 instance=ExtResource("2_g2els")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -0.8605205, 1.4429735, 0)
 Id = "Rusty Bow"
