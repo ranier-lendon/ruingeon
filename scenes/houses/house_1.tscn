@@ -36,22 +36,22 @@ shape = SubResource("BoxShape3D_qyjd6")
 [node name="Wall" type="Node3D" parent="." unique_id=1997881420]
 
 [node name="W_Front_F0_22" parent="Wall" unique_id=1472395243 instance=ExtResource("1_y8l0f")]
-transform = Transform3D(0, 0, 1, 0, 1, 0, -1, 0, 0, -10.5, 0.5, -2.3000002)
+transform = Transform3D(8.742278e-08, 0, -1, 0, 1, 0, 1, 0, 8.742278e-08, -10.5, 0.5, 1.6999998)
 
 [node name="W_Front_F0_23" parent="Wall" unique_id=1529627573 instance=ExtResource("1_y8l0f")]
-transform = Transform3D(0, 0, 1, 0, 1, 0, -1, 0, 0, -10.5, 0.5, -0.3000002)
+transform = Transform3D(8.742278e-08, 0, -1, 0, 1, 0, 1, 0, 8.742278e-08, -10.5, 0.5, -0.3000002)
 
 [node name="W_Front_F0_24" parent="Wall" unique_id=1783643576 instance=ExtResource("1_y8l0f")]
-transform = Transform3D(0, 0, 1, 0, 1, 0, -1, 0, 0, -10.5, 0.5, 1.6999998)
+transform = Transform3D(8.742278e-08, 0, -1, 0, 1, 0, 1, 0, 8.742278e-08, -10.5, 0.5, -2.3000002)
 
 [node name="W_Back_F0_22" parent="Wall" unique_id=1916776942 instance=ExtResource("1_y8l0f")]
-transform = Transform3D(0, 0, -1, 0, 1, 0, 1, 0, 0, 7.5, 0.5, -2.3000002)
+transform = Transform3D(-8.742278e-08, 0, 1, 0, 1, 0, -1, 0, -8.742278e-08, 7.5, 0.5, 1.6999998)
 
 [node name="W_Back_F0_23" parent="Wall" unique_id=774494135 instance=ExtResource("1_y8l0f")]
-transform = Transform3D(0, 0, -1, 0, 1, 0, 1, 0, 0, 7.5, 0.5, -0.3000002)
+transform = Transform3D(-8.742278e-08, 0, 1, 0, 1, 0, -1, 0, -8.742278e-08, 7.5, 0.5, -0.3000002)
 
 [node name="W_Back_F0_24" parent="Wall" unique_id=219758270 instance=ExtResource("1_y8l0f")]
-transform = Transform3D(0, 0, -1, 0, 1, 0, 1, 0, 0, 7.5, 0.5, 1.6999998)
+transform = Transform3D(-8.742278e-08, 0, 1, 0, 1, 0, -1, 0, -8.742278e-08, 7.5, 0.5, -2.3000002)
 
 [node name="W_Right_F0_84" parent="Wall" unique_id=1622972439 instance=ExtResource("1_y8l0f")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.5, 0.5, 2.6999998)
@@ -144,22 +144,22 @@ transform = Transform3D(0, 0, -1, 0, 1, 0, 1, 0, 0, -10.5, 0.5, 2.6999998)
 transform = Transform3D(-1, 0, 0, 0, 1, 0, 0, 0, -1, -10.5, 0.5, -3.3000002)
 
 [node name="W_Front_F1_23" parent="Wall" unique_id=1865709559 instance=ExtResource("11_aa1jf")]
-transform = Transform3D(0, 0, 1, 0, 1, 0, -1, 0, 0, -10.5, 3.5, -0.3000002)
+transform = Transform3D(8.742278e-08, 0, -1, 0, 1, 0, 1, 0, 8.742278e-08, -10.5, 3.5, -0.3000002)
 
 [node name="W_Front_F1_25" parent="Wall" unique_id=173428197 instance=ExtResource("11_aa1jf")]
-transform = Transform3D(0, 0, 1, 0, 1, 0, -1, 0, 0, -10.5, 3.5, -2.3000002)
+transform = Transform3D(8.742278e-08, 0, -1, 0, 1, 0, 1, 0, 8.742278e-08, -10.5, 3.5, 1.6999998)
 
 [node name="W_Front_F1_24" parent="Wall" unique_id=1271983306 instance=ExtResource("11_aa1jf")]
-transform = Transform3D(0, 0, 1, 0, 1, 0, -1, 0, 0, -10.5, 3.5, 1.6999998)
+transform = Transform3D(8.742278e-08, 0, -1, 0, 1, 0, 1, 0, 8.742278e-08, -10.5, 3.5, -2.3000002)
 
 [node name="W_Back_F1_22" parent="Wall" unique_id=352033932 instance=ExtResource("11_aa1jf")]
-transform = Transform3D(0, 0, -1, 0, 1, 0, 1, 0, 0, 7.5, 3.5, -2.3000002)
+transform = Transform3D(-8.742278e-08, 0, 1, 0, 1, 0, -1, 0, -8.742278e-08, 7.5, 3.5, 1.6999998)
 
 [node name="W_Back_F1_23" parent="Wall" unique_id=1368280968 instance=ExtResource("11_aa1jf")]
-transform = Transform3D(0, 0, -1, 0, 1, 0, 1, 0, 0, 7.5, 3.5, -0.3000002)
+transform = Transform3D(-8.742278e-08, 0, 1, 0, 1, 0, -1, 0, -8.742278e-08, 7.5, 3.5, -0.3000002)
 
 [node name="W_Back_F1_24" parent="Wall" unique_id=124963788 instance=ExtResource("11_aa1jf")]
-transform = Transform3D(0, 0, -1, 0, 1, 0, 1, 0, 0, 7.5, 3.5, 1.6999998)
+transform = Transform3D(-8.742278e-08, 0, 1, 0, 1, 0, -1, 0, -8.742278e-08, 7.5, 3.5, -2.3000002)
 
 [node name="W_Right_F1_85" parent="Wall" unique_id=1861948984 instance=ExtResource("2_ewtff")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.5, 3.5, 2.6999998)
@@ -254,10 +254,10 @@ transform = Transform3D(-1, 0, 0, 0, 1, 0, 0, 0, -1, -10.5, 3.5, -3.3000002)
 [node name="Roof" type="Node3D" parent="." unique_id=861799125]
 
 [node name="Roof_Gable_Front_08" parent="Roof" unique_id=1661732130 instance=ExtResource("12_lok3u")]
-transform = Transform3D(0, 0, 1, 0, 1, 0, -1, 0, 0, -10.5, 6.5, -0.3000002)
+transform = Transform3D(8.742278e-08, 0, -1, 0, 1, 0, 1, 0, 8.742278e-08, -10.5, 6.5, -0.3000002)
 
 [node name="Roof_Gable_Back_08" parent="Roof" unique_id=1437144792 instance=ExtResource("12_lok3u")]
-transform = Transform3D(0, 0, -1, 0, 1, 0, 1, 0, 0, 7.5, 6.5, -0.3000002)
+transform = Transform3D(-8.742278e-08, 0, 1, 0, 1, 0, -1, 0, -8.742278e-08, 7.5, 6.5, -0.3000002)
 
 [node name="Roof_Roof_RoundTiles_6x10_03" parent="Roof" unique_id=583807732 instance=ExtResource("13_612ox")]
 transform = Transform3D(0, 0, 1, 0, 1, 0, -1, 0, 0, 2.5, 6.5, -0.3000002)
