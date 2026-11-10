@@ -30,6 +30,9 @@ public partial class PlayerControl : CharacterBody3D, IGravity, IDamageable, ISt
     [Export] public float DashDistance = 8.0f;
     [Export] public float DashDuration = 0.15f;
     [Export] public float DashCooldown = 1.0f;
+    [Export] public string DashAnimation = "Shield_Dash";
+    [Export] public string IdleAnimation = "Idle_Shield";
+    [Export] public float DashAnimationSpeed = 1.5f;
 
     private Node3D _visuals;
     public Vector3 FacingDirection => _visuals != null ? _visuals.GlobalTransform.Basis.Z : GlobalTransform.Basis.Z;
@@ -46,11 +49,22 @@ public partial class PlayerControl : CharacterBody3D, IGravity, IDamageable, ISt
     private float _chargeTimer = 0f;
     private Weapon _weapon;
 
+    private AnimationPlayer _animationPlayer;
+
     public override void _Ready()
     {
         _visuals = GetNode<Node3D>("Visuals");
         _camera = GetViewport().GetCamera3D();
         _weapon = GetNode<Node3D>("Visuals/Weapon").GetChild(0) as Weapon;
+        _animationPlayer = GetNodeOrNull<AnimationPlayer>("Visuals/UAL2_Standard/Anim");
+        if (_animationPlayer != null)
+        {
+            _animationPlayer.AnimationFinished += OnAnimationFinished;
+            if (!string.IsNullOrEmpty(IdleAnimation) && _animationPlayer.HasAnimation(IdleAnimation))
+            {
+                _animationPlayer.Play(IdleAnimation);
+            }
+        }
 
         Damage = WeaponDatabase.WeaponList[_weapon.Id].Damage;
         CritChance = WeaponDatabase.WeaponList[_weapon.Id].CritChance;
@@ -89,6 +103,8 @@ public partial class PlayerControl : CharacterBody3D, IGravity, IDamageable, ISt
             _isDashing = true;
             _dashTimer = DashDuration;
             _dashCooldownTimer = DashCooldown;
+
+            PlayDashAnimation();
         }
     }
 
@@ -213,5 +229,27 @@ public partial class PlayerControl : CharacterBody3D, IGravity, IDamageable, ISt
     {
         EmitSignal(SignalName.Died);
         QueueFree();
+    }
+
+    private void PlayDashAnimation()
+    {
+        if (_animationPlayer == null || string.IsNullOrEmpty(DashAnimation)) return;
+
+        if (_animationPlayer.HasAnimation(DashAnimation))
+        {
+            _animationPlayer.Stop();
+            _animationPlayer.Play(DashAnimation, customSpeed: DashAnimationSpeed);
+        }
+    }
+
+    private void OnAnimationFinished(StringName animName)
+    {
+        if (animName == DashAnimation)
+        {
+            if (_animationPlayer != null && !string.IsNullOrEmpty(IdleAnimation) && _animationPlayer.HasAnimation(IdleAnimation))
+            {
+                _animationPlayer.Play(IdleAnimation);
+            }
+        }
     }
 }
