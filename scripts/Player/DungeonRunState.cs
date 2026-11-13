@@ -10,9 +10,10 @@ public class DungeonRunState
     public int AcquiredGold { get; set; }
     public int AcquiredPremiumGold { get; set; }
 
-    public void AddItem(string itemName)
+    public void AddItem(string itemName, int amount)
     {
-        AcquiredItems.Add(itemName);
+        ItemStack stack = new ItemStack(itemName, amount);
+        AcquiredItems.Add(stack);
     }
 
     public void AddGold(int amount)
@@ -32,7 +33,7 @@ public class DungeonRunState
             Items = AcquiredItems,
             Gold = AcquiredGold,
             PremiumGold = AcquiredPremiumGold
-        }
+        };
     }
 }
 
