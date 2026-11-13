@@ -61,6 +61,7 @@ public class PlayerProfile : ISaveable
     {
         BasicCoin += loots.Gold;
         PremiumCoin += loots.PremiumGold;
+        Experience += loots.BonusExp;
 
         if (loots.Items == null)
             return;

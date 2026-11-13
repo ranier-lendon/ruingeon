@@ -42,4 +42,5 @@ public class DungeonRewards
     public List<ItemStack> Items { get; set; } = new();
     public int Gold { get; set; }
     public int PremiumGold { get; set; }
+    public int BonusExp { get; set; }
 }
