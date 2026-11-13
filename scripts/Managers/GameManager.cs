@@ -23,9 +23,13 @@ public partial class GameManager : Node
         PlayerRuntime = new PlayerRuntime(100, new string[]{"Rusty Sword", null}, null);
     }
 
+    public void ExitDungeon()
+    {
+        PlayerProfile.AddLoot(DungeonRun.GetRewards());
+    }
+
     private void OnPlayerDied()
     {
         GD.Print("Game Manager: Player Died");
-
     }
 }
