@@ -12,6 +12,8 @@ public class PlayerProfile : ISaveable
     public int Experience { get; set; }
     public int BasicCoin { get; set; }
     public int PremiumCoin { get; set; }
+    public Dictionary<string, int> Inventory { get; set; } = new Dictionary<string, int>();
+    public string[] Equipments { get; set; } = new string[4];
 
     public PlayerProfile(
         string name,
@@ -48,5 +50,27 @@ public class PlayerProfile : ISaveable
         Experience = data["experience"].GetInt32();
         BasicCoin = data["basic_coin"].GetInt32();
         PremiumCoin = data["premium_coin"].GetInt32();
+    }
+
+    public void AddExp(int amount)
+    {
+        Experience += amount;
+    }
+
+    public void AddLoot(DungeonRewards loots)
+    {
+        BasicCoin += loots.Gold;
+        PremiumCoin += loots.PremiumGold;
+
+        if (loots.Items == null)
+            return;
+
+        foreach (var item in loots.Items)
+        {
+            if (Inventory.ContainsKey(item.Id))
+                Inventory[item.Id] += item.Amount;
+            else
+                Inventory.Add(item.Id, item.Amount);
+        }
     }
 }
