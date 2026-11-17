@@ -21,7 +21,7 @@ public partial class ProjectileManager : Node
             return;
         }
 
-        _projectile = ResourceLoader.Load<PackedScene>("res://scenes/projectile.tscn");
+        _projectile = ResourceLoader.Load<PackedScene>("res://scenes/Projectile.tscn");
 
         for (int i = 0; i < _poolSize; i++)
         {
