@@ -11,21 +11,27 @@ public partial class Enemy : CharacterBody3D, IGravity, IDamageable
 
     [Export] public float GravityScale { get; set; } = 1.0f;
 
+    [ExportGroup("Combat")]
+    [Export] public float Damage { get; set; } = 10f;
+    [Export] public float AttackRange { get; set; } = 1.2f;
+    [Export] public float AttackCooldown { get; set; } = 1.0f;
+
     [ExportGroup("Animation")]
     [Export] public string WalkAnimation = "Walk";
     [Export] public string IdleAnimation = "Idle";
+    [Export] public string AttackAnimation = "Sword_Attack";
     [Export] public float WalkAnimationSpeed = 1.0f;
+    [Export] public float AttackAnimationSpeed = 1.0f;
     [Export] public float AnimationBlendTime = 0.2f;
 
     public float Health { get; private set; } = 100f;
-    public float Damage { get; } = 10f;
-    public float AttackRange { get; } = 1.2f;
-    public float AttackCooldown { get; } = 1f;
 
     private Node3D _visuals;
     private CharacterBody3D _player;
     private AnimationPlayer _animationPlayer;
     private string _currentAnimation = "";
+    private bool _isAttacking = false;
+    private float _attackCooldownTimer = 0f;
 
     public override void _Ready()
     {
@@ -33,21 +39,36 @@ public partial class Enemy : CharacterBody3D, IGravity, IDamageable
         _player  = FindPlayer();
         _animationPlayer = GetNodeOrNull<AnimationPlayer>("Visuals/Puglin/AnimationPlayer");
 
-        EnsureAnimationLoop(WalkAnimation);
-        EnsureAnimationLoop(IdleAnimation);
+        if (_animationPlayer != null)
+        {
+            _animationPlayer.AnimationFinished += OnAnimationFinished;
+        }
 
-        PlayAnimation(IdleAnimation);
+        EnsureAnimationLoop(WalkAnimation, loop: true);
+        EnsureAnimationLoop(IdleAnimation, loop: true);
+        EnsureAnimationLoop(AttackAnimation, loop: false);
+
+        PlayAnimation(IdleAnimation, loop: true);
     }
 
     public override void _PhysicsProcess(double delta)
     {
+        float fDelta = (float)delta;
         GravityComponent.ApplyGravity(this, delta);
+
+        if (_attackCooldownTimer > 0f)
+            _attackCooldownTimer -= fDelta;
+
+        if (_isAttacking && (_animationPlayer == null || !_animationPlayer.IsPlaying()))
+        {
+            _isAttacking = false;
+        }
 
         if (!IsInstanceValid(_player))
             _player = FindPlayer();
 
         if (_player != null)
-            ChasePlayer((float)delta);
+            ChasePlayer(fDelta);
         else
             BrakeHorizontal();
 
@@ -72,12 +93,33 @@ public partial class Enemy : CharacterBody3D, IGravity, IDamageable
 
     public void Attack()
     {
-        
+        if (_isAttacking) return;
+
+        _isAttacking = true;
+        _attackCooldownTimer = AttackCooldown;
+
+        PlayAnimation(AttackAnimation, AttackAnimationSpeed, loop: false);
+
+        if (IsInstanceValid(_player))
+        {
+            float dist = GlobalPosition.DistanceTo(_player.GlobalPosition);
+            if (dist <= AttackRange + 0.3f && _player is IDamageable damageable)
+            {
+                damageable.TakeDamage(Damage);
+            }
+        }
     }
 
     private void ChasePlayer(float delta)
     {
         float dist = GlobalPosition.DistanceTo(_player.GlobalPosition);
+
+        if (_isAttacking)
+        {
+            BrakeHorizontal();
+            FacePlayer();
+            return;
+        }
 
         if (dist > DetectionRange)
         {
@@ -85,10 +127,16 @@ public partial class Enemy : CharacterBody3D, IGravity, IDamageable
             return;
         }
 
-        if (dist <= StopDistance)
+        float attackDist = Mathf.Max(StopDistance, AttackRange);
+        if (dist <= attackDist)
         {
             BrakeHorizontal();
             FacePlayer();
+
+            if (_attackCooldownTimer <= 0f)
+            {
+                Attack();
+            }
             return;
         }
 
@@ -132,44 +180,53 @@ public partial class Enemy : CharacterBody3D, IGravity, IDamageable
 
     private void UpdateAnimation()
     {
-        if (_animationPlayer == null) return;
+        if (_animationPlayer == null || _isAttacking) return;
 
         Vector2 horizontalVel = new Vector2(Velocity.X, Velocity.Z);
         if (horizontalVel.LengthSquared() > 0.05f)
         {
-            PlayAnimation(WalkAnimation, WalkAnimationSpeed);
+            PlayAnimation(WalkAnimation, WalkAnimationSpeed, loop: true);
         }
         else
         {
-            PlayAnimation(IdleAnimation, 1.0f);
+            PlayAnimation(IdleAnimation, 1.0f, loop: true);
         }
     }
 
-    private void PlayAnimation(string animName, float customSpeed = 1.0f)
+    private void PlayAnimation(string animName, float customSpeed = 1.0f, bool loop = true)
     {
         if (_animationPlayer == null) return;
 
         string resolved = ResolveAnimation(animName);
         if (string.IsNullOrEmpty(resolved)) return;
 
-        if (_currentAnimation == resolved && _animationPlayer.IsPlaying())
+        if (_currentAnimation == resolved && _animationPlayer.IsPlaying() && loop)
             return;
 
-        EnsureAnimationLoop(resolved);
+        EnsureAnimationLoop(resolved, loop);
         _currentAnimation = resolved;
         _animationPlayer.Play(resolved, customBlend: AnimationBlendTime, customSpeed: customSpeed);
     }
 
-    private void EnsureAnimationLoop(string animName)
+    private void EnsureAnimationLoop(string animName, bool loop)
     {
         string resolved = ResolveAnimation(animName);
         if (_animationPlayer != null && !string.IsNullOrEmpty(resolved) && _animationPlayer.HasAnimation(resolved))
         {
             var anim = _animationPlayer.GetAnimation(resolved);
-            if (anim != null && anim.LoopMode == Animation.LoopModeEnum.None)
+            if (anim != null)
             {
-                anim.LoopMode = Animation.LoopModeEnum.Linear;
+                anim.LoopMode = loop ? Animation.LoopModeEnum.Linear : Animation.LoopModeEnum.None;
             }
+        }
+    }
+
+    private void OnAnimationFinished(StringName animName)
+    {
+        string resolvedAttack = ResolveAnimation(AttackAnimation);
+        if (!string.IsNullOrEmpty(resolvedAttack) && animName == resolvedAttack)
+        {
+            _isAttacking = false;
         }
     }
 
