@@ -11,6 +11,12 @@ public partial class Enemy : CharacterBody3D, IGravity, IDamageable
 
     [Export] public float GravityScale { get; set; } = 1.0f;
 
+    [ExportGroup("Animation")]
+    [Export] public string WalkAnimation = "Walk";
+    [Export] public string IdleAnimation = "Idle";
+    [Export] public float WalkAnimationSpeed = 1.0f;
+    [Export] public float AnimationBlendTime = 0.2f;
+
     public float Health { get; private set; } = 100f;
     public float Damage { get; } = 10f;
     public float AttackRange { get; } = 1.2f;
@@ -18,11 +24,19 @@ public partial class Enemy : CharacterBody3D, IGravity, IDamageable
 
     private Node3D _visuals;
     private CharacterBody3D _player;
+    private AnimationPlayer _animationPlayer;
+    private string _currentAnimation = "";
 
     public override void _Ready()
     {
         _visuals = GetNode<Node3D>("Visuals");
         _player  = FindPlayer();
+        _animationPlayer = GetNodeOrNull<AnimationPlayer>("Visuals/Puglin/AnimationPlayer");
+
+        EnsureAnimationLoop(WalkAnimation);
+        EnsureAnimationLoop(IdleAnimation);
+
+        PlayAnimation(IdleAnimation);
     }
 
     public override void _PhysicsProcess(double delta)
@@ -34,8 +48,12 @@ public partial class Enemy : CharacterBody3D, IGravity, IDamageable
 
         if (_player != null)
             ChasePlayer((float)delta);
+        else
+            BrakeHorizontal();
 
         MoveAndSlide();
+
+        UpdateAnimation();
     }
 
     public void TakeDamage(float amount)
@@ -112,10 +130,99 @@ public partial class Enemy : CharacterBody3D, IGravity, IDamageable
         }
     }
 
+    private void UpdateAnimation()
+    {
+        if (_animationPlayer == null) return;
+
+        Vector2 horizontalVel = new Vector2(Velocity.X, Velocity.Z);
+        if (horizontalVel.LengthSquared() > 0.05f)
+        {
+            PlayAnimation(WalkAnimation, WalkAnimationSpeed);
+        }
+        else
+        {
+            PlayAnimation(IdleAnimation, 1.0f);
+        }
+    }
+
+    private void PlayAnimation(string animName, float customSpeed = 1.0f)
+    {
+        if (_animationPlayer == null) return;
+
+        string resolved = ResolveAnimation(animName);
+        if (string.IsNullOrEmpty(resolved)) return;
+
+        if (_currentAnimation == resolved && _animationPlayer.IsPlaying())
+            return;
+
+        EnsureAnimationLoop(resolved);
+        _currentAnimation = resolved;
+        _animationPlayer.Play(resolved, customBlend: AnimationBlendTime, customSpeed: customSpeed);
+    }
+
+    private void EnsureAnimationLoop(string animName)
+    {
+        string resolved = ResolveAnimation(animName);
+        if (_animationPlayer != null && !string.IsNullOrEmpty(resolved) && _animationPlayer.HasAnimation(resolved))
+        {
+            var anim = _animationPlayer.GetAnimation(resolved);
+            if (anim != null && anim.LoopMode == Animation.LoopModeEnum.None)
+            {
+                anim.LoopMode = Animation.LoopModeEnum.Linear;
+            }
+        }
+    }
+
+    private string ResolveAnimation(string animName)
+    {
+        if (_animationPlayer == null || string.IsNullOrEmpty(animName))
+            return null;
+
+        if (_animationPlayer.HasAnimation(animName))
+            return animName;
+
+        string cleanName = animName.Replace("_Loop", "").Replace("_loop", "");
+
+        string[] candidates = new string[]
+        {
+            animName,
+            cleanName,
+            $"{cleanName}_Loop",
+            $"UAL1_Standard/{animName}",
+            $"UAL1_Standard/{cleanName}",
+            $"UAL1_Standard/{cleanName}_Loop",
+            $"UAL2_Standard/{animName}",
+            $"UAL2_Standard/{cleanName}",
+            $"UAL2_Standard/{cleanName}_Loop",
+        };
+
+        foreach (var c in candidates)
+        {
+            if (_animationPlayer.HasAnimation(c))
+                return c;
+        }
+
+        // Case-insensitive fallback search
+        var allAnims = _animationPlayer.GetAnimationList();
+        foreach (var a in allAnims)
+        {
+            string s = a.ToString();
+            if (string.Equals(s, animName, System.StringComparison.OrdinalIgnoreCase) ||
+                string.Equals(s, cleanName, System.StringComparison.OrdinalIgnoreCase) ||
+                s.EndsWith($"/{cleanName}", System.StringComparison.OrdinalIgnoreCase) ||
+                s.EndsWith($"/{animName}", System.StringComparison.OrdinalIgnoreCase))
+            {
+                return s;
+            }
+        }
+
+        return null;
+    }
+
     private CharacterBody3D FindPlayer()
     {
         var nodes = GetTree().GetNodesInGroup("player");
-        if (nodes[0] is CharacterBody3D cb)
+        if (nodes.Count > 0 && nodes[0] is CharacterBody3D cb)
             return cb;
         return null;
     }
