@@ -17,9 +17,8 @@ config/icon="res://icon.svg"
 
 [autoload]
 
-SignalBus="*uid://melo8r0j27ii"
-ProjectileManager="*uid://bwd3m1rhyk1rh"
-GameManager="*uid://cl5067u3o54nu"
+ProjectileManager="*res://scripts/Combat/Weapons/ProjectileManager.cs"
+GameManager="*res://scripts/Managers/GameManager.cs"
 
 [display]
 
