@@ -1,0 +1,11 @@
+[gd_scene format=3 uid="uid://cwq4ri8gqc5lc"]
+
+[ext_resource type="PackedScene" uid="uid://c8cv2eskkvaba" path="res://scenes/UI/craft.tscn" id="1_7dr7o"]
+[ext_resource type="PackedScene" uid="uid://ciihgeub0twc5" path="res://scenes/UI/stash.tscn" id="2_40uwi"]
+
+[node name="MainUI" type="CanvasLayer" unique_id=896236161]
+
+[node name="Craft" parent="." unique_id=1162594058 instance=ExtResource("1_7dr7o")]
+visible = false
+
+[node name="Stash" parent="." unique_id=1722693723 instance=ExtResource("2_40uwi")]
