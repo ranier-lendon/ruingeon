@@ -1,0 +1,1417 @@
+[gd_scene format=3 uid="uid://ciihgeub0twc5"]
+
+[ext_resource type="FontFile" uid="uid://c3khjsw2edlef" path="res://assets/Cormorant_Garamond/static/CormorantGaramond-Bold.ttf" id="1_font_bold"]
+[ext_resource type="FontFile" uid="uid://ddkv46py3oos6" path="res://assets/Cormorant_Garamond/static/CormorantGaramond-SemiBold.ttf" id="2_font_semibold"]
+[ext_resource type="Script" uid="uid://ybrf1bl4qp4y" path="res://scripts/UI/stash.gd" id="3_script"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_main_panel"]
+bg_color = Color(0.0705882, 0.0784314, 0.101961, 0.968627)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.678431, 0.552941, 0.352941, 0.85098)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+shadow_color = Color(0, 0, 0, 0.705882)
+shadow_size = 20
+shadow_offset = Vector2(0, 6)
+
+[sub_resource type="LabelSettings" id="LabelSettings_hagke"]
+font = ExtResource("1_font_bold")
+font_size = 28
+font_color = Color(0.960784, 0.878431, 0.717647, 1)
+shadow_size = 4
+shadow_color = Color(0, 0, 0, 0.8)
+shadow_offset = Vector2(1, 2)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_srfft"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_close_normal"]
+bg_color = Color(0.121569, 0.137255, 0.176471, 0.8)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.4, 0.352941, 0.301961, 0.701961)
+corner_radius_top_left = 14
+corner_radius_top_right = 14
+corner_radius_bottom_right = 14
+corner_radius_bottom_left = 14
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_close_hover"]
+bg_color = Color(0.352941, 0.14902, 0.14902, 0.901961)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.901961, 0.45098, 0.4, 1)
+corner_radius_top_left = 14
+corner_radius_top_right = 14
+corner_radius_bottom_right = 14
+corner_radius_bottom_left = 14
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_separator"]
+color = Color(0.678431, 0.552941, 0.352941, 0.4)
+grow_begin = -4.0
+grow_end = -4.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_filter_normal"]
+content_margin_left = 12.0
+content_margin_top = 6.0
+content_margin_right = 12.0
+content_margin_bottom = 6.0
+bg_color = Color(0.121569, 0.137255, 0.176471, 0.85098)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.352941, 0.321569, 0.278431, 0.701961)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_filter_pressed"]
+content_margin_left = 12.0
+content_margin_top = 6.0
+content_margin_right = 12.0
+content_margin_bottom = 6.0
+bg_color = Color(0.258824, 0.219608, 0.160784, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.921569, 0.780392, 0.478431, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_filter_hover"]
+content_margin_left = 12.0
+content_margin_top = 6.0
+content_margin_right = 12.0
+content_margin_bottom = 6.0
+bg_color = Color(0.196078, 0.219608, 0.278431, 0.952941)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.819608, 0.701961, 0.45098, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_v_separator"]
+color = Color(0.678431, 0.552941, 0.352941, 0.3)
+grow_begin = -4.0
+grow_end = -4.0
+vertical = true
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_slot_panel"]
+content_margin_left = 6.0
+content_margin_top = 6.0
+content_margin_right = 6.0
+content_margin_bottom = 6.0
+bg_color = Color(0.0588235, 0.0666667, 0.0862745, 0.95)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.38, 0.341176, 0.282353, 0.75)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+shadow_color = Color(0, 0, 0, 0.45)
+shadow_size = 3
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_scroll_grabber"]
+bg_color = Color(0.54902, 0.45098, 0.301961, 0.8)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_scroll_grabber_hl"]
+bg_color = Color(0.74902, 0.619608, 0.419608, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_scroll_trough"]
+bg_color = Color(0.0470588, 0.054902, 0.0705882, 0.5)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+
+[sub_resource type="Theme" id="Theme_stash_list"]
+PanelContainer/styles/panel = SubResource("StyleBoxFlat_slot_panel")
+VScrollBar/styles/grabber = SubResource("StyleBoxFlat_scroll_grabber")
+VScrollBar/styles/grabber_highlight = SubResource("StyleBoxFlat_scroll_grabber_hl")
+VScrollBar/styles/grabber_pressed = SubResource("StyleBoxFlat_scroll_grabber_hl")
+VScrollBar/styles/scroll = SubResource("StyleBoxFlat_scroll_trough")
+
+[sub_resource type="LabelSettings" id="LabelSettings_amount"]
+font = ExtResource("1_font_bold")
+font_size = 12
+outline_size = 3
+outline_color = Color(0, 0, 0, 0.95)
+
+[node name="Stash" type="Control" unique_id=1722693723]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("3_script")
+
+[node name="PanelContainer" type="PanelContainer" parent="." unique_id=614134702]
+custom_minimum_size = Vector2(780, 560)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -390.0
+offset_top = -280.0
+offset_right = 390.0
+offset_bottom = 280.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_main_panel")
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer" unique_id=848707714]
+layout_mode = 2
+theme_override_constants/margin_left = 22
+theme_override_constants/margin_top = 18
+theme_override_constants/margin_right = 22
+theme_override_constants/margin_bottom = 20
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer" unique_id=1458003403]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=1023298571]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="Title" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer" unique_id=205058717]
+layout_mode = 2
+text = "STASH"
+label_settings = SubResource("LabelSettings_hagke")
+
+[node name="VSeparator" type="VSeparator" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer" unique_id=803932821]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+theme_override_styles/separator = SubResource("StyleBoxEmpty_srfft")
+
+[node name="CloseButton" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer" unique_id=987654321]
+custom_minimum_size = Vector2(28, 28)
+layout_mode = 2
+size_flags_vertical = 4
+focus_mode = 0
+theme_override_fonts/font = ExtResource("1_font_bold")
+theme_override_font_sizes/font_size = 14
+theme_override_styles/normal = SubResource("StyleBoxFlat_close_normal")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_close_hover")
+theme_override_styles/hover = SubResource("StyleBoxFlat_close_hover")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_srfft")
+text = "✕"
+
+[node name="HSeparator" type="HSeparator" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=778899002]
+layout_mode = 2
+theme_override_styles/separator = SubResource("StyleBoxLine_separator")
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=1196257697]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 16
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2" unique_id=1725443826]
+layout_mode = 2
+
+[node name="Filters" type="VBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2/MarginContainer" unique_id=755122358]
+custom_minimum_size = Vector2(130, 0)
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="All" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2/MarginContainer/Filters" unique_id=314159266]
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+focus_mode = 0
+theme_override_fonts/font = ExtResource("2_font_semibold")
+theme_override_font_sizes/font_size = 13
+theme_override_styles/normal = SubResource("StyleBoxFlat_filter_normal")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_filter_pressed")
+theme_override_styles/hover = SubResource("StyleBoxFlat_filter_hover")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_srfft")
+text = "All"
+
+[node name="Sword" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2/MarginContainer/Filters" unique_id=927535249]
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+focus_mode = 0
+theme_override_fonts/font = ExtResource("2_font_semibold")
+theme_override_font_sizes/font_size = 13
+theme_override_styles/normal = SubResource("StyleBoxFlat_filter_normal")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_filter_pressed")
+theme_override_styles/hover = SubResource("StyleBoxFlat_filter_hover")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_srfft")
+text = "Sword"
+
+[node name="Shield" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2/MarginContainer/Filters" unique_id=1647134352]
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+focus_mode = 0
+theme_override_fonts/font = ExtResource("2_font_semibold")
+theme_override_font_sizes/font_size = 13
+theme_override_styles/normal = SubResource("StyleBoxFlat_filter_normal")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_filter_pressed")
+theme_override_styles/hover = SubResource("StyleBoxFlat_filter_hover")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_srfft")
+text = "Shield"
+
+[node name="Bow" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2/MarginContainer/Filters" unique_id=1473105155]
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+focus_mode = 0
+theme_override_fonts/font = ExtResource("2_font_semibold")
+theme_override_font_sizes/font_size = 13
+theme_override_styles/normal = SubResource("StyleBoxFlat_filter_normal")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_filter_pressed")
+theme_override_styles/hover = SubResource("StyleBoxFlat_filter_hover")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_srfft")
+text = "Bow"
+
+[node name="Materials" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2/MarginContainer/Filters" unique_id=1752842658]
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+focus_mode = 0
+theme_override_fonts/font = ExtResource("2_font_semibold")
+theme_override_font_sizes/font_size = 13
+theme_override_styles/normal = SubResource("StyleBoxFlat_filter_normal")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_filter_pressed")
+theme_override_styles/hover = SubResource("StyleBoxFlat_filter_hover")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_srfft")
+text = "Materials"
+
+[node name="VSeparator2" type="VSeparator" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2" unique_id=778899003]
+layout_mode = 2
+mouse_filter = 2
+theme_override_styles/separator = SubResource("StyleBoxLine_v_separator")
+
+[node name="ScrollContainer" type="ScrollContainer" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2" unique_id=1453366888]
+layout_mode = 2
+size_flags_horizontal = 3
+theme = SubResource("Theme_stash_list")
+horizontal_scroll_mode = 0
+vertical_scroll_mode = 2
+
+[node name="GridContainer" type="GridContainer" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2/ScrollContainer" unique_id=788576297]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/h_separation = 8
+theme_override_constants/v_separation = 8
+columns = 7
+
+[node name="InventorySlot" type="PanelContainer" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2/ScrollContainer/GridContainer" unique_id=1211277651]
+custom_minimum_size = Vector2(70, 70)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_slot_panel")
+
+[node name="TextureRect" type="TextureRect" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2/ScrollContainer/GridContainer/InventorySlot" unique_id=1792913755]
+layout_mode = 2
+mouse_filter = 2
+expand_mode = 1
+stretch_mode = 5
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2/ScrollContainer/GridContainer/InventorySlot" unique_id=415027601]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/margin_right = 2
+theme_override_constants/margin_bottom = 0
+
+[node name="Label" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2/ScrollContainer/GridContainer/InventorySlot/MarginContainer" unique_id=1776270391]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+text = "0"
+label_settings = SubResource("LabelSettings_amount")
+horizontal_alignment = 2
+vertical_alignment = 2
+
+[node name="InventorySlot2" type="PanelContainer" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2/ScrollContainer/GridContainer" unique_id=1723817557]
+custom_minimum_size = Vector2(70, 70)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_slot_panel")
+
+[node name="TextureRect" type="TextureRect" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2/ScrollContainer/GridContainer/InventorySlot2" unique_id=1525204887]
+layout_mode = 2
+mouse_filter = 2
+expand_mode = 1
+stretch_mode = 5
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2/ScrollContainer/GridContainer/InventorySlot2" unique_id=730418880]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/margin_right = 2
+theme_override_constants/margin_bottom = 0
+
+[node name="Label" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2/ScrollContainer/GridContainer/InventorySlot2/MarginContainer" unique_id=549076777]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+text = "0"
+label_settings = SubResource("LabelSettings_amount")
+horizontal_alignment = 2
+vertical_alignment = 2
+
+[node name="InventorySlot3" type="PanelContainer" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2/ScrollContainer/GridContainer" unique_id=747580880]
+custom_minimum_size = Vector2(70, 70)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_slot_panel")
+
+[node name="TextureRect" type="TextureRect" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2/ScrollContainer/GridContainer/InventorySlot3" unique_id=1041320924]
+layout_mode = 2
+mouse_filter = 2
+expand_mode = 1
+stretch_mode = 5
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2/ScrollContainer/GridContainer/InventorySlot3" unique_id=705612488]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/margin_right = 2
+theme_override_constants/margin_bottom = 0
+
+[node name="Label" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2/ScrollContainer/GridContainer/InventorySlot3/MarginContainer" unique_id=1291373568]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+text = "0"
+label_settings = SubResource("LabelSettings_amount")
+horizontal_alignment = 2
+vertical_alignment = 2
+
+[node name="InventorySlot4" type="PanelContainer" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2/ScrollContainer/GridContainer" unique_id=109511830]
+custom_minimum_size = Vector2(70, 70)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_slot_panel")
+
+[node name="TextureRect" type="TextureRect" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2/ScrollContainer/GridContainer/InventorySlot4" unique_id=1135815057]
+layout_mode = 2
+mouse_filter = 2
+expand_mode = 1
+stretch_mode = 5
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2/ScrollContainer/GridContainer/InventorySlot4" unique_id=1082647294]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/margin_right = 2
+theme_override_constants/margin_bottom = 0
+
+[node name="Label" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2/ScrollContainer/GridContainer/InventorySlot4/MarginContainer" unique_id=708886548]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+text = "0"
+label_settings = SubResource("LabelSettings_amount")
+horizontal_alignment = 2
+vertical_alignment = 2
+
+[node name="InventorySlot5" type="PanelContainer" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2/ScrollContainer/GridContainer" unique_id=1026958472]
+custom_minimum_size = Vector2(70, 70)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_slot_panel")
+
+[node name="TextureRect" type="TextureRect" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2/ScrollContainer/GridContainer/InventorySlot5" unique_id=1135863990]
+layout_mode = 2
+mouse_filter = 2
+expand_mode = 1
+stretch_mode = 5
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2/ScrollContainer/GridContainer/InventorySlot5" unique_id=1242864868]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/margin_right = 2
+theme_override_constants/margin_bottom = 0
+
+[node name="Label" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2/ScrollContainer/GridContainer/InventorySlot5/MarginContainer" unique_id=645834178]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+text = "0"
+label_settings = SubResource("LabelSettings_amount")
+horizontal_alignment = 2
+vertical_alignment = 2
+
+[node name="InventorySlot6" type="PanelContainer" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2/ScrollContainer/GridContainer" unique_id=397415410]
+custom_minimum_size = Vector2(70, 70)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_slot_panel")
+
+[node name="TextureRect" type="TextureRect" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2/ScrollContainer/GridContainer/InventorySlot6" unique_id=576772352]
+layout_mode = 2
+mouse_filter = 2
+expand_mode = 1
+stretch_mode = 5
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2/ScrollContainer/GridContainer/InventorySlot6" unique_id=1398912401]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/margin_right = 2
+theme_override_constants/margin_bottom = 0
+
+[node name="Label" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2/ScrollContainer/GridContainer/InventorySlot6/MarginContainer" unique_id=1117079185]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+text = "0"
+label_settings = SubResource("LabelSettings_amount")
+horizontal_alignment = 2
+vertical_alignment = 2
+
+[node name="InventorySlot7" type="PanelContainer" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2/ScrollContainer/GridContainer" unique_id=92716055]
+custom_minimum_size = Vector2(70, 70)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_slot_panel")
+
+[node name="TextureRect" type="TextureRect" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2/ScrollContainer/GridContainer/InventorySlot7" unique_id=1507764830]
+layout_mode = 2
+mouse_filter = 2
+expand_mode = 1
+stretch_mode = 5
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2/ScrollContainer/GridContainer/InventorySlot7" unique_id=87245980]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/margin_right = 2
+theme_override_constants/margin_bottom = 0
+
+[node name="Label" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2/ScrollContainer/GridContainer/InventorySlot7/MarginContainer" unique_id=665982206]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+text = "0"
+label_settings = SubResource("LabelSettings_amount")
+horizontal_alignment = 2
+vertical_alignment = 2
+
+[node name="InventorySlot8" type="PanelContainer" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2/ScrollContainer/GridContainer" unique_id=1067451460]
+custom_minimum_size = Vector2(70, 70)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_slot_panel")
+
+[node name="TextureRect" type="TextureRect" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2/ScrollContainer/GridContainer/InventorySlot8" unique_id=1153267695]
+layout_mode = 2
+mouse_filter = 2
+expand_mode = 1
+stretch_mode = 5
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2/ScrollContainer/GridContainer/InventorySlot8" unique_id=2120080102]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/margin_right = 2
+theme_override_constants/margin_bottom = 0
+
+[node name="Label" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2/ScrollContainer/GridContainer/InventorySlot8/MarginContainer" unique_id=1152650358]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+text = "0"
+label_settings = SubResource("LabelSettings_amount")
+horizontal_alignment = 2
+vertical_alignment = 2
+
+[node name="InventorySlot9" type="PanelContainer" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2/ScrollContainer/GridContainer" unique_id=1754016430]
+custom_minimum_size = Vector2(70, 70)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_slot_panel")
+
+[node name="TextureRect" type="TextureRect" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2/ScrollContainer/GridContainer/InventorySlot9" unique_id=1928357353]
+layout_mode = 2
+mouse_filter = 2
+expand_mode = 1
+stretch_mode = 5
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2/ScrollContainer/GridContainer/InventorySlot9" unique_id=289087259]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/margin_right = 2
+theme_override_constants/margin_bottom = 0
+
+[node name="Label" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2/ScrollContainer/GridContainer/InventorySlot9/MarginContainer" unique_id=20922057]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+text = "0"
+label_settings = SubResource("LabelSettings_amount")
+horizontal_alignment = 2
+vertical_alignment = 2
+
+[node name="InventorySlot10" type="PanelContainer" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2/ScrollContainer/GridContainer" unique_id=1800099498]
+custom_minimum_size = Vector2(70, 70)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_slot_panel")
+
+[node name="TextureRect" type="TextureRect" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2/ScrollContainer/GridContainer/InventorySlot10" unique_id=1678411102]
+layout_mode = 2
+mouse_filter = 2
+expand_mode = 1
+stretch_mode = 5
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2/ScrollContainer/GridContainer/InventorySlot10" unique_id=661396931]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/margin_right = 2
+theme_override_constants/margin_bottom = 0
+
+[node name="Label" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2/ScrollContainer/GridContainer/InventorySlot10/MarginContainer" unique_id=156475613]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+text = "0"
+label_settings = SubResource("LabelSettings_amount")
+horizontal_alignment = 2
+vertical_alignment = 2
+
+[node name="InventorySlot11" type="PanelContainer" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2/ScrollContainer/GridContainer" unique_id=1093974014]
+custom_minimum_size = Vector2(70, 70)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_slot_panel")
+
+[node name="TextureRect" type="TextureRect" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2/ScrollContainer/GridContainer/InventorySlot11" unique_id=2060426567]
+layout_mode = 2
+mouse_filter = 2
+expand_mode = 1
+stretch_mode = 5
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2/ScrollContainer/GridContainer/InventorySlot11" unique_id=775048069]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/margin_right = 2
+theme_override_constants/margin_bottom = 0
+
+[node name="Label" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2/ScrollContainer/GridContainer/InventorySlot11/MarginContainer" unique_id=1900444940]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+text = "0"
+label_settings = SubResource("LabelSettings_amount")
+horizontal_alignment = 2
+vertical_alignment = 2
+
+[node name="InventorySlot12" type="PanelContainer" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2/ScrollContainer/GridContainer" unique_id=1587429469]
+custom_minimum_size = Vector2(70, 70)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_slot_panel")
+
+[node name="TextureRect" type="TextureRect" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2/ScrollContainer/GridContainer/InventorySlot12" unique_id=648888657]
+layout_mode = 2
+mouse_filter = 2
+expand_mode = 1
+stretch_mode = 5
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2/ScrollContainer/GridContainer/InventorySlot12" unique_id=1863234163]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/margin_right = 2
+theme_override_constants/margin_bottom = 0
+
+[node name="Label" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2/ScrollContainer/GridContainer/InventorySlot12/MarginContainer" unique_id=210322248]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+text = "0"
+label_settings = SubResource("LabelSettings_amount")
+horizontal_alignment = 2
+vertical_alignment = 2
+
+[node name="InventorySlot13" type="PanelContainer" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2/ScrollContainer/GridContainer" unique_id=459303912]
+custom_minimum_size = Vector2(70, 70)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_slot_panel")
+
+[node name="TextureRect" type="TextureRect" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2/ScrollContainer/GridContainer/InventorySlot13" unique_id=393600254]
+layout_mode = 2
+mouse_filter = 2
+expand_mode = 1
+stretch_mode = 5
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2/ScrollContainer/GridContainer/InventorySlot13" unique_id=232041654]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/margin_right = 2
+theme_override_constants/margin_bottom = 0
+
+[node name="Label" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2/ScrollContainer/GridContainer/InventorySlot13/MarginContainer" unique_id=813455838]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+text = "0"
+label_settings = SubResource("LabelSettings_amount")
+horizontal_alignment = 2
+vertical_alignment = 2
+
+[node name="InventorySlot14" type="PanelContainer" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2/ScrollContainer/GridContainer" unique_id=2103888230]
+custom_minimum_size = Vector2(70, 70)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_slot_panel")
+
+[node name="TextureRect" type="TextureRect" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2/ScrollContainer/GridContainer/InventorySlot14" unique_id=378661301]
+layout_mode = 2
+mouse_filter = 2
+expand_mode = 1
+stretch_mode = 5
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2/ScrollContainer/GridContainer/InventorySlot14" unique_id=720065991]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/margin_right = 2
+theme_override_constants/margin_bottom = 0
+
+[node name="Label" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2/ScrollContainer/GridContainer/InventorySlot14/MarginContainer" unique_id=1082702858]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+text = "0"
+label_settings = SubResource("LabelSettings_amount")
+horizontal_alignment = 2
+vertical_alignment = 2
+
+[node name="InventorySlot15" type="PanelContainer" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2/ScrollContainer/GridContainer" unique_id=1729633704]
+custom_minimum_size = Vector2(70, 70)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_slot_panel")
+
+[node name="TextureRect" type="TextureRect" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2/ScrollContainer/GridContainer/InventorySlot15" unique_id=1052421698]
+layout_mode = 2
+mouse_filter = 2
+expand_mode = 1
+stretch_mode = 5
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2/ScrollContainer/GridContainer/InventorySlot15" unique_id=539319215]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/margin_right = 2
+theme_override_constants/margin_bottom = 0
+
+[node name="Label" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2/ScrollContainer/GridContainer/InventorySlot15/MarginContainer" unique_id=1431458403]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+text = "0"
+label_settings = SubResource("LabelSettings_amount")
+horizontal_alignment = 2
+vertical_alignment = 2
+
+[node name="InventorySlot16" type="PanelContainer" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2/ScrollContainer/GridContainer" unique_id=195427826]
+custom_minimum_size = Vector2(70, 70)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_slot_panel")
+
+[node name="TextureRect" type="TextureRect" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2/ScrollContainer/GridContainer/InventorySlot16" unique_id=1818825133]
+layout_mode = 2
+mouse_filter = 2
+expand_mode = 1
+stretch_mode = 5
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2/ScrollContainer/GridContainer/InventorySlot16" unique_id=953409132]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/margin_right = 2
+theme_override_constants/margin_bottom = 0
+
+[node name="Label" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2/ScrollContainer/GridContainer/InventorySlot16/MarginContainer" unique_id=1676591334]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+text = "0"
+label_settings = SubResource("LabelSettings_amount")
+horizontal_alignment = 2
+vertical_alignment = 2
+
+[node name="InventorySlot17" type="PanelContainer" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2/ScrollContainer/GridContainer" unique_id=1978427486]
+custom_minimum_size = Vector2(70, 70)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_slot_panel")
+
+[node name="TextureRect" type="TextureRect" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2/ScrollContainer/GridContainer/InventorySlot17" unique_id=1534902118]
+layout_mode = 2
+mouse_filter = 2
+expand_mode = 1
+stretch_mode = 5
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2/ScrollContainer/GridContainer/InventorySlot17" unique_id=1673916780]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/margin_right = 2
+theme_override_constants/margin_bottom = 0
+
+[node name="Label" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2/ScrollContainer/GridContainer/InventorySlot17/MarginContainer" unique_id=570518579]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+text = "0"
+label_settings = SubResource("LabelSettings_amount")
+horizontal_alignment = 2
+vertical_alignment = 2
+
+[node name="InventorySlot18" type="PanelContainer" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2/ScrollContainer/GridContainer" unique_id=1603497647]
+custom_minimum_size = Vector2(70, 70)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_slot_panel")
+
+[node name="TextureRect" type="TextureRect" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2/ScrollContainer/GridContainer/InventorySlot18" unique_id=1564331107]
+layout_mode = 2
+mouse_filter = 2
+expand_mode = 1
+stretch_mode = 5
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2/ScrollContainer/GridContainer/InventorySlot18" unique_id=1572909945]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/margin_right = 2
+theme_override_constants/margin_bottom = 0
+
+[node name="Label" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2/ScrollContainer/GridContainer/InventorySlot18/MarginContainer" unique_id=427356159]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+text = "0"
+label_settings = SubResource("LabelSettings_amount")
+horizontal_alignment = 2
+vertical_alignment = 2
+
+[node name="InventorySlot19" type="PanelContainer" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2/ScrollContainer/GridContainer" unique_id=996161007]
+custom_minimum_size = Vector2(70, 70)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_slot_panel")
+
+[node name="TextureRect" type="TextureRect" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2/ScrollContainer/GridContainer/InventorySlot19" unique_id=1040158120]
+layout_mode = 2
+mouse_filter = 2
+expand_mode = 1
+stretch_mode = 5
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2/ScrollContainer/GridContainer/InventorySlot19" unique_id=124696677]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/margin_right = 2
+theme_override_constants/margin_bottom = 0
+
+[node name="Label" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2/ScrollContainer/GridContainer/InventorySlot19/MarginContainer" unique_id=1258517002]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+text = "0"
+label_settings = SubResource("LabelSettings_amount")
+horizontal_alignment = 2
+vertical_alignment = 2
+
+[node name="InventorySlot20" type="PanelContainer" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2/ScrollContainer/GridContainer" unique_id=1389785854]
+custom_minimum_size = Vector2(70, 70)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_slot_panel")
+
+[node name="TextureRect" type="TextureRect" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2/ScrollContainer/GridContainer/InventorySlot20" unique_id=1208343305]
+layout_mode = 2
+mouse_filter = 2
+expand_mode = 1
+stretch_mode = 5
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2/ScrollContainer/GridContainer/InventorySlot20" unique_id=2104427869]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/margin_right = 2
+theme_override_constants/margin_bottom = 0
+
+[node name="Label" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2/ScrollContainer/GridContainer/InventorySlot20/MarginContainer" unique_id=334347974]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+text = "0"
+label_settings = SubResource("LabelSettings_amount")
+horizontal_alignment = 2
+vertical_alignment = 2
+
+[node name="InventorySlot21" type="PanelContainer" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2/ScrollContainer/GridContainer" unique_id=1829215674]
+custom_minimum_size = Vector2(70, 70)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_slot_panel")
+
+[node name="TextureRect" type="TextureRect" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2/ScrollContainer/GridContainer/InventorySlot21" unique_id=1728489815]
+layout_mode = 2
+mouse_filter = 2
+expand_mode = 1
+stretch_mode = 5
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2/ScrollContainer/GridContainer/InventorySlot21" unique_id=1487778651]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/margin_right = 2
+theme_override_constants/margin_bottom = 0
+
+[node name="Label" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2/ScrollContainer/GridContainer/InventorySlot21/MarginContainer" unique_id=649954189]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+text = "0"
+label_settings = SubResource("LabelSettings_amount")
+horizontal_alignment = 2
+vertical_alignment = 2
+
+[node name="InventorySlot22" type="PanelContainer" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2/ScrollContainer/GridContainer" unique_id=306713208]
+custom_minimum_size = Vector2(70, 70)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_slot_panel")
+
+[node name="TextureRect" type="TextureRect" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2/ScrollContainer/GridContainer/InventorySlot22" unique_id=2022966734]
+layout_mode = 2
+mouse_filter = 2
+expand_mode = 1
+stretch_mode = 5
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2/ScrollContainer/GridContainer/InventorySlot22" unique_id=993366010]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/margin_right = 2
+theme_override_constants/margin_bottom = 0
+
+[node name="Label" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2/ScrollContainer/GridContainer/InventorySlot22/MarginContainer" unique_id=1996896555]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+text = "0"
+label_settings = SubResource("LabelSettings_amount")
+horizontal_alignment = 2
+vertical_alignment = 2
+
+[node name="InventorySlot23" type="PanelContainer" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2/ScrollContainer/GridContainer" unique_id=1950650749]
+custom_minimum_size = Vector2(70, 70)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_slot_panel")
+
+[node name="TextureRect" type="TextureRect" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2/ScrollContainer/GridContainer/InventorySlot23" unique_id=1743925049]
+layout_mode = 2
+mouse_filter = 2
+expand_mode = 1
+stretch_mode = 5
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2/ScrollContainer/GridContainer/InventorySlot23" unique_id=1700913656]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/margin_right = 2
+theme_override_constants/margin_bottom = 0
+
+[node name="Label" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2/ScrollContainer/GridContainer/InventorySlot23/MarginContainer" unique_id=1967700300]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+text = "0"
+label_settings = SubResource("LabelSettings_amount")
+horizontal_alignment = 2
+vertical_alignment = 2
+
+[node name="InventorySlot24" type="PanelContainer" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2/ScrollContainer/GridContainer" unique_id=1284290698]
+custom_minimum_size = Vector2(70, 70)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_slot_panel")
+
+[node name="TextureRect" type="TextureRect" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2/ScrollContainer/GridContainer/InventorySlot24" unique_id=1817010244]
+layout_mode = 2
+mouse_filter = 2
+expand_mode = 1
+stretch_mode = 5
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2/ScrollContainer/GridContainer/InventorySlot24" unique_id=476946187]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/margin_right = 2
+theme_override_constants/margin_bottom = 0
+
+[node name="Label" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2/ScrollContainer/GridContainer/InventorySlot24/MarginContainer" unique_id=1128187253]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+text = "0"
+label_settings = SubResource("LabelSettings_amount")
+horizontal_alignment = 2
+vertical_alignment = 2
+
+[node name="InventorySlot25" type="PanelContainer" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2/ScrollContainer/GridContainer" unique_id=516036569]
+custom_minimum_size = Vector2(70, 70)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_slot_panel")
+
+[node name="TextureRect" type="TextureRect" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2/ScrollContainer/GridContainer/InventorySlot25" unique_id=126543399]
+layout_mode = 2
+mouse_filter = 2
+expand_mode = 1
+stretch_mode = 5
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2/ScrollContainer/GridContainer/InventorySlot25" unique_id=1050065084]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/margin_right = 2
+theme_override_constants/margin_bottom = 0
+
+[node name="Label" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2/ScrollContainer/GridContainer/InventorySlot25/MarginContainer" unique_id=356714118]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+text = "0"
+label_settings = SubResource("LabelSettings_amount")
+horizontal_alignment = 2
+vertical_alignment = 2
+
+[node name="InventorySlot26" type="PanelContainer" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2/ScrollContainer/GridContainer" unique_id=487313232]
+custom_minimum_size = Vector2(70, 70)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_slot_panel")
+
+[node name="TextureRect" type="TextureRect" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2/ScrollContainer/GridContainer/InventorySlot26" unique_id=1244382064]
+layout_mode = 2
+mouse_filter = 2
+expand_mode = 1
+stretch_mode = 5
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2/ScrollContainer/GridContainer/InventorySlot26" unique_id=262657853]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/margin_right = 2
+theme_override_constants/margin_bottom = 0
+
+[node name="Label" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2/ScrollContainer/GridContainer/InventorySlot26/MarginContainer" unique_id=857876188]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+text = "0"
+label_settings = SubResource("LabelSettings_amount")
+horizontal_alignment = 2
+vertical_alignment = 2
+
+[node name="InventorySlot27" type="PanelContainer" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2/ScrollContainer/GridContainer" unique_id=1074746784]
+custom_minimum_size = Vector2(70, 70)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_slot_panel")
+
+[node name="TextureRect" type="TextureRect" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2/ScrollContainer/GridContainer/InventorySlot27" unique_id=745020755]
+layout_mode = 2
+mouse_filter = 2
+expand_mode = 1
+stretch_mode = 5
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2/ScrollContainer/GridContainer/InventorySlot27" unique_id=1264125331]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/margin_right = 2
+theme_override_constants/margin_bottom = 0
+
+[node name="Label" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2/ScrollContainer/GridContainer/InventorySlot27/MarginContainer" unique_id=1638572157]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+text = "0"
+label_settings = SubResource("LabelSettings_amount")
+horizontal_alignment = 2
+vertical_alignment = 2
+
+[node name="InventorySlot28" type="PanelContainer" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2/ScrollContainer/GridContainer" unique_id=1476994895]
+custom_minimum_size = Vector2(70, 70)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_slot_panel")
+
+[node name="TextureRect" type="TextureRect" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2/ScrollContainer/GridContainer/InventorySlot28" unique_id=629490055]
+layout_mode = 2
+mouse_filter = 2
+expand_mode = 1
+stretch_mode = 5
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2/ScrollContainer/GridContainer/InventorySlot28" unique_id=962063049]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/margin_right = 2
+theme_override_constants/margin_bottom = 0
+
+[node name="Label" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2/ScrollContainer/GridContainer/InventorySlot28/MarginContainer" unique_id=1400351069]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+text = "0"
+label_settings = SubResource("LabelSettings_amount")
+horizontal_alignment = 2
+vertical_alignment = 2
+
+[node name="InventorySlot29" type="PanelContainer" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2/ScrollContainer/GridContainer" unique_id=1128338843]
+custom_minimum_size = Vector2(70, 70)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_slot_panel")
+
+[node name="TextureRect" type="TextureRect" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2/ScrollContainer/GridContainer/InventorySlot29" unique_id=1035906038]
+layout_mode = 2
+mouse_filter = 2
+expand_mode = 1
+stretch_mode = 5
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2/ScrollContainer/GridContainer/InventorySlot29" unique_id=1027621990]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/margin_right = 2
+theme_override_constants/margin_bottom = 0
+
+[node name="Label" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2/ScrollContainer/GridContainer/InventorySlot29/MarginContainer" unique_id=39941022]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+text = "0"
+label_settings = SubResource("LabelSettings_amount")
+horizontal_alignment = 2
+vertical_alignment = 2
+
+[node name="InventorySlot30" type="PanelContainer" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2/ScrollContainer/GridContainer" unique_id=1760012764]
+custom_minimum_size = Vector2(70, 70)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_slot_panel")
+
+[node name="TextureRect" type="TextureRect" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2/ScrollContainer/GridContainer/InventorySlot30" unique_id=523593724]
+layout_mode = 2
+mouse_filter = 2
+expand_mode = 1
+stretch_mode = 5
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2/ScrollContainer/GridContainer/InventorySlot30" unique_id=483777534]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/margin_right = 2
+theme_override_constants/margin_bottom = 0
+
+[node name="Label" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2/ScrollContainer/GridContainer/InventorySlot30/MarginContainer" unique_id=1503308990]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+text = "0"
+label_settings = SubResource("LabelSettings_amount")
+horizontal_alignment = 2
+vertical_alignment = 2
+
+[node name="InventorySlot31" type="PanelContainer" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2/ScrollContainer/GridContainer" unique_id=1901209335]
+custom_minimum_size = Vector2(70, 70)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_slot_panel")
+
+[node name="TextureRect" type="TextureRect" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2/ScrollContainer/GridContainer/InventorySlot31" unique_id=1432927666]
+layout_mode = 2
+mouse_filter = 2
+expand_mode = 1
+stretch_mode = 5
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2/ScrollContainer/GridContainer/InventorySlot31" unique_id=574351371]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/margin_right = 2
+theme_override_constants/margin_bottom = 0
+
+[node name="Label" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2/ScrollContainer/GridContainer/InventorySlot31/MarginContainer" unique_id=665546243]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+text = "0"
+label_settings = SubResource("LabelSettings_amount")
+horizontal_alignment = 2
+vertical_alignment = 2
+
+[node name="InventorySlot32" type="PanelContainer" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2/ScrollContainer/GridContainer" unique_id=1842424537]
+custom_minimum_size = Vector2(70, 70)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_slot_panel")
+
+[node name="TextureRect" type="TextureRect" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2/ScrollContainer/GridContainer/InventorySlot32" unique_id=1405802435]
+layout_mode = 2
+mouse_filter = 2
+expand_mode = 1
+stretch_mode = 5
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2/ScrollContainer/GridContainer/InventorySlot32" unique_id=1719309976]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/margin_right = 2
+theme_override_constants/margin_bottom = 0
+
+[node name="Label" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2/ScrollContainer/GridContainer/InventorySlot32/MarginContainer" unique_id=1289363674]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+text = "0"
+label_settings = SubResource("LabelSettings_amount")
+horizontal_alignment = 2
+vertical_alignment = 2
+
+[node name="InventorySlot33" type="PanelContainer" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2/ScrollContainer/GridContainer" unique_id=169765014]
+custom_minimum_size = Vector2(70, 70)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_slot_panel")
+
+[node name="TextureRect" type="TextureRect" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2/ScrollContainer/GridContainer/InventorySlot33" unique_id=2101825631]
+layout_mode = 2
+mouse_filter = 2
+expand_mode = 1
+stretch_mode = 5
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2/ScrollContainer/GridContainer/InventorySlot33" unique_id=593168674]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/margin_right = 2
+theme_override_constants/margin_bottom = 0
+
+[node name="Label" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2/ScrollContainer/GridContainer/InventorySlot33/MarginContainer" unique_id=2120071065]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+text = "0"
+label_settings = SubResource("LabelSettings_amount")
+horizontal_alignment = 2
+vertical_alignment = 2
+
+[node name="InventorySlot34" type="PanelContainer" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2/ScrollContainer/GridContainer" unique_id=1730670317]
+custom_minimum_size = Vector2(70, 70)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_slot_panel")
+
+[node name="TextureRect" type="TextureRect" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2/ScrollContainer/GridContainer/InventorySlot34" unique_id=1945937555]
+layout_mode = 2
+mouse_filter = 2
+expand_mode = 1
+stretch_mode = 5
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2/ScrollContainer/GridContainer/InventorySlot34" unique_id=1821169240]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/margin_right = 2
+theme_override_constants/margin_bottom = 0
+
+[node name="Label" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2/ScrollContainer/GridContainer/InventorySlot34/MarginContainer" unique_id=2112341960]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+text = "0"
+label_settings = SubResource("LabelSettings_amount")
+horizontal_alignment = 2
+vertical_alignment = 2
+
+[node name="InventorySlot35" type="PanelContainer" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2/ScrollContainer/GridContainer" unique_id=628032264]
+custom_minimum_size = Vector2(70, 70)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_slot_panel")
+
+[node name="TextureRect" type="TextureRect" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2/ScrollContainer/GridContainer/InventorySlot35" unique_id=1246646863]
+layout_mode = 2
+mouse_filter = 2
+expand_mode = 1
+stretch_mode = 5
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2/ScrollContainer/GridContainer/InventorySlot35" unique_id=1526045821]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/margin_right = 2
+theme_override_constants/margin_bottom = 0
+
+[node name="Label" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2/ScrollContainer/GridContainer/InventorySlot35/MarginContainer" unique_id=670741756]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+text = "0"
+label_settings = SubResource("LabelSettings_amount")
+horizontal_alignment = 2
+vertical_alignment = 2
+
+[node name="InventorySlot36" type="PanelContainer" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2/ScrollContainer/GridContainer" unique_id=121544842]
+custom_minimum_size = Vector2(70, 70)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_slot_panel")
+
+[node name="TextureRect" type="TextureRect" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2/ScrollContainer/GridContainer/InventorySlot36" unique_id=501756158]
+layout_mode = 2
+mouse_filter = 2
+expand_mode = 1
+stretch_mode = 5
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2/ScrollContainer/GridContainer/InventorySlot36" unique_id=1857080910]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/margin_right = 2
+theme_override_constants/margin_bottom = 0
+
+[node name="Label" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2/ScrollContainer/GridContainer/InventorySlot36/MarginContainer" unique_id=1891874230]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+text = "0"
+label_settings = SubResource("LabelSettings_amount")
+horizontal_alignment = 2
+vertical_alignment = 2
+
+[node name="InventorySlot37" type="PanelContainer" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2/ScrollContainer/GridContainer" unique_id=328967915]
+custom_minimum_size = Vector2(70, 70)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_slot_panel")
+
+[node name="TextureRect" type="TextureRect" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2/ScrollContainer/GridContainer/InventorySlot37" unique_id=2109810935]
+layout_mode = 2
+mouse_filter = 2
+expand_mode = 1
+stretch_mode = 5
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2/ScrollContainer/GridContainer/InventorySlot37" unique_id=1137173607]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/margin_right = 2
+theme_override_constants/margin_bottom = 0
+
+[node name="Label" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2/ScrollContainer/GridContainer/InventorySlot37/MarginContainer" unique_id=736015529]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+text = "0"
+label_settings = SubResource("LabelSettings_amount")
+horizontal_alignment = 2
+vertical_alignment = 2
+
+[node name="InventorySlot38" type="PanelContainer" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2/ScrollContainer/GridContainer" unique_id=1901987394]
+custom_minimum_size = Vector2(70, 70)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_slot_panel")
+
+[node name="TextureRect" type="TextureRect" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2/ScrollContainer/GridContainer/InventorySlot38" unique_id=83483497]
+layout_mode = 2
+mouse_filter = 2
+expand_mode = 1
+stretch_mode = 5
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2/ScrollContainer/GridContainer/InventorySlot38" unique_id=220374081]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/margin_right = 2
+theme_override_constants/margin_bottom = 0
+
+[node name="Label" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2/ScrollContainer/GridContainer/InventorySlot38/MarginContainer" unique_id=489895980]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+text = "0"
+label_settings = SubResource("LabelSettings_amount")
+horizontal_alignment = 2
+vertical_alignment = 2
+
+[node name="InventorySlot39" type="PanelContainer" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2/ScrollContainer/GridContainer" unique_id=738300774]
+custom_minimum_size = Vector2(70, 70)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_slot_panel")
+
+[node name="TextureRect" type="TextureRect" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2/ScrollContainer/GridContainer/InventorySlot39" unique_id=1022985804]
+layout_mode = 2
+mouse_filter = 2
+expand_mode = 1
+stretch_mode = 5
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2/ScrollContainer/GridContainer/InventorySlot39" unique_id=2137518370]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/margin_right = 2
+theme_override_constants/margin_bottom = 0
+
+[node name="Label" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2/ScrollContainer/GridContainer/InventorySlot39/MarginContainer" unique_id=443312728]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+text = "0"
+label_settings = SubResource("LabelSettings_amount")
+horizontal_alignment = 2
+vertical_alignment = 2
+
+[node name="InventorySlot40" type="PanelContainer" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2/ScrollContainer/GridContainer" unique_id=412853457]
+custom_minimum_size = Vector2(70, 70)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_slot_panel")
+
+[node name="TextureRect" type="TextureRect" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2/ScrollContainer/GridContainer/InventorySlot40" unique_id=1674395634]
+layout_mode = 2
+mouse_filter = 2
+expand_mode = 1
+stretch_mode = 5
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2/ScrollContainer/GridContainer/InventorySlot40" unique_id=560097415]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/margin_right = 2
+theme_override_constants/margin_bottom = 0
+
+[node name="Label" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2/ScrollContainer/GridContainer/InventorySlot40/MarginContainer" unique_id=2103335274]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+text = "0"
+label_settings = SubResource("LabelSettings_amount")
+horizontal_alignment = 2
+vertical_alignment = 2
+
+[node name="InventorySlot41" type="PanelContainer" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2/ScrollContainer/GridContainer" unique_id=870879669]
+custom_minimum_size = Vector2(70, 70)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_slot_panel")
+
+[node name="TextureRect" type="TextureRect" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2/ScrollContainer/GridContainer/InventorySlot41" unique_id=991751884]
+layout_mode = 2
+mouse_filter = 2
+expand_mode = 1
+stretch_mode = 5
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2/ScrollContainer/GridContainer/InventorySlot41" unique_id=350589745]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/margin_right = 2
+theme_override_constants/margin_bottom = 0
+
+[node name="Label" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2/ScrollContainer/GridContainer/InventorySlot41/MarginContainer" unique_id=1201408317]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+text = "0"
+label_settings = SubResource("LabelSettings_amount")
+horizontal_alignment = 2
+vertical_alignment = 2
+
+[node name="InventorySlot42" type="PanelContainer" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2/ScrollContainer/GridContainer" unique_id=482482602]
+custom_minimum_size = Vector2(70, 70)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_slot_panel")
+
+[node name="TextureRect" type="TextureRect" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2/ScrollContainer/GridContainer/InventorySlot42" unique_id=907431308]
+layout_mode = 2
+mouse_filter = 2
+expand_mode = 1
+stretch_mode = 5
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2/ScrollContainer/GridContainer/InventorySlot42" unique_id=1494096102]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/margin_right = 2
+theme_override_constants/margin_bottom = 0
+
+[node name="Label" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2/ScrollContainer/GridContainer/InventorySlot42/MarginContainer" unique_id=277683869]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+text = "0"
+label_settings = SubResource("LabelSettings_amount")
+horizontal_alignment = 2
+vertical_alignment = 2
