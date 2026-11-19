@@ -17,7 +17,7 @@ namespace ItemData
                 {
                     Name = "Wood",
                     Path = "res://assets/Items/wood.jpg",
-                },
+                }
             },
             {
                 "Iced Wood", new ItemInfo
@@ -38,7 +38,7 @@ namespace ItemData
                 {
                     Name = "Steel",
                     Path = "res://assets/Items/steel.jpg",
-                },
+                }
             },
             {
                 "Iced Steel", new ItemInfo
@@ -59,7 +59,7 @@ namespace ItemData
                 {
                     Name = "Reinforced Steel",
                     Path = "res://assets/Items/reinforced-steel.jpg",
-                },
+                }
             },
             {
                 "Iced Reinforced Steel", new ItemInfo
@@ -80,7 +80,7 @@ namespace ItemData
                 {
                     Name = "String",
                     Path = "res://assets/Items/string.jpg",
-                },
+                }
             },
             {
                 "Iced String", new ItemInfo
@@ -96,6 +96,6 @@ namespace ItemData
                     Path = "res://assets/Items/burned-string.jpg",
                 }
             }
-        } 
+        };
     }
 }
