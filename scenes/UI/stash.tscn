@@ -27,7 +27,7 @@ shadow_size = 4
 shadow_color = Color(0, 0, 0, 0.8)
 shadow_offset = Vector2(1, 2)
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_srfft"]
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_551la"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_close_normal"]
 bg_color = Color(0.121569, 0.137255, 0.176471, 0.8)
@@ -52,6 +52,8 @@ corner_radius_top_left = 14
 corner_radius_top_right = 14
 corner_radius_bottom_right = 14
 corner_radius_bottom_left = 14
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_srfft"]
 
 [sub_resource type="StyleBoxLine" id="StyleBoxLine_separator"]
 color = Color(0.678431, 0.552941, 0.352941, 0.4)
@@ -213,7 +215,7 @@ label_settings = SubResource("LabelSettings_hagke")
 layout_mode = 2
 size_flags_horizontal = 3
 mouse_filter = 2
-theme_override_styles/separator = SubResource("StyleBoxEmpty_srfft")
+theme_override_styles/separator = SubResource("StyleBoxEmpty_551la")
 
 [node name="CloseButton" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer" unique_id=987654321]
 custom_minimum_size = Vector2(28, 28)
