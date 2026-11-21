@@ -28,9 +28,9 @@ public partial class PlayerControl : CharacterBody3D, IGravity, IDamageable, ISt
     [Export] public float RotateSensitivity = 0.005f;
 
     [Export] public float DashDistance = 8.0f;
-    [Export] public float DashDuration = 0.15f;
-    [Export] public float DashCooldown = 1.0f;
-    [Export] public string DashAnimation = "Shield_Dash";
+    [Export] public float DashDuration = 0.5f;
+    [Export] public float DashCooldown = 2.0f;
+    [Export] public string DashAnimation = "UAL1_Standard/Roll";
     [Export] public string IdleAnimation = "Idle_Shield";
     [Export] public float DashAnimationSpeed = 1.5f;
 
