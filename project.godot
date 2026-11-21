@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Ruingeon 2"
-run/main_scene="uid://cwq4ri8gqc5lc"
+run/main_scene="uid://dae3sw27epyuw"
 config/features=PackedStringArray("4.7", "C#", "Forward Plus")
 config/icon="res://icon.svg"
 
