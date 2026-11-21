@@ -3,6 +3,8 @@
 [ext_resource type="Script" uid="uid://dx52im6pmxdq7" path="res://scripts/Portal.cs" id="1_5gu6x"]
 [ext_resource type="PackedScene" uid="uid://k073yrpgt2u3" path="res://scenes/player.tscn" id="1_o1atq"]
 [ext_resource type="AudioStream" uid="uid://dd158p4iyrm70" path="res://assets/Sounds/Lobby.mp3" id="3_q60fs"]
+[ext_resource type="PackedScene" uid="uid://b8uumg5foftye" path="res://scenes/NPC/blacksmith.tscn" id="5_4pkyx"]
+[ext_resource type="PackedScene" uid="uid://cwq4ri8gqc5lc" path="res://scenes/UI/main_ui.tscn" id="65_4pkyx"]
 [ext_resource type="Texture2D" uid="uid://bda2t5k8pe08u" path="res://assets/Owned/Portal.png" id="65_oysm8"]
 [ext_resource type="PackedScene" uid="uid://654b00nml1q0" path="res://scenes/houses/house_1.tscn" id="69_5jb2g"]
 [ext_resource type="PackedScene" uid="uid://yu36446qbxpx" path="res://house_2.tscn" id="69_s0n6j"]
@@ -290,6 +292,9 @@ surface_material_override/2 = SubResource("StandardMaterial3D_e4si7")
 
 [node name="Player" parent="." unique_id=1932986954 instance=ExtResource("1_o1atq")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14, 1.5101805, 0)
+
+[node name="Blacksmith" parent="." unique_id=2088466620 instance=ExtResource("5_4pkyx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.241237, 0.65109944, 14.108658)
 
 [node name="Environment" type="Node3D" parent="." unique_id=1588118954]
 
@@ -3624,3 +3629,5 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -10)
 
 [node name="House2" parent="Environment" unique_id=93071622 instance=ExtResource("69_s0n6j")]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 11, 0, 1)
+
+[node name="MainUI" parent="." unique_id=896236161 instance=ExtResource("65_4pkyx")]
