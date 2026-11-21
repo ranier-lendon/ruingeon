@@ -1,0 +1,13 @@
+[gd_scene format=3 uid="uid://b8uumg5foftye"]
+
+[ext_resource type="PackedScene" uid="uid://nbx1m6xue7x5" path="res://assets/Models/Player_NPC/Universal Base Characters[Standard]/Universal Base Characters[Standard]/Base Characters/Godot - UE/Superhero_Male_FullBody.gltf" id="1_0x8sa"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_qyjd6"]
+
+[node name="Blacksmith" type="CharacterBody3D" unique_id=2088466620]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1145157616]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.94584155, 0)
+shape = SubResource("CapsuleShape3D_qyjd6")
+
+[node name="Superhero_Male_FullBody" parent="." unique_id=2077677086 instance=ExtResource("1_0x8sa")]
